@@ -1,0 +1,50 @@
+
+.roads__button {
+  margin-bottom: $global-margin;
+}
+
+.roads__title {
+ background: rgba($black, .8);
+ padding: $global-padding;
+ color: $white;
+ text-transform: uppercase;
+ font-weight: bold;
+}
+
+.roads__report {
+  padding: 20px;
+}
+
+.roads__full {
+  padding: 0;
+  width: 100% !important;
+}
+
+.road__box {
+  margin-bottom: 0;
+  border-radius: unset;
+  border: 0;
+  background: transparent;
+  box-shadow: unset;
+  border-top: 2px solid #dcdcdc;
+}
+
+.roads__box {
+  transition: ease-in-out .2s;
+}
+
+.roads__box:hover {
+   background: rgba($black, .05);
+   transition: transfer;
+}
+
+.roads__txt {
+  font-weight: bold;
+}
+
+.is-scrollable {
+  overflow-y: scroll;
+  width: 49.1%;
+  position: absolute;
+  height: 850px;
+}
