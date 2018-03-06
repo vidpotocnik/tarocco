@@ -1,0 +1,99 @@
+<div class="modal" [class.is-active]="modalService.gameRecord">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Dodaj igro</p>
+      <button class="delete" aria-label="close"></button>
+    </header>
+    <section class="modal-card-body">
+      <!-- RESULT -->
+        <div class="field">
+          <label class="label">Izid</label>
+          <div class="control">
+            <div class="select">
+              <select>
+                <option>---</option>
+                <option>Zmaga</option>
+                <option>Poraz</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      <!-- PLAYER -->
+      <div class="field">
+        <label class="label">Igralec</label>
+        <div class="control">
+          <div class="select">
+            <select>
+              <option>---</option>
+              <option>Jan</option>
+              <option>Luka</option>
+              <option>Nejc</option>
+              <option>Erik</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- PLAYER -->
+      <div class="field">
+        <label class="label">Partner</label>
+        <div class="control">
+          <div class="select">
+            <select>
+              <option>---</option>
+              <option>Jan</option>
+              <option>Luka</option>
+              <option>Nejc</option>
+              <option>Erik</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- GAME -->
+      <div class="field">
+        <label class="label">Igra</label>
+        <div class="control">
+          <div class="select">
+            <select>
+              <option>III.</option>
+              <option>II.</option>
+              <option>I.</option>
+              <option>Klop</option>
+              <option>Solo III.</option>
+              <option>Solo II.</option>
+              <option>Solo I.</option>
+              <option>Berač</option>
+              <option>Solo B.T.</option>
+              <option>Odprti berač</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- POINT DIFFERENCE -->
+      <div class="field">
+        <label class="label">Razlika v točkah</label>
+        <div class="control">
+          <div class="select">
+            <select>
+              <option>0</option>
+              <option>5</option>
+              <option>10</option>
+              <option>15</option>
+              <option>20</option>
+              <option>25</option>
+              <option>30</option>
+              <option>35</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success" (click)="modalService.close('gameRecord')">Zapiši</button>
+      <button class="button" (click)="modalService.close('gameRecord')">Prekliči</button>
+    </footer>
+  </div>
+</div>
