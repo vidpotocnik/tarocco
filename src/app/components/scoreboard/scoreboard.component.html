@@ -1,4 +1,4 @@
-<div class="container-fluid" *ngIf="scoreBoard">
+<div class="container-fluid" *ngIf="roundList">
   <div class="box">
     <app-game-menu></app-game-menu>
     <app-game-record></app-game-record>
@@ -19,7 +19,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let round of scoreBoard">
+  <tr *ngFor="let round of roundList">
     <th>{{round.roundNumber}}</th>
     <td><strong>{{round.getGameType()}}</strong></td>
     <td *ngFor="let result of round.roundResults">{{result.playerScore}}</td>

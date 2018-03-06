@@ -3,7 +3,7 @@ import { ModalService } from '../../../core/services/render/modal.service';
 import { HttpService } from '../../../core/services/http.service';
 import { GameService } from '../../../core/services/game.service';
 import { ScoreBoardService } from '../../../core/services/score-board.service';
-import { ScoreBoardList } from '../../../core/models/score-board';
+import { RoundList } from '../../../core/models/round';
 
 @Component({
   selector: 'app-scoreboard',
@@ -12,7 +12,7 @@ import { ScoreBoardList } from '../../../core/models/score-board';
 })
 export class ScoreboardComponent implements OnInit {
 
-  public scoreBoard: ScoreBoardList;
+  public roundList: RoundList;
 
   constructor(public modalService: ModalService,
               private httpService: HttpService,
@@ -35,7 +35,8 @@ export class ScoreboardComponent implements OnInit {
   }
 
   private loadScoreBoard(entities: any): void {
-    this.scoreBoard = entities.data;
+    this.roundList = entities.data;
+    console.log(this.roundList);
   }
 
 }

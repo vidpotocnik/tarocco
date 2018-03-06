@@ -1,25 +1,60 @@
-import { Model } from './model';
-import { Player } from './player';
+import {Model} from './model';
+import { RoundResult } from './round-result';
 
 export class Round extends Model {
-  public roundId: string;
-  public GameId: string;
-  public playerId: string;
-  public playerRadelcCount: number;
-  public playerRadelcUsed: number;
-  public playerScore: number;
-  public player: Player;
+   public contraFactor: number;
+   public difference: number;
+   public gameId: string;
+   public gameType: number;
+   public isKlop: boolean;
+   public leadPlayerId: string;
+   public mondFangPlayerId: string;
+   public roundId: string;
+   public roundNumber: number;
+   public supportingPlayerId: string;
+   public won: boolean;
+   public roundResults: Array<RoundResult>;
 
-  public static init(entity: any): Round {
-    return new this(entity);
+
+    public static init(entity: any): Round {
+      return new this(entity);
+    }
+
+  public getGameType(): string {
+    switch (this.gameType) {
+      case 10: {
+        return 'III';
+      }
+      case 20: {
+        return 'II';
+      }
+      case 30: {
+        return 'I';
+      }
+      case 40: {
+        return 'S. III';
+      }
+      case 50: {
+        return 'S. II';
+      }
+      case 60: {
+        return 'S. I';
+      }
+      case 70: {
+        return 'B.';
+      }
+      case 80: {
+        return 'O. B.';
+      }
+    }
   }
 }
 
 export class RoundList extends Model {
-  data: Array<Round>;
+    data: Array<Round>;
 
-  constructor(data: any) {
-    super(data);
-    super.mapToObjects('data', Round);
-  }
+    constructor(data: any) {
+        super(data);
+      super.mapToObjects('data', Round);
+    }
 }

@@ -4,18 +4,18 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import {environment} from '../../environments/environment';
-import { ScoreBoardList } from '../models/score-board';
+import { RoundList } from '../models/round';
 
 @Injectable()
 export class ScoreBoardService {
     private scoreBoardUri = environment.baseUri.concat('ScoreBoard/');
 
-    public getScoreBoard(gameId: string): Observable<ScoreBoardList> {
+    public getScoreBoard(gameId: string): Observable<RoundList> {
         const uri = this.scoreBoardUri.concat(gameId);
         return this.http
             .get(uri)
             .map(rsp => rsp)
-            .map(rsp => new ScoreBoardList(rsp));
+            .map(rsp => new RoundList(rsp));
     }
 
     constructor(private http: HttpClient) {
