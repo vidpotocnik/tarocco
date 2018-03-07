@@ -28,7 +28,7 @@
   <tr>
     <th>R</th>
     <th></th>
-    <th *ngFor="let lastRoundResult of lastRound.roundResults">
+    <th *ngFor="let lastRoundResult of lastRound.roundResults" class="has-text-info">
       <span *ngFor="let radelc of lastRoundResult.radelci">
         <i class="fa fa-xs fa-circle" aria-hidden="true" *ngIf="radelc"></i>
         <i class="fa fa-xs fa-circle-thin" aria-hidden="true" *ngIf="!radelc"></i>
@@ -37,9 +37,9 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let round of roundList">
-    <th>{{round.roundNumber}}</th>
-    <td><strong>{{round.getGameType()}}</strong></td>
+  <tr *ngFor="let round of roundList" [class.has-text-info]="round.isLast" [class.has-text-weight-bold]="round.isLast">
+    <td>{{round.roundNumber}}</td>
+    <td>{{round.getGameType()}}</td>
     <td *ngFor="let result of round.roundResults">{{result.playerScore}}</td>
   </tr>
   </tbody>
