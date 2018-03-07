@@ -6,94 +6,154 @@
       <button class="delete" aria-label="close" (click)="modalService.close('gameRecord')"></button>
     </header>
     <section class="modal-card-body">
-      <!-- RESULT -->
+      <div class="box">
+        <!-- RESULT -->
         <div class="field">
-          <label class="label">Izid</label>
+          <label class="label">Klop</label>
           <div class="control">
             <div class="select">
-              <select>
-                <option>---</option>
-                <option>Zmaga</option>
-                <option>Poraz</option>
+              <select [(ngModel)]="newRound.isKlop">
+                <option [value]="true">Da</option>
+                <option selected [value]="false">Ne</option>
               </select>
             </div>
           </div>
         </div>
-      <!-- PLAYER -->
-      <div class="field">
-        <label class="label">Igralec</label>
-        <div class="control">
-          <div class="select">
-            <select>
-              <option>---</option>
-              <option>Jan</option>
-              <option>Luka</option>
-              <option>Nejc</option>
-              <option>Erik</option>
-            </select>
+        <!-- RESULT -->
+        <div class="field">
+          <label class="label">Izid</label>
+          <div class="control">
+            <div class="select">
+              <select [(ngModel)]="newRound.won">
+                <option [value]="null">---</option>
+                <option [value]="true">Zmaga</option>
+                <option [value]="false">Poraz</option>
+              </select>
+            </div>
           </div>
+        </div>
+        <!-- PLAYER -->
+        <div class="field">
+          <label class="label">Igralec</label>
+          <div class="control">
+            <div class="select">
+              <select [(ngModel)]="newRound.leadPlayerId">
+                <option [value]="null">---</option>
+                <option [value]="player.playerId" *ngFor="let player of gameService.currentGame.players">
+                  {{player.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- PLAYER -->
+        <div class="field">
+          <label class="label">Partner</label>
+          <div class="control">
+            <div class="select">
+              <select [(ngModel)]="newRound.supportingPlayerId">
+                <option [value]="null">---</option>
+                <option [value]="player.playerId" *ngFor="let player of gameService.currentGame.players">
+                  {{player.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- GAME -->
+        <div class="field">
+          <label class="label">Igra</label>
+          <div class="control">
+            <div class="select">
+              <select [(ngModel)]="newRound.gameType">
+                <option [value]="10">III.</option>
+                <option [value]="20">II.</option>
+                <option [value]="30">I.</option>
+                <option [value]="70">Klop</option>
+                <option [value]="40">Solo III.</option>
+                <option [value]="50">Solo II.</option>
+                <option [value]="60">Solo I.</option>
+                <option [value]="70">Berač</option>
+                <option [value]="80">Solo B.T.</option>
+                <option [value]="90">Odprti berač</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- POINT DIFFERENCE -->
+        <div class="field">
+          <label class="label">Razlika v točkah</label>
+          <div class="control">
+            <div class="select">
+              <select [(ngModel)]="newRound.scoreDifference">
+                <option [value]="0">0</option>
+                <option [value]="5">5</option>
+                <option [value]="10">10</option>
+                <option [value]="15">15</option>
+                <option [value]="20">20</option>
+                <option [value]="25">25</option>
+                <option [value]="30">30</option>
+                <option [value]="35">35</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- POINT DIFFERENCE -->
+        <div class="field">
+          <label class="label">Kontra</label>
+          <div class="control">
+            <div class="select">
+              <select [(ngModel)]="newRound.contraFactor">
+                <option selected [value]="1">Brez</option>
+                <option [value]="2">Kontra</option>
+                <option [value]="4">Re</option>
+                <option [value]="8">Sub</option>
+                <option [value]="16">Mort</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- MONDFANG -->
+        <div class="field">
+          <label class="label">MondFang igralec</label>
+          <div class="control">
+            <div class="select">
+              <select [(ngModel)]="newRound.mondFangPlayerId">
+                <option [value]="null">---</option>
+                <option [value]="player.playerId" *ngFor="let player of gameService.currentGame.players">
+                  {{player.name}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="box">
+          <div class="field is-grouped is-grouped-multiline" *ngFor="let modifier of modifiers">
+            <div class="control">
+              <div class="tags has-addons">
+                <span class="tag" (click)="incrementAnnounced(modifier)" [class.is-success]="modifier.announced === 1">
+                  <i class="fa fa-check" aria-hidden="true" *ngIf="modifier.announced === 1"></i>
+                  <i class="fa fa-remove" aria-hidden="true" *ngIf="modifier.announced === 0"></i>
+                </span>
+                <span class="tag" (click)="incrementContraFactor(modifier)">{{getFactorMessage(modifier)}}</span>
+                <span class="tag" [class.is-info]="modifier.isActive" (click)="toggleModifier(modifier)">{{modifier.modifierType}}</span>
+              </div>
+            </div>
         </div>
       </div>
-
-      <!-- PLAYER -->
-      <div class="field">
-        <label class="label">Partner</label>
-        <div class="control">
-          <div class="select">
-            <select>
-              <option>---</option>
-              <option>Jan</option>
-              <option>Luka</option>
-              <option>Nejc</option>
-              <option>Erik</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- GAME -->
-      <div class="field">
-        <label class="label">Igra</label>
-        <div class="control">
-          <div class="select">
-            <select>
-              <option>III.</option>
-              <option>II.</option>
-              <option>I.</option>
-              <option>Klop</option>
-              <option>Solo III.</option>
-              <option>Solo II.</option>
-              <option>Solo I.</option>
-              <option>Berač</option>
-              <option>Solo B.T.</option>
-              <option>Odprti berač</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- POINT DIFFERENCE -->
-      <div class="field">
-        <label class="label">Razlika v točkah</label>
-        <div class="control">
-          <div class="select">
-            <select>
-              <option>0</option>
-              <option>5</option>
-              <option>10</option>
-              <option>15</option>
-              <option>20</option>
-              <option>25</option>
-              <option>30</option>
-              <option>35</option>
-            </select>
-          </div>
-        </div>
       </div>
     </section>
     <footer class="modal-card-foot">
-      <button class="button is-info is-radiusless" (click)="modalService.close('gameRecord')"><i class="fa fa-check" aria-hidden="true"></i></button>
-      <button class="button is-radiusless" (click)="modalService.close('gameRecord')"><i class="fa fa-remove" aria-hidden="true"></i></button>
+      <button class="button is-info is-radiusless" (click)="addNewRound()"><i class="fa fa-check"
+                                                                              aria-hidden="true"></i></button>
+      <button class="button is-radiusless" (click)="modalService.close('gameRecord')"><i class="fa fa-remove"
+                                                                                         aria-hidden="true"></i>
+      </button>
     </footer>
   </div>
 </div>
