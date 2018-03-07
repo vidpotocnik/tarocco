@@ -1,48 +1,50 @@
 <div class="container-fluid" *ngIf="roundList">
   <div class="box">
-    <app-game-menu (gameChanged)="getScoreBoard()"></app-game-menu>
-    <app-game-record></app-game-record>
-    <button class="button" aria-haspopup="true" (click)="modalService.open('gameRecord')">
-      <span><i class="fa fa-lg fa-plus" aria-hidden="true"></i></span>
-    </button>
+    <h2 class="subtitle is-5 has-text-info has-text-centered is-uppercase">{{gameService.currentGame.name}}</h2>
   </div>
   <div class="box">
-    <article class="message is-info" *ngIf="!lastRound">
-      <div class="message-header">
-        <p>Info</p>
-      </div>
-      <div class="message-body">
-        Trenutna igra še nima nobenega zapisa.
-      </div>
-    </article>
-<table class="table is-hoverable is-fullwidth" *ngIf="lastRound">
-  <thead>
-  <tr>
-    <th><abbr title="Position">#</abbr></th>
-    <th>Tip</th>
-    <th><abbr title="Erik">Erik</abbr></th>
-    <th><abbr title="Nejc">Nejc</abbr></th>
-    <th><abbr title="Luka">Luka</abbr></th>
-    <th><abbr title="Jan">Jan</abbr></th>
-  </tr>
-  <tr>
-    <th>R</th>
-    <th></th>
-    <th *ngFor="let lastRoundResult of lastRound.roundResults" class="has-text-info">
+    <div class="column">
+      <app-game-menu (gameChanged)="getScoreBoard()"></app-game-menu>
+      <app-game-record></app-game-record>
+      <button class="button" aria-haspopup="true" (click)="modalService.open('gameRecord')">
+        <span><i class="fa fa-lg fa-plus" aria-hidden="true"></i></span>
+      </button>
+    </div>
+    <div class="box">
+      <article class="message is-info" *ngIf="!lastRound">
+        <div class="message-header">
+          <p>Info</p>
+        </div>
+        <div class="message-body">
+          Trenutna igra še nima nobenega zapisa.
+        </div>
+      </article>
+      <table class="table is-hoverable is-fullwidth" *ngIf="lastRound">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Tip</th>
+          <th *ngFor="let player of getOrderedPlayers()">{{player.name}}</th>
+        </tr>
+        <tr>
+          <th>R</th>
+          <th></th>
+          <th *ngFor="let lastRoundResult of lastRound.roundResults" class="has-text-info">
       <span *ngFor="let radelc of lastRoundResult.radelci">
         <i class="fa fa-xs fa-circle" aria-hidden="true" *ngIf="radelc"></i>
         <i class="fa fa-xs fa-circle-thin" aria-hidden="true" *ngIf="!radelc"></i>
       </span>
-    </th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let round of roundList" [class.has-text-info]="round.isLast" [class.has-text-weight-bold]="round.isLast">
-    <td>{{round.roundNumber}}</td>
-    <td>{{round.getGameType()}}</td>
-    <td *ngFor="let result of round.roundResults">{{result.playerScore}}</td>
-  </tr>
-  </tbody>
-</table>
-</div>
-</div>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let round of roundList" [class.has-text-info]="round.isLast"
+            [class.has-text-weight-bold]="round.isLast">
+          <td>{{round.roundNumber}}</td>
+          <td>{{round.getGameType()}}</td>
+          <td *ngFor="let result of round.roundResults">{{result.playerScore}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

@@ -3,7 +3,8 @@ import { ModalService } from '../../../core/services/render/modal.service';
 import { HttpService } from '../../../core/services/http.service';
 import { GameService } from '../../../core/services/game.service';
 import { ScoreBoardService } from '../../../core/services/score-board.service';
-import { Round, RoundList } from '../../../core/models/round';
+import { Round } from '../../../core/models/round';
+import { Player } from '../../../core/models/player';
 
 @Component({
   selector: 'app-scoreboard',
@@ -16,15 +17,14 @@ export class ScoreboardComponent implements OnInit {
   public lastRound: Round;
 
   constructor(public modalService: ModalService,
+              public gameService: GameService,
               private httpService: HttpService,
-              private gameService: GameService,
               private scoreBoardService: ScoreBoardService) {
   }
 
   ngOnInit() {
     this.getGames();
   }
-
 
   public getGames(): void {
     this.gameService
@@ -35,10 +35,13 @@ export class ScoreboardComponent implements OnInit {
       );
   }
 
-  private loadGames(entities: any): void {
-    this.gameService.games = entities.data;
-    this.gameService.getCurrentGame();
-    this.getScoreBoard();
+  public getGame(gameId: string): void {
+    this.gameService
+      .getGame(gameId)
+      .subscribe(
+        entity => this.loadGame(entity),
+        error => this.httpService.handleError(error)
+      );
   }
 
   public getScoreBoard(gameId = this.gameService.currentGame.gameId): void {
@@ -48,6 +51,29 @@ export class ScoreboardComponent implements OnInit {
         entities => this.loadScoreBoard(entities),
         error => this.httpService.handleError(error)
       );
+  }
+
+  public getOrderedPlayers(): Array<Player> {
+    const result = [];
+    this.lastRound.roundResults.forEach((r) => {
+      this.gameService.currentGame.players.forEach((p) => {
+        if (r.playerId === p.playerId) {
+          result.push(p);
+        }
+      });
+    });
+
+    return result;
+  }
+
+  private loadGames(entities: any): void {
+    this.gameService.games = entities.data;
+    this.gameService.getCurrentGame();
+    this.getScoreBoard();
+  }
+
+  private loadGame(entity: any): void {
+    this.gameService.currentGame = entity.data;
   }
 
   private loadScoreBoard(entities: any): void {
@@ -72,6 +98,6 @@ export class ScoreboardComponent implements OnInit {
         }
       });
     });
-    console.log(this.lastRound);
+    this.getGame(this.gameService.currentGame.gameId);
   }
 }

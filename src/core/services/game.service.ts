@@ -19,6 +19,13 @@ export class GameService {
       .map(rsp => new Game(rsp));
   }
 
+  public getGame(gameId: string): Observable<Game> {
+    return this.http
+      .get(this.scoreBoardUri + gameId)
+      .map(rsp => rsp)
+      .map(rsp => new Game(rsp));
+  }
+
   public getCurrentGame(): void {
     this.games.forEach((game, index) => {
       this.currentGame = game;
