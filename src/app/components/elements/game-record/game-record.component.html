@@ -1,9 +1,9 @@
-<div class="modal" [class.is-active]="modalService.gameRecord">
+<div class="modal i is-radiusless" [class.is-active]="modalService.gameRecord">
   <div class="modal-background"></div>
   <div class="modal-card">
     <header class="modal-card-head">
-      <p class="modal-card-title">Dodaj igro</p>
-      <button class="delete" aria-label="close"></button>
+      <p class="modal-card-title">Dodaj zapis</p>
+      <button class="delete" aria-label="close" (click)="modalService.close('gameRecord')"></button>
     </header>
     <section class="modal-card-body">
       <!-- RESULT -->
@@ -92,8 +92,8 @@
       </div>
     </section>
     <footer class="modal-card-foot">
-      <button class="button is-success" (click)="modalService.close('gameRecord')">Zapiši</button>
-      <button class="button" (click)="modalService.close('gameRecord')">Prekliči</button>
+      <button class="button is-info is-radiusless" (click)="modalService.close('gameRecord')"><i class="fa fa-check" aria-hidden="true"></i></button>
+      <button class="button is-radiusless" (click)="modalService.close('gameRecord')"><i class="fa fa-remove" aria-hidden="true"></i></button>
     </footer>
   </div>
 </div>
