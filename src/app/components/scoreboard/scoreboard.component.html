@@ -7,6 +7,9 @@
       <app-game-menu (gameChanged)="getScoreBoard()"></app-game-menu>
       <app-game-record></app-game-record>
       <button class="button" aria-haspopup="true" (click)="modalService.open('gameRecord')">
+        <span><i class="fa fa-lg fa-pencil" aria-hidden="true"></i></span>
+      </button>
+      <button class="button" aria-haspopup="true">
         <span><i class="fa fa-lg fa-plus" aria-hidden="true"></i></span>
       </button>
     </div>
