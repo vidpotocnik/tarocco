@@ -54,6 +54,9 @@ export class ScoreboardComponent implements OnInit {
   }
 
   public getOrderedPlayers(): Array<Player> {
+    if (!this.gameService.currentGame.players) {
+      return;
+    }
     const result = [];
     this.lastRound.roundResults.forEach((r) => {
       this.gameService.currentGame.players.forEach((p) => {
