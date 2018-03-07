@@ -11,6 +11,5 @@ export class DropDownService {
         break;
       }
     }
-    console.log(this.gameMenu);
   }
 }

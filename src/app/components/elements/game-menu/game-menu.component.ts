@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { DropDownService } from '../../../../core/services/render/dropdown.service';
+import { GameService } from '../../../../core/services/game.service';
+import { Game } from '../../../../core/models/game';
 
 @Component({
   selector: 'app-game-menu',
@@ -8,9 +10,20 @@ import { DropDownService } from '../../../../core/services/render/dropdown.servi
 })
 export class GameMenuComponent implements OnInit {
 
-  constructor(public dropDownService: DropDownService) { }
+  @Output() gameChanged = new EventEmitter();
+
+  constructor(
+    public dropDownService: DropDownService,
+    public gameService: GameService
+  ) { }
 
   ngOnInit() {
+  }
+
+  public selectGame(game: Game) {
+    this.gameService.currentGame = game;
+    this.dropDownService.toggle('gameMenu');
+    this.gameChanged.next();
   }
 
 }

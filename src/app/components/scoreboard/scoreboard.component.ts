@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ModalService } from '../../../core/services/render/modal.service';
 import { HttpService } from '../../../core/services/http.service';
 import { GameService } from '../../../core/services/game.service';
@@ -22,11 +22,26 @@ export class ScoreboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getScoreBoard('5d8486cd-6e3b-4ffc-8c9b-e14ff5c2d2c1');
+    this.getGames();
   }
 
 
-  public getScoreBoard(gameId: string): void {
+  public getGames(): void {
+    this.gameService
+      .getGames()
+      .subscribe(
+        entities => this.loadGames(entities),
+        error => this.httpService.handleError(error)
+      );
+  }
+
+  private loadGames(entities: any): void {
+    this.gameService.games = entities.data;
+    this.gameService.getCurrentGame();
+    this.getScoreBoard();
+  }
+
+  public getScoreBoard(gameId = this.gameService.currentGame.gameId): void {
     this.scoreBoardService
       .getScoreBoard(gameId)
       .subscribe(
@@ -36,6 +51,10 @@ export class ScoreboardComponent implements OnInit {
   }
 
   private loadScoreBoard(entities: any): void {
+    /**
+     * Last round needs to be undefined before rendering starts
+     */
+    this.lastRound = null;
     this.roundList = entities.data;
     this.roundList.forEach((c, i) => {
       c.isLast = i === this.roundList.length - 1;
@@ -53,5 +72,6 @@ export class ScoreboardComponent implements OnInit {
         }
       });
     });
+    console.log(this.lastRound);
   }
 }
