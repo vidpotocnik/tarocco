@@ -4,7 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { environment } from '../../environments/environment';
-import { Game, GameList } from '../models/game';
+import { Game } from '../models/game';
+import { NewGame } from '../models/new-game';
 
 @Injectable()
 export class GameService {
@@ -15,6 +16,13 @@ export class GameService {
   public getGames(): Observable<Game> {
     return this.http
       .get(this.scoreBoardUri)
+      .map(rsp => rsp)
+      .map(rsp => new Game(rsp));
+  }
+
+  public postGame(newGame: NewGame): Observable<Game> {
+    return this.http
+      .post(this.scoreBoardUri, newGame)
       .map(rsp => rsp)
       .map(rsp => new Game(rsp));
   }

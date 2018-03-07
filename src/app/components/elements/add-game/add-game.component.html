@@ -1,0 +1,27 @@
+<div class="modal i is-radiusless" [class.is-active]="modalService.newGame" *ngIf="newGame">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Nova igra</p>
+      <button class="delete" aria-label="close" (click)="modalService.close('newGame')"></button>
+    </header>
+    <section class="modal-card-body">
+      <div class="field">
+        <label class="label">Ime igre</label>
+        <div class="control">
+          <input class="input" type="text" [(ngModel)]="newGame.name">
+        </div>
+      </div>
+      <div class="box">
+        <div class="has-text-weight-bold">Igralci</div>
+        <div class="control" *ngFor="let player of newGame.players">
+          <input class="input" type="text" [(ngModel)]="player.name">
+        </div>
+      </div>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-info is-radiusless" (click)="makeNewGame()"><i class="fa fa-check" aria-hidden="true"></i></button>
+      <button class="button is-radiusless" (click)="modalService.close('newGame')"><i class="fa fa-remove" aria-hidden="true"></i></button>
+    </footer>
+  </div>
+</div>

@@ -5,11 +5,12 @@
   <div class="box">
     <div class="column">
       <app-game-menu (gameChanged)="getScoreBoard()"></app-game-menu>
-      <app-game-record></app-game-record>
+      <app-add-record></app-add-record>
       <button class="button" aria-haspopup="true" (click)="modalService.open('gameRecord')">
         <span><i class="fa fa-lg fa-pencil" aria-hidden="true"></i></span>
       </button>
-      <button class="button" aria-haspopup="true">
+      <app-add-game (gameChanged)="getScoreBoard()"></app-add-game>
+      <button class="button" aria-haspopup="true" (click)="modalService.open('newGame')">
         <span><i class="fa fa-lg fa-plus" aria-hidden="true"></i></span>
       </button>
     </div>
@@ -51,3 +52,4 @@
       </table>
     </div>
   </div>
+</div>
