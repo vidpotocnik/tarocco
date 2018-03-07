@@ -11,11 +11,21 @@
   <thead>
   <tr>
     <th><abbr title="Position">#</abbr></th>
-    <th>Tip igre</th>
+    <th>Tip</th>
     <th><abbr title="Erik">Erik</abbr></th>
     <th><abbr title="Nejc">Nejc</abbr></th>
     <th><abbr title="Luka">Luka</abbr></th>
     <th><abbr title="Jan">Jan</abbr></th>
+  </tr>
+  <tr>
+    <th>R</th>
+    <th></th>
+    <th *ngFor="let lastRoundResult of lastRound.roundResults">
+      <span *ngFor="let radelc of lastRoundResult.radelci">
+        <i class="fa fa-xs fa-circle" aria-hidden="true" *ngIf="radelc"></i>
+        <i class="fa fa-xs fa-circle-thin" aria-hidden="true" *ngIf="!radelc"></i>
+      </span>
+    </th>
   </tr>
   </thead>
   <tbody>

@@ -14,6 +14,7 @@ export class Round extends Model {
    public supportingPlayerId: string;
    public won: boolean;
    public roundResults: Array<RoundResult>;
+   public isLast: boolean;
 
 
     public static init(entity: any): Round {

@@ -9,6 +9,7 @@ export class RoundResult extends Model {
   public playerRadelcUsed: number;
   public playerScore: number;
   public player: Player;
+  public radelci: Array<boolean>;
 
   public static init(entity: any): RoundResult {
     return new this(entity);

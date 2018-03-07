@@ -3,7 +3,7 @@ import { ModalService } from '../../../core/services/render/modal.service';
 import { HttpService } from '../../../core/services/http.service';
 import { GameService } from '../../../core/services/game.service';
 import { ScoreBoardService } from '../../../core/services/score-board.service';
-import { RoundList } from '../../../core/models/round';
+import { Round, RoundList } from '../../../core/models/round';
 
 @Component({
   selector: 'app-scoreboard',
@@ -12,7 +12,8 @@ import { RoundList } from '../../../core/models/round';
 })
 export class ScoreboardComponent implements OnInit {
 
-  public roundList: RoundList;
+  public roundList: Array<Round>;
+  public lastRound: Round;
 
   constructor(public modalService: ModalService,
               private httpService: HttpService,
@@ -36,7 +37,21 @@ export class ScoreboardComponent implements OnInit {
 
   private loadScoreBoard(entities: any): void {
     this.roundList = entities.data;
-    console.log(this.roundList);
+    this.roundList.forEach((c, i) => {
+      c.isLast = i === this.roundList.length - 1;
+      if (c.isLast) {
+        this.lastRound = c;
+      }
+      c.roundResults.forEach((r) => {
+        r.radelci = [];
+        for (let k = 1; k <= r.playerRadelcCount; k++) {
+          if (k <= r.playerRadelcUsed) {
+            r.radelci.push(true);
+          } else {
+            r.radelci.push(false);
+          }
+        }
+      });
+    });
   }
-
 }
