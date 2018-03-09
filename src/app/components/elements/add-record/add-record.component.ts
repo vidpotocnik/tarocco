@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ModalService } from '../../../../core/services/render/modal.service';
 import { NewRound } from '../../../../core/models/new-round';
 import { GameService } from '../../../../core/services/game.service';
@@ -18,6 +18,8 @@ export class AddRecordComponent implements OnInit {
   public newRound: NewRound;
   public result: Result;
   public modifiers: Array<Modifier>;
+
+  @Output() orderPlayer = new EventEmitter();
 
   constructor(public modalService: ModalService,
               public gameService: GameService,
@@ -60,10 +62,10 @@ export class AddRecordComponent implements OnInit {
   }
 
   public addNewRound() {
+    this.newRound.gameId = this.gameService.currentGame.gameId;
     this.addModifiers();
     this.postRound();
     this.initModifiers();
-    console.log(this.newRound);
     this.modalService.close('gameRecord');
   }
 
@@ -118,8 +120,11 @@ export class AddRecordComponent implements OnInit {
     ];
   }
 
-  private loadRound(entity: Round) {
-    this.scoreBoardService.roundList.push(entity);
-    this.scoreBoardService.lastRound = entity;
+  private loadRound(entity: any) {
+    this.scoreBoardService.lastRound = Round.init(entity.data);
+    this.scoreBoardService.lastRound.isLast = true;
+    this.scoreBoardService.roundList[this.scoreBoardService.roundList.length - 1].isLast = false;
+    this.scoreBoardService.roundList.push(this.scoreBoardService.lastRound);
+    this.orderPlayer.next();
   }
 }
