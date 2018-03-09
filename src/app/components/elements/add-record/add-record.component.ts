@@ -14,43 +14,49 @@ export class AddRecordComponent implements OnInit {
 
   public newRound: NewRound;
   public result: Result;
-  public modifiers = [
-    Modifier.init({modifierType: 'TRULA'}),
-    Modifier.init({modifierType: 'K. ULTIMA'}),
-    Modifier.init({modifierType: 'P. ULTIMA'}),
-    Modifier.init({modifierType: 'KRALJI'}),
-    Modifier.init({modifierType: 'VALAT'}),
-    Modifier.init({modifierType: 'B. VALAT'})
+  public modifiers: Array<Modifier>;
 
-  ];
-
-  constructor(
-    public modalService: ModalService,
-    public gameService: GameService
-  ) {
+  constructor(public modalService: ModalService,
+              public gameService: GameService) {
   }
 
   ngOnInit() {
     this.newRound = NewRound.init();
     this.result = Result.init();
+    this.initModifiers();
   }
 
   public toggleModifier(modifier: Modifier): void {
-    modifier.isActive = !modifier.isActive;
+    switch (modifier.team) {
+      case -1: {
+        modifier.team = 0;
+        break;
+      }
+      case 0: {
+        modifier.team = 1;
+        break;
+      }
+      case 1: {
+        modifier.team = -1;
+        break;
+      }
+    }
   }
 
-  public addModifier(modifier: Modifier): void {
+  public addModifiers(): void {
     if (!this.newRound.modifiers) {
       this.newRound.modifiers = [];
     }
     this.modifiers.forEach((m) => {
-      if (m.isActive) {
+      if (m.team !== 0) {
         this.newRound.modifiers.push(m);
       }
     });
   }
 
   public addNewRound() {
+    this.addModifiers();
+    this.initModifiers();
     console.log(this.newRound);
     this.modalService.close('gameRecord');
   }
@@ -85,6 +91,7 @@ export class AddRecordComponent implements OnInit {
       }
     }
   }
+
   public getAnnounced(modifier: Modifier): string {
     switch (modifier.announced) {
       case 0: {
@@ -94,5 +101,16 @@ export class AddRecordComponent implements OnInit {
         return 'Napoved';
       }
     }
+  }
+
+  private initModifiers(): void {
+    this.modifiers = [
+      Modifier.init({modifierType: 'trula'}),
+      Modifier.init({modifierType: 'kralji'}),
+      Modifier.init({modifierType: 'kralj_ultimo'}),
+      Modifier.init({modifierType: 'pagat_ultimo'}),
+      Modifier.init({modifierType: 'barvni_valat'}),
+      Modifier.init({modifierType: 'valat'})
+    ];
   }
 }

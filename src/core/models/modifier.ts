@@ -2,6 +2,7 @@ import { Model } from './model';
 
 export class Modifier extends Model {
   public modifierType: string;
+  public displayName: string;
   public team = 0;
   public announced = 0;
   public contraFactor = 1;

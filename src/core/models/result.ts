@@ -49,5 +49,7 @@ export class Result extends Model {
       ]
     });
   }
+
+  public serializ
 }
 
