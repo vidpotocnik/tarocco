@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ModalService } from '../../../../core/services/render/modal.service';
 import { NewRound } from '../../../../core/models/new-round';
 import { GameService } from '../../../../core/services/game.service';
@@ -17,7 +17,6 @@ export class AddRecordComponent implements OnInit {
   public newRound: NewRound;
   public result: Result;
   public modifiers: Array<Modifier>;
-
   @Output() refreshScoreBoard = new EventEmitter();
 
   constructor(public modalService: ModalService,
@@ -103,7 +102,7 @@ export class AddRecordComponent implements OnInit {
     this.scoreBoardService
       .postRound(this.newRound)
       .subscribe(
-        entity => this.loadRound(entity),
+        entity => this.loadRound(),
         error => this.httpService.handleError(error)
       );
   }
@@ -119,7 +118,9 @@ export class AddRecordComponent implements OnInit {
     ];
   }
 
-  private loadRound(entity: any) {
+  private loadRound(): void {
     this.refreshScoreBoard.next();
+    this.initModifiers();
+    this.newRound = NewRound.init();
   }
 }
