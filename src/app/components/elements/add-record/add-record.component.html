@@ -12,120 +12,150 @@
           <label class="label">Klop</label>
           <div class="control">
             <div class="select">
-              <select [(ngModel)]="newRound.isKlop">
-                <option [selected]="klop.value" [ngValue]="klop.value" *ngFor="let klop of result.isKlop">{{klop.name}}</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <!-- RESULT -->
-        <div class="field">
-          <label class="label">Izid</label>
-          <div class="control">
-            <div class="select">
-              <select [(ngModel)]="newRound.won">
-                <option [selected]="outcome.value" [ngValue]="outcome.value" *ngFor="let outcome of result.outcome">{{outcome.name}}</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <!-- PLAYER -->
-        <div class="field">
-          <label class="label">Igralec</label>
-          <div class="control">
-            <div class="select">
-              <select [(ngModel)]="newRound.leadPlayerId">
-                <option [ngValue]="null">---</option>
-                <option [ngValue]="player.playerId" *ngFor="let player of gameService.currentGame.players">
-                  {{player.name}}
+              <select [(ngModel)]="newRound.isKlop" (change)="initKlopResults()">
+                <option [selected]="klop.value" [ngValue]="klop.value" *ngFor="let klop of result.isKlop">
+                  {{klop.name}}
                 </option>
               </select>
             </div>
           </div>
         </div>
-
-        <!-- PLAYER -->
-        <div class="field">
-          <label class="label">Partner</label>
-          <div class="control">
-            <div class="select">
-              <select [(ngModel)]="newRound.supportingPlayerId">
-                <option [ngValue]="null">---</option>
-                <option [ngValue]="player.playerId" *ngFor="let player of gameService.currentGame.players">
-                  {{player.name}}
-                </option>
-              </select>
+        <ng-container [ngSwitch]="newRound.isKlop">
+          <ng-container *ngSwitchCase="false">
+            <!-- RESULT -->
+            <div class="field">
+              <label class="label">Izid</label>
+              <div class="control">
+                <div class="select">
+                  <select [(ngModel)]="newRound.won">
+                    <option [selected]="outcome.value" [ngValue]="outcome.value" *ngFor="let outcome of result.outcome">
+                      {{outcome.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-
-        <!-- GAME -->
-        <div class="field">
-          <label class="label">Igra</label>
-          <div class="control">
-            <div class="select">
-              <select [(ngModel)]="newRound.gameType">
-                <option [ngValue]="type.value" *ngFor="let type of result.gameType">{{type.name}}</option>
-              </select>
+            <!-- PLAYER -->
+            <div class="field">
+              <label class="label">Igralec</label>
+              <div class="control">
+                <div class="select">
+                  <select [(ngModel)]="newRound.leadPlayerId">
+                    <option [ngValue]="null">---</option>
+                    <option [ngValue]="player.playerId" *ngFor="let player of gameService.currentGame.players">
+                      {{player.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <!-- POINT DIFFERENCE -->
-        <div class="field">
-          <label class="label">Razlika v točkah</label>
-          <div class="control">
-            <div class="select">
-              <select [(ngModel)]="newRound.scoreDifference">
-                <option [ngValue]="score.value" *ngFor="let score of result.difference">{{score.value}}</option>
-              </select>
+            <!-- PLAYER -->
+            <div class="field">
+              <label class="label">Partner</label>
+              <div class="control">
+                <div class="select">
+                  <select [(ngModel)]="newRound.supportingPlayerId">
+                    <option [ngValue]="null">---</option>
+                    <option [ngValue]="player.playerId" *ngFor="let player of gameService.currentGame.players">
+                      {{player.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <!-- POINT DIFFERENCE -->
-        <div class="field">
-          <label class="label">Kontra</label>
-          <div class="control">
-            <div class="select">
-              <select [(ngModel)]="newRound.contraFactor">
-                <option [selected]="contra.value === 1" [ngValue]="contra.value" *ngFor="let contra of result.contraFactor">{{contra.name}}</option>
-              </select>
+            <!-- GAME -->
+            <div class="field">
+              <label class="label">Igra</label>
+              <div class="control">
+                <div class="select">
+                  <select [(ngModel)]="newRound.gameType">
+                    <option [ngValue]="type.value" *ngFor="let type of result.gameType">{{type.name}}</option>
+                  </select>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <!-- MONDFANG -->
-        <div class="field">
-          <label class="label">MondFang igralec</label>
-          <div class="control">
-            <div class="select">
-              <select [(ngModel)]="newRound.mondFangPlayerId">
-                <option [ngValue]="null">---</option>
-                <option [ngValue]="player.playerId" *ngFor="let player of gameService.currentGame.players">
-                  {{player.name}}
-                </option>
-              </select>
+            <!-- POINT DIFFERENCE -->
+            <div class="field">
+              <label class="label">Razlika v točkah</label>
+              <div class="control">
+                <div class="select">
+                  <select [(ngModel)]="newRound.scoreDifference">
+                    <option [ngValue]="score.value" *ngFor="let score of result.difference">{{score.value}}</option>
+                  </select>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="box">
-          <div class="field is-grouped is-grouped-multiline" *ngFor="let modifier of modifiers">
-            <div class="control">
-              <div class="tags has-addons">
+
+            <!-- POINT DIFFERENCE -->
+            <div class="field">
+              <label class="label">Kontra</label>
+              <div class="control">
+                <div class="select">
+                  <select [(ngModel)]="newRound.contraFactor">
+                    <option [selected]="contra.value === 1" [ngValue]="contra.value"
+                            *ngFor="let contra of result.contraFactor">{{contra.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- MONDFANG -->
+            <div class="field">
+              <label class="label">MondFang igralec</label>
+              <div class="control">
+                <div class="select">
+                  <select [(ngModel)]="newRound.mondFangPlayerId">
+                    <option [ngValue]="null">---</option>
+                    <option [ngValue]="player.playerId" *ngFor="let player of gameService.currentGame.players">
+                      {{player.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="box">
+              <div class="field is-grouped is-grouped-multiline" *ngFor="let modifier of modifiers">
+                <div class="control">
+                  <div class="tags has-addons">
                 <span class="tag" (click)="incrementAnnounced(modifier)" [class.is-success]="modifier.announced === 1">
                   <i class="fa fa-check" aria-hidden="true" *ngIf="modifier.announced === 1"></i>
                   <i class="fa fa-remove" aria-hidden="true" *ngIf="modifier.announced === 0"></i>
                 </span>
-                <span class="tag" (click)="incrementContraFactor(modifier)">{{getFactorMessage(modifier)}}</span>
-                <span class="tag"
-                      [class.is-info]="modifier.team === - 1"
-                      [class.is-success]="modifier.team === 1"
-                      (click)="toggleModifier(modifier)">{{modifier.modifierType}}</span>
+                    <span class="tag" (click)="incrementContraFactor(modifier)">{{getFactorMessage(modifier)}}</span>
+                    <span class="tag"
+                          [class.is-info]="modifier.team === - 1"
+                          [class.is-success]="modifier.team === 1"
+                          (click)="toggleModifier(modifier)">{{modifier.modifierType}}</span>
+                  </div>
+                </div>
               </div>
             </div>
-        </div>
-      </div>
+          </ng-container>
+          <ng-container *ngSwitchCase="true">
+            <div class="box">
+              <table class="table">
+                <thead>
+                   <tr>
+                    <th *ngFor="let player of gameService.getOrderedPlayers()">{{player.name}}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td *ngFor="let result of newRound.klopResults">
+                    <div class="control">
+                      <input class="input" type="number" [(ngModel)]="result.score">
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </ng-container>
+        </ng-container>
       </div>
     </section>
     <footer class="modal-card-foot">

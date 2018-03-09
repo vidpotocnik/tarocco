@@ -1,11 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ModalService } from '../../../../core/services/render/modal.service';
-import { NewRound } from '../../../../core/models/new-round';
 import { GameService } from '../../../../core/services/game.service';
-import { Modifier } from '../../../../core/models/modifier';
-import { Result } from '../../../../core/models/result';
 import { HttpService } from '../../../../core/services/http.service';
 import { ScoreBoardService } from '../../../../core/services/score-board.service';
+import { Modifier } from '../../../../core/models/modifier';
+import { Result } from '../../../../core/models/result';
+import { Player } from '../../../../core/models/player';
+import { NewRound } from '../../../../core/models/new-round';
+
 
 @Component({
   selector: 'app-add-record',
@@ -107,6 +109,8 @@ export class AddRecordComponent implements OnInit {
       );
   }
 
+
+
   private initModifiers(): void {
     this.modifiers = [
       Modifier.init({modifierType: 'trula'}),
@@ -116,6 +120,14 @@ export class AddRecordComponent implements OnInit {
       Modifier.init({modifierType: 'barvni_valat'}),
       Modifier.init({modifierType: 'valat'})
     ];
+  }
+
+  public initKlopResults() {
+    const klopResults = [];
+    this.scoreBoardService.lastRound.roundResults.forEach((r) => {
+      klopResults.push({playerId: r.playerId, score: 0});
+    });
+    this.newRound.klopResults = klopResults;
   }
 
   private loadRound(): void {

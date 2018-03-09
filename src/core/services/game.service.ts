@@ -6,6 +6,8 @@ import 'rxjs/add/operator/map';
 import { environment } from '../../environments/environment';
 import { Game } from '../models/game';
 import { NewGame } from '../models/new-game';
+import { Player } from '../models/player';
+import { ScoreBoardService } from './score-board.service';
 
 @Injectable()
 export class GameService {
@@ -43,6 +45,22 @@ export class GameService {
     });
   }
 
-  constructor(private http: HttpClient) {
+  public getOrderedPlayers(): Array<Player> {
+    if (!this.currentGame.players) {
+      return;
+    }
+    const result = [];
+    this.scoreBoardService.lastRound.roundResults.forEach((r) => {
+      this.currentGame.players.forEach((p) => {
+        if (r.playerId === p.playerId) {
+          result.push(p);
+        }
+      });
+    });
+
+    return result;
+  }
+
+  constructor(private http: HttpClient, private scoreBoardService: ScoreBoardService) {
   }
 }

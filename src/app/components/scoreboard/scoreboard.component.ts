@@ -51,22 +51,6 @@ export class ScoreboardComponent implements OnInit {
       );
   }
 
-  public getOrderedPlayers(): Array<Player> {
-    if (!this.gameService.currentGame.players) {
-      return;
-    }
-    const result = [];
-    this.scoreBoardService.lastRound.roundResults.forEach((r) => {
-      this.gameService.currentGame.players.forEach((p) => {
-        if (r.playerId === p.playerId) {
-          result.push(p);
-        }
-      });
-    });
-
-    return result;
-  }
-
   private loadGames(entities: any): void {
     this.gameService.games = entities.data;
     this.gameService.getCurrentGame();

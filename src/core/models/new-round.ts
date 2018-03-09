@@ -16,6 +16,7 @@ export class NewRound extends Model {
   }>;
   public contraFactor: number;
   public mondFangPlayerId: string;
+  public klopResults: Array<{playerId: string, score: number}>;
 
   public static init(entity = {}): NewRound {
     return new this(entity);
