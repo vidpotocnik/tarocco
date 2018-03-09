@@ -13,8 +13,7 @@
           <div class="control">
             <div class="select">
               <select [(ngModel)]="newRound.isKlop">
-                <option [value]="true">Da</option>
-                <option selected [value]="false">Ne</option>
+                <option [selected]="klop.value" [value]="klop.value" *ngFor="let klop of result.isKlop">{{klop.name}}</option>
               </select>
             </div>
           </div>
@@ -25,9 +24,7 @@
           <div class="control">
             <div class="select">
               <select [(ngModel)]="newRound.won">
-                <option [value]="null">---</option>
-                <option [value]="true">Zmaga</option>
-                <option [value]="false">Poraz</option>
+                <option [selected]="outcome.value" [value]="outcome.value" *ngFor="let outcome of result.outcome">{{outcome.name}}</option>
               </select>
             </div>
           </div>
@@ -68,16 +65,7 @@
           <div class="control">
             <div class="select">
               <select [(ngModel)]="newRound.gameType">
-                <option [value]="10">III.</option>
-                <option [value]="20">II.</option>
-                <option [value]="30">I.</option>
-                <option [value]="70">Klop</option>
-                <option [value]="40">Solo III.</option>
-                <option [value]="50">Solo II.</option>
-                <option [value]="60">Solo I.</option>
-                <option [value]="70">Berač</option>
-                <option [value]="80">Solo B.T.</option>
-                <option [value]="90">Odprti berač</option>
+                <option [value]="type.value" *ngFor="let type of result.gameType">{{type.name}}</option>
               </select>
             </div>
           </div>
@@ -89,14 +77,7 @@
           <div class="control">
             <div class="select">
               <select [(ngModel)]="newRound.scoreDifference">
-                <option [value]="0">0</option>
-                <option [value]="5">5</option>
-                <option [value]="10">10</option>
-                <option [value]="15">15</option>
-                <option [value]="20">20</option>
-                <option [value]="25">25</option>
-                <option [value]="30">30</option>
-                <option [value]="35">35</option>
+                <option [value]="score.value" *ngFor="let score of result.difference">{{score.value}}</option>
               </select>
             </div>
           </div>
@@ -108,11 +89,7 @@
           <div class="control">
             <div class="select">
               <select [(ngModel)]="newRound.contraFactor">
-                <option selected [value]="1">Brez</option>
-                <option [value]="2">Kontra</option>
-                <option [value]="4">Re</option>
-                <option [value]="8">Sub</option>
-                <option [value]="16">Mort</option>
+                <option [selected]="contra.value === 1" [value]="contra.value" *ngFor="let contra of result.contraFactor">{{contra.name}}</option>
               </select>
             </div>
           </div>

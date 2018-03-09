@@ -3,6 +3,7 @@ import { ModalService } from '../../../../core/services/render/modal.service';
 import { NewRound } from '../../../../core/models/new-round';
 import { GameService } from '../../../../core/services/game.service';
 import { Modifier } from '../../../../core/models/modifier';
+import { Result } from '../../../../core/models/result';
 
 @Component({
   selector: 'app-add-record',
@@ -12,6 +13,7 @@ import { Modifier } from '../../../../core/models/modifier';
 export class AddRecordComponent implements OnInit {
 
   public newRound: NewRound;
+  public result: Result;
   public modifiers = [
     Modifier.init({modifierType: 'TRULA'}),
     Modifier.init({modifierType: 'K. ULTIMA'}),
@@ -30,6 +32,7 @@ export class AddRecordComponent implements OnInit {
 
   ngOnInit() {
     this.newRound = NewRound.init();
+    this.result = Result.init();
   }
 
   public toggleModifier(modifier: Modifier): void {
