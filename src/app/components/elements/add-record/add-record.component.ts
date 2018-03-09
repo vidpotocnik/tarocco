@@ -6,7 +6,6 @@ import { Modifier } from '../../../../core/models/modifier';
 import { Result } from '../../../../core/models/result';
 import { HttpService } from '../../../../core/services/http.service';
 import { ScoreBoardService } from '../../../../core/services/score-board.service';
-import { Round } from "../../../../core/models/round";
 
 @Component({
   selector: 'app-add-record',
@@ -19,7 +18,7 @@ export class AddRecordComponent implements OnInit {
   public result: Result;
   public modifiers: Array<Modifier>;
 
-  @Output() orderPlayer = new EventEmitter();
+  @Output() refreshScoreBoard = new EventEmitter();
 
   constructor(public modalService: ModalService,
               public gameService: GameService,
@@ -121,10 +120,6 @@ export class AddRecordComponent implements OnInit {
   }
 
   private loadRound(entity: any) {
-    this.scoreBoardService.lastRound = Round.init(entity.data);
-    this.scoreBoardService.lastRound.isLast = true;
-    this.scoreBoardService.roundList[this.scoreBoardService.roundList.length - 1].isLast = false;
-    this.scoreBoardService.roundList.push(this.scoreBoardService.lastRound);
-    this.orderPlayer.next();
+    this.refreshScoreBoard.next();
   }
 }
