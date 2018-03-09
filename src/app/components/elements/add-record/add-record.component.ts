@@ -122,7 +122,10 @@ export class AddRecordComponent implements OnInit {
     ];
   }
 
-  public initKlopResults() {
+  public initKlopResults(): void {
+    if (!this.scoreBoardService.lastRound) {
+      return;
+    }
     const klopResults = [];
     this.scoreBoardService.lastRound.roundResults.forEach((r) => {
       klopResults.push({playerId: r.playerId, score: 0});
