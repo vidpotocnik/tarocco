@@ -13,13 +13,11 @@ import { Player } from '../../../core/models/player';
 })
 export class ScoreboardComponent implements OnInit {
 
-  public roundList: Array<Round>;
-  public lastRound: Round;
 
   constructor(public modalService: ModalService,
               public gameService: GameService,
-              private httpService: HttpService,
-              private scoreBoardService: ScoreBoardService) {
+              public scoreBoardService: ScoreBoardService,
+              private httpService: HttpService) {
   }
 
   ngOnInit() {
@@ -58,7 +56,7 @@ export class ScoreboardComponent implements OnInit {
       return;
     }
     const result = [];
-    this.lastRound.roundResults.forEach((r) => {
+    this.scoreBoardService.lastRound.roundResults.forEach((r) => {
       this.gameService.currentGame.players.forEach((p) => {
         if (r.playerId === p.playerId) {
           result.push(p);
@@ -83,12 +81,12 @@ export class ScoreboardComponent implements OnInit {
     /**
      * Last round needs to be undefined before rendering starts
      */
-    this.lastRound = null;
-    this.roundList = entities.data;
-    this.roundList.forEach((c, i) => {
-      c.isLast = i === this.roundList.length - 1;
+    this.scoreBoardService.lastRound = null;
+    this.scoreBoardService.roundList = entities.data;
+    this.scoreBoardService.roundList.forEach((c, i) => {
+      c.isLast = i === this.scoreBoardService.roundList.length - 1;
       if (c.isLast) {
-        this.lastRound = c;
+        this.scoreBoardService.lastRound = c;
       }
       c.roundResults.forEach((r) => {
         r.radelci = [];

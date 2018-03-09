@@ -4,6 +4,9 @@ import { NewRound } from '../../../../core/models/new-round';
 import { GameService } from '../../../../core/services/game.service';
 import { Modifier } from '../../../../core/models/modifier';
 import { Result } from '../../../../core/models/result';
+import { HttpService } from '../../../../core/services/http.service';
+import { ScoreBoardService } from '../../../../core/services/score-board.service';
+import { Round } from "../../../../core/models/round";
 
 @Component({
   selector: 'app-add-record',
@@ -17,7 +20,9 @@ export class AddRecordComponent implements OnInit {
   public modifiers: Array<Modifier>;
 
   constructor(public modalService: ModalService,
-              public gameService: GameService) {
+              public gameService: GameService,
+              private scoreBoardService: ScoreBoardService,
+              private httpService: HttpService) {
   }
 
   ngOnInit() {
@@ -56,6 +61,7 @@ export class AddRecordComponent implements OnInit {
 
   public addNewRound() {
     this.addModifiers();
+    this.postRound();
     this.initModifiers();
     console.log(this.newRound);
     this.modalService.close('gameRecord');
@@ -92,15 +98,13 @@ export class AddRecordComponent implements OnInit {
     }
   }
 
-  public getAnnounced(modifier: Modifier): string {
-    switch (modifier.announced) {
-      case 0: {
-        return 'Brez napovedi';
-      }
-      case 1: {
-        return 'Napoved';
-      }
-    }
+  public postRound(): void {
+    this.scoreBoardService
+      .postRound(this.newRound)
+      .subscribe(
+        entity => this.loadRound(entity),
+        error => this.httpService.handleError(error)
+      );
   }
 
   private initModifiers(): void {
@@ -112,5 +116,10 @@ export class AddRecordComponent implements OnInit {
       Modifier.init({modifierType: 'barvni_valat'}),
       Modifier.init({modifierType: 'valat'})
     ];
+  }
+
+  private loadRound(entity: Round) {
+    this.scoreBoardService.roundList.push(entity);
+    this.scoreBoardService.lastRound = entity;
   }
 }

@@ -11,25 +11,25 @@ import { NewGame } from '../models/new-game';
 export class GameService {
   public games: Array<Game>;
   public currentGame: Game;
-  private scoreBoardUri = environment.baseUri.concat('Game/');
+  private gameUri = environment.baseUri.concat('Game/');
 
   public getGames(): Observable<Game> {
     return this.http
-      .get(this.scoreBoardUri)
+      .get(this.gameUri)
       .map(rsp => rsp)
       .map(rsp => new Game(rsp));
   }
 
   public postGame(newGame: NewGame): Observable<Game> {
     return this.http
-      .post(this.scoreBoardUri, newGame)
+      .post(this.gameUri, newGame)
       .map(rsp => rsp)
       .map(rsp => new Game(rsp));
   }
 
   public getGame(gameId: string): Observable<Game> {
     return this.http
-      .get(this.scoreBoardUri + gameId)
+      .get(this.gameUri + gameId)
       .map(rsp => rsp)
       .map(rsp => new Game(rsp));
   }

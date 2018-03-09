@@ -1,4 +1,4 @@
-<div class="container-fluid" *ngIf="roundList">
+<div class="container-fluid" *ngIf="scoreBoardService.roundList">
   <div class="box">
     <h2 class="subtitle is-5 has-text-info has-text-centered is-uppercase">{{gameService.currentGame.name}}</h2>
   </div>
@@ -15,7 +15,7 @@
       </button>
     </div>
     <div class="box">
-      <article class="message is-info" *ngIf="!lastRound">
+      <article class="message is-info" *ngIf="!scoreBoardService.lastRound">
         <div class="message-header">
           <p>Info</p>
         </div>
@@ -23,7 +23,7 @@
           Trenutna igra še nima nobenega zapisa.
         </div>
       </article>
-      <table class="table is-hoverable is-fullwidth" *ngIf="lastRound">
+      <table class="table is-hoverable is-fullwidth" *ngIf="scoreBoardService.lastRound">
         <thead>
         <tr>
           <th>#</th>
@@ -33,7 +33,7 @@
         <tr>
           <th>R</th>
           <th></th>
-          <th *ngFor="let lastRoundResult of lastRound.roundResults" class="has-text-info">
+          <th *ngFor="let lastRoundResult of scoreBoardService.lastRound.roundResults" class="has-text-info">
       <span *ngFor="let radelc of lastRoundResult.radelci">
         <i class="fa fa-xs fa-circle" aria-hidden="true" *ngIf="radelc"></i>
         <i class="fa fa-xs fa-circle-thin" aria-hidden="true" *ngIf="!radelc"></i>
@@ -42,7 +42,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let round of roundList" [class.has-text-info]="round.isLast"
+        <tr *ngFor="let round of scoreBoardService.roundList" [class.has-text-info]="round.isLast"
             [class.has-text-weight-bold]="round.isLast">
           <td>{{round.roundNumber}}</td>
           <td>{{round.getGameType()}}</td>
