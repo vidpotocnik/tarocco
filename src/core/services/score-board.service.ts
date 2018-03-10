@@ -26,6 +26,13 @@ export class ScoreBoardService {
       .map(rsp => new RoundList(rsp));
   }
 
+  public deleteLastround(gameId: string): Observable<RoundList> {
+    const uri = this.scoreBoardUri.concat(gameId);
+    return this.http
+      .delete(uri)
+      .map(rsp => rsp);
+  }
+
   public postRound(round: NewRound): Observable<Round> {
     return this.http
       .post(this.scoreBoardUri, round)

@@ -20,6 +20,7 @@ import { ScoreBoardService } from '../core/services/score-board.service';
 import { ModalService } from '../core/services/render/modal.service';
 import { HttpService } from '../core/services/http.service';
 import { GameService } from '../core/services/game.service';
+import { RemoveRoundComponent } from './components/scoreboard/remove-round/remove-round.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { GameService } from '../core/services/game.service';
     StatisticsComponent,
     GameMenuComponent,
     AddRecordComponent,
-    AddGameComponent
+    AddGameComponent,
+    RemoveRoundComponent
   ],
   imports: [
     BrowserModule,

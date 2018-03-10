@@ -5,6 +5,7 @@ export class ModalService {
   // Logout modal toggle property
   public gameRecord: boolean;
   public newGame: boolean;
+  public removeRound: boolean;
 
   public open(entity: string) {
     switch (entity) {
@@ -14,6 +15,10 @@ export class ModalService {
       }
       case 'newGame': {
         this.newGame = true;
+        break;
+      }
+      case 'removeRound': {
+        this.removeRound = true;
         break;
       }
     }
@@ -27,6 +32,10 @@ export class ModalService {
       }
       case 'newGame': {
         this.newGame = false;
+        break;
+      }
+      case 'removeRound': {
+        this.removeRound = false;
         break;
       }
     }
