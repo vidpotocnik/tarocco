@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ModalService } from '../../../../core/services/render/modal.service';
 import { HttpService } from '../../../../core/services/http.service';
 import { ScoreBoardService } from '../../../../core/services/score-board.service';
@@ -10,6 +10,8 @@ import { GameService } from '../../../../core/services/game.service';
   styleUrls: ['./remove-round.component.css']
 })
 export class RemoveRoundComponent implements OnInit {
+
+  @Output() gameChanged = new EventEmitter();
 
   constructor(
     public modalService: ModalService,
@@ -31,6 +33,7 @@ export class RemoveRoundComponent implements OnInit {
   }
 
   private loadResponse(rsp: any): void {
+    this.gameChanged.next();
     this.modalService.close('removeRound');
   }
  }
