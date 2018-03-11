@@ -30,7 +30,7 @@ export class MenuComponent implements OnInit {
     this.menu = [
       MenuItem.init({
         label: 'Osnovno',
-        list: [{label: 'Login', isActive: false, link: ['login']}, {label: 'Registracija ekipe', isActive: false, link: ['']}]
+        list: [{label: 'Login', isActive: false, link: ['login']}, {label: 'Registracija ekipe', isActive: false, link: ['register']}]
       }),
       MenuItem.init({
         label: 'Administracija',

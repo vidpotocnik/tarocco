@@ -13,6 +13,9 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { GameMenuComponent } from './components/elements/game-menu/game-menu.component';
 import { AddRecordComponent } from './components/elements/add-record/add-record.component';
 import { AddGameComponent } from './components/elements/add-game/add-game.component';
+import { MenuComponent } from './components/menu/menu.component';
+import { LoginComponent } from './components/login/login.component';
+import { RemoveRoundComponent } from './components/scoreboard/remove-round/remove-round.component';
 /**
  * Services
  */
@@ -21,10 +24,9 @@ import { ScoreBoardService } from '../core/services/score-board.service';
 import { ModalService } from '../core/services/render/modal.service';
 import { HttpService } from '../core/services/http.service';
 import { GameService } from '../core/services/game.service';
-import { RemoveRoundComponent } from './components/scoreboard/remove-round/remove-round.component';
 import { ToastService } from '../core/services/render/toast.service';
-import { MenuComponent } from './components/menu/menu.component';
-import { LoginComponent } from './components/login/login.component';
+import { StepperService } from '../core/services/render/stepper.service';
+import { RegisterComponent } from './components/register/register.component';
 
 
 @NgModule({
@@ -37,7 +39,8 @@ import { LoginComponent } from './components/login/login.component';
     AddGameComponent,
     RemoveRoundComponent,
     MenuComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,8 @@ import { LoginComponent } from './components/login/login.component';
     ScoreBoardService,
     GameService,
     HttpService,
-    ToastService
+    ToastService,
+    StepperService
   ],
   bootstrap: [AppComponent]
 })
