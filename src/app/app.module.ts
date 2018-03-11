@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastyModule } from 'ng2-toasty';
 /**
  * Components
  */
@@ -21,6 +22,7 @@ import { ModalService } from '../core/services/render/modal.service';
 import { HttpService } from '../core/services/http.service';
 import { GameService } from '../core/services/game.service';
 import { RemoveRoundComponent } from './components/scoreboard/remove-round/remove-round.component';
+import { ToastService } from '../core/services/render/toast.service';
 
 
 @NgModule({
@@ -37,14 +39,16 @@ import { RemoveRoundComponent } from './components/scoreboard/remove-round/remov
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ToastyModule
   ],
   providers: [
     DropDownService,
     ModalService,
     ScoreBoardService,
     GameService,
-    HttpService
+    HttpService,
+    ToastService
   ],
   bootstrap: [AppComponent]
 })

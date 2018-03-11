@@ -3,6 +3,7 @@ import { ModalService } from '../../../../core/services/render/modal.service';
 import { NewGame } from '../../../../core/models/new-game';
 import { GameService } from '../../../../core/services/game.service';
 import { HttpService } from '../../../../core/services/http.service';
+import { ToastService } from '../../../../core/services/render/toast.service';
 
 @Component({
   selector: 'app-add-game',
@@ -17,7 +18,8 @@ export class AddGameComponent implements OnInit {
   constructor(
     public modalService: ModalService,
     public gameService: GameService,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private toastService: ToastService
   ) { }
 
   ngOnInit() {
@@ -41,5 +43,10 @@ export class AddGameComponent implements OnInit {
     this.gameService.games.push(this.gameService.currentGame);
     this.gameChanged.next();
     this.modalService.close('newGame');
+    this.toastService.addToast(
+      'Obvestilo',
+      'Nova igra uspešno dodana!',
+      'success'
+    );
   }
 }

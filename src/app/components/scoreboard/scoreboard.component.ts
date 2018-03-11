@@ -3,8 +3,6 @@ import { ModalService } from '../../../core/services/render/modal.service';
 import { HttpService } from '../../../core/services/http.service';
 import { GameService } from '../../../core/services/game.service';
 import { ScoreBoardService } from '../../../core/services/score-board.service';
-import { Round } from '../../../core/models/round';
-import { Player } from '../../../core/models/player';
 
 @Component({
   selector: 'app-scoreboard',

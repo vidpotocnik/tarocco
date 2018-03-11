@@ -3,6 +3,7 @@ import { ModalService } from '../../../../core/services/render/modal.service';
 import { HttpService } from '../../../../core/services/http.service';
 import { ScoreBoardService } from '../../../../core/services/score-board.service';
 import { GameService } from '../../../../core/services/game.service';
+import { ToastService } from '../../../../core/services/render/toast.service';
 
 @Component({
   selector: 'app-remove-round',
@@ -17,7 +18,8 @@ export class RemoveRoundComponent implements OnInit {
     public modalService: ModalService,
     public httpService: HttpService,
     public scoreBoardService: ScoreBoardService,
-    public gameService: GameService
+    public gameService: GameService,
+    private toastService: ToastService
   ) { }
 
   ngOnInit() {
@@ -35,5 +37,10 @@ export class RemoveRoundComponent implements OnInit {
   private loadResponse(rsp: any): void {
     this.gameChanged.next();
     this.modalService.close('removeRound');
+    this.toastService.addToast(
+      'Obvestilo',
+      'Zadnja runda je bila odstranjena.',
+      'success'
+    );
   }
  }

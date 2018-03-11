@@ -5,9 +5,8 @@ import { HttpService } from '../../../../core/services/http.service';
 import { ScoreBoardService } from '../../../../core/services/score-board.service';
 import { Modifier } from '../../../../core/models/modifier';
 import { Result } from '../../../../core/models/result';
-import { Player } from '../../../../core/models/player';
 import { NewRound } from '../../../../core/models/new-round';
-
+import { ToastService } from "../../../../core/services/render/toast.service";
 
 @Component({
   selector: 'app-add-record',
@@ -24,6 +23,7 @@ export class AddRecordComponent implements OnInit {
   constructor(public modalService: ModalService,
               public gameService: GameService,
               private scoreBoardService: ScoreBoardService,
+              private toastService: ToastService,
               private httpService: HttpService) {
   }
 
@@ -137,5 +137,10 @@ export class AddRecordComponent implements OnInit {
     this.refreshScoreBoard.next();
     this.initModifiers();
     this.newRound = NewRound.init();
+    this.toastService.addToast(
+      'Obvestilo',
+      'Nova runda uspešno dodana!',
+      'success'
+    );
   }
 }
