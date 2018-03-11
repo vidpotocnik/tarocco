@@ -13,10 +13,9 @@ export class HttpService {
   }
 
   public handleError(error: HttpErrorResponse): void {
-    console.log(error);
     this.toastService.addToast(
       'Napaka',
-       error.statusText,
+       String(error.status) + ': ' + error.statusText,
       'error'
     );
   }
