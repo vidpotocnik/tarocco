@@ -23,6 +23,8 @@ import { HttpService } from '../core/services/http.service';
 import { GameService } from '../core/services/game.service';
 import { RemoveRoundComponent } from './components/scoreboard/remove-round/remove-round.component';
 import { ToastService } from '../core/services/render/toast.service';
+import { MenuComponent } from './components/menu/menu.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { ToastService } from '../core/services/render/toast.service';
     GameMenuComponent,
     AddRecordComponent,
     AddGameComponent,
-    RemoveRoundComponent
+    RemoveRoundComponent,
+    MenuComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

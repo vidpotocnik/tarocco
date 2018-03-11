@@ -1,0 +1,12 @@
+<div class="box">
+  <aside class="menu">
+    <ng-container *ngFor="let item of menu">
+    <p class="menu-label">
+      {{item.label}}
+    </p>
+    <ul class="menu-list">
+      <li *ngFor="let option of item.list" (click)="setActive(option)"><a [class.is-active]="option.isActive" [routerLink]="option.link">{{option.label}}</a></li>
+    </ul>
+    </ng-container>
+  </aside>
+</div>

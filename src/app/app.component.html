@@ -24,8 +24,16 @@
   <!-- TODO: This inline style is to be moved somewhere .... -->
   <div style="padding-top:100px;">
 
-    <div class="container">
-     <router-outlet></router-outlet>
+    <div class="container is-fluid">
+
+      <div class="columns">
+        <div class="column">
+          <app-menu></app-menu>
+        </div>
+        <div class="column is-three-quarters">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
     </div>
 
   </div>
