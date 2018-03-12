@@ -13,12 +13,10 @@
         <a class="navbar-item" routerLink="statistics">
           <i class="fa fa-lg fa-bar-chart" aria-hidden="true"></i>
         </a>
-      </div>
-      <div class="navbar-end">
         <a class="navbar-item" (click)="dropDownService.toggle('user')">
-          <div class="dropdown" [class.is-active]="dropDownService.user">
+          <div class="dropdown is-left" [class.is-active]="dropDownService.user">
             <div class="dropdown-trigger">
-                <i class="fa fa-lg fa-user" aria-hidden="true"></i>
+              <i class="fa fa-lg fa-user" aria-hidden="true"></i>
             </div>
             <div class="dropdown-menu" id="dropdown-menu" role="menu">
               <div class="dropdown-content">
@@ -31,8 +29,10 @@
               </div>
             </div>
           </div>
-
         </a>
+      </div>
+      <div class="navbar-end">
+
       </div>
     </div>
   </nav>
