@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 export class DropDownService {
   public gameMenu: boolean;
   public games: boolean;
+  public user: boolean
 
   public toggle(entity: string) {
     switch (entity) {
@@ -13,6 +14,10 @@ export class DropDownService {
       }
       case 'games': {
         this.games = !this.games;
+        break;
+      }
+      case 'user': {
+        this.user = !this.user;
         break;
       }
     }

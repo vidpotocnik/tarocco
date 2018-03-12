@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from '../../../core/models/menu-item';
+import { DropDownService } from '../../../core/services/render/dropdown.service';
 
 @Component({
   selector: 'app-menu',
@@ -10,7 +11,7 @@ export class MenuComponent implements OnInit {
 
   public menu: Array<MenuItem>;
 
-  constructor() {
+  constructor(public dropDownService: DropDownService) {
     this.initMenu();
   }
 
