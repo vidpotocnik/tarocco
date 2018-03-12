@@ -1,12 +1,26 @@
-<div class="box">
-  <aside class="menu">
-    <ng-container *ngFor="let item of menu">
-    <p class="menu-label">
-      {{item.label}}
-    </p>
-    <ul class="menu-list">
-      <li *ngFor="let option of item.list" (click)="setActive(option)"><a [class.is-active]="option.isActive" [routerLink]="option.link">{{option.label}}</a></li>
-    </ul>
-    </ng-container>
-  </aside>
+<div class="navbar-fixed">
+  <nav class="navbar is-primary">
+    <div class="navbar-brand">
+      <a class="navbar-item" routerLink="/">
+        <i class="fa fa-lg fa-heart" aria-hidden="true"></i>
+      </a>
+    </div>
+    <div class="navbar-menu is-active">
+      <div class="navbar-start">
+        <a class="navbar-item" routerLink="">
+          <i class="fa fa-lg fa-sticky-note" aria-hidden="true"></i>
+        </a>
+        <a class="navbar-item" routerLink="statistics">
+          <i class="fa fa-lg fa-bar-chart" aria-hidden="true"></i>
+        </a>
+      </div>
+      <div class="navbar-end">
+        <a class="navbar-item" routerLink="login">
+          <i class="fa fa-lg fa-user-circle" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </nav>
+  <nav class="breadcrumb navbar-breadcrumb" aria-label="breadcrumbs">
+  </nav>
 </div>

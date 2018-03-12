@@ -1,41 +1,11 @@
 <div>
-  <div class="navbar-fixed">
-    <nav class="navbar is-primary">
-      <div class="navbar-brand">
-        <a class="navbar-item" routerLink="/">
-          <i class="fa fa-lg fa-heart" aria-hidden="true"></i>
-        </a>
-      </div>
-      <div class="navbar-menu">
-        <div class="navbar-start">
-        </div>
-        <div class="navbar-end">
-          <a class="navbar-item">
-
-          </a>
-          <div class="navbar-item"></div>
-        </div>
-      </div>
-    </nav>
-    <nav class="breadcrumb navbar-breadcrumb" aria-label="breadcrumbs">
-    </nav>
-  </div>
-
+  <app-menu></app-menu>
   <!-- TODO: This inline style is to be moved somewhere .... -->
-  <div style="padding-top:100px;">
+  <div style="padding-top:200px;">
 
     <div class="container is-fluid">
-
-      <div class="columns">
-        <div class="column">
-          <app-search></app-search>
-        </div>
-        <div class="column is-three-quarters">
-          <router-outlet></router-outlet>
-        </div>
-      </div>
+      <router-outlet></router-outlet>
     </div>
-
   </div>
 </div>
 

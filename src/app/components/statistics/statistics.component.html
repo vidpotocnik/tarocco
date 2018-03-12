@@ -1,47 +1,76 @@
-<table class="table">
-  <thead>
-  <tr>
-    <th><abbr title="Position">#</abbr></th>
-    <th>Statistika</th>
-    <th><abbr title="Erik">Erik</abbr></th>
-    <th><abbr title="Nejc">Nejc</abbr></th>
-    <th><abbr title="Luka">Luka</abbr></th>
-    <th><abbr title="Jan">Jan</abbr></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <th>Št. zmag</th>
-    <td><a title="Klop">Klop</a> <strong>(OBV.)</strong>
-    </td>
-    <td>38</td>
-    <td>23</td>
-    <td>12</td>
-    <td>3</td>
-  </tr>
-  <tr>
-    <th>Št. porazov</th>
-    <td><a title="Igra v II.">II.</a></td>
-    <td>38</td>
-    <td>19</td>
-    <td>13</td>
-    <td>6</td>
-  </tr>
-  <tr class="is-selected">
-    <th>Št. pasivnih iger</th>
-    <td><a title="Igra v I.">I.</a></td>
-    <td>38</td>
-    <td>19</td>
-    <td>9</td>
-    <td>10</td>
-  </tr>
-  <tr>
-    <th>Št. aktivnih iger</th>
-    <td><a title="Igra v I.">I.</a></td>
-    <td>38</td>
-    <td>19</td>
-    <td>9</td>
-    <td>10</td>
-  </tr>
-  </tbody>
-</table>
+<div class="container is fluid" *ngIf="gameService.currentGame">
+  <div class="box">
+    <h2 class="subtitle is-5 has-text-info has-text-centered is-uppercase">{{gameService.currentGame.name}}</h2>
+    <div class="column">
+      <button class="button" aria-haspopup="true">
+        <app-search (gameChanged)="getStatistics()"></app-search>
+      </button>
+    </div>
+    <table class="table is-hoverable is-fullwidth" *ngIf="statistics">
+      <tr>
+        <th>Statistika</th>
+        <th *ngFor="let stat of statistics">{{stat.name}}</th>
+      </tr>
+      <tr>
+        <th>povp. rundo</th>
+        <td *ngFor="let stat of statistics">{{stat.averagePerRound}}</td>
+      </tr>
+      <tr>
+        <th>povp. aktivno</th>
+        <td *ngFor="let stat of statistics">{{stat.averagePerLead}}</td>
+      </tr>
+      <tr>
+        <th>povp. pasivno</th>
+        <td *ngFor="let stat of statistics">{{stat.averagePerPrikolica}}</td>
+      </tr>
+      <tr>
+        <th>pov. igro</th>
+        <td *ngFor="let stat of statistics">{{stat.averagePerPlayed}}</td>
+      </tr>
+      <tr>
+        <th>max poz. spr.</th>
+        <td *ngFor="let stat of statistics">{{stat.maxPosScoreChange}}</td>
+      </tr>
+
+      <tr>
+        <th>max neg. spr</th>
+        <td *ngFor="let stat of statistics">{{stat.maxNegScoreChange}}</td>
+      </tr>
+
+      <tr>
+        <th>št. akt. iger</th>
+        <td *ngFor="let stat of statistics">{{stat.countLead}}</td>
+      </tr>
+
+      <tr>
+        <th>št. pas. iger</th>
+        <td *ngFor="let stat of statistics">{{stat.countPrikolica}}</td>
+      </tr>
+      <tr>
+        <th>št. igr. iger</th>
+        <td *ngFor="let stat of statistics">{{stat.countPlayed}}</td>
+      </tr>
+
+      <tr>
+        <th>št. izg. igr. iger</th>
+        <td *ngFor="let stat of statistics">{{stat.countLeadLost}}</td>
+      </tr>
+
+      <tr>
+        <th>št. zm. igr. iger</th>
+        <td *ngFor="let stat of statistics">{{stat.countLeadWon}}</td>
+      </tr>
+
+      <tr>
+        <th>vsota doblj. točk</th>
+        <td *ngFor="let stat of statistics">{{stat.sumScoreWon}}</td>
+      </tr>
+
+      <tr>
+        <th>vsota izgub. točk</th>
+        <td *ngFor="let stat of statistics">{{stat.sumScoreLost}}</td>
+      </tr>
+
+    </table>
+  </div>
+</div>

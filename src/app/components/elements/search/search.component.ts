@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { GameService } from '../../../../core/services/game.service';
 import { Game } from '../../../../core/models/game';
+import { DropDownService } from '../../../../core/services/render/dropdown.service';
 
 @Component({
   selector: 'app-search',
@@ -9,14 +10,25 @@ import { Game } from '../../../../core/models/game';
 })
 export class SearchComponent implements OnInit {
 
-  constructor(
-    public gameService: GameService,
-    ) { }
+  @Output() gameChanged = new EventEmitter();
+
+  constructor(public gameService: GameService,
+              public dropDownService: DropDownService) {
+  }
 
   ngOnInit() {
   }
 
   public selectGame(game: Game) {
     this.gameService.currentGame = game;
+    this.dropDownService.toggle('games');
+    this.setActive(game);
+    this.gameChanged.next();
+  }
+
+  private setActive(game: Game) {
+    this.gameService.games.forEach((g) => {
+      g.isActive = g.gameId === game.gameId;
+    });
   }
 }

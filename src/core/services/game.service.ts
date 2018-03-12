@@ -8,59 +8,70 @@ import { Game } from '../models/game';
 import { NewGame } from '../models/new-game';
 import { Player } from '../models/player';
 import { ScoreBoardService } from './score-board.service';
+import { GameStatisticsList } from '../models/game-statistics';
 
-@Injectable()
-export class GameService {
-  public games: Array<Game>;
-  public currentGame: Game;
-  private gameUri = environment.baseUri.concat('Game/');
+  @Injectable()
+  export class GameService {
+    public games: Array<Game>;
+    public currentGame: Game;
+    private gameUri = environment.baseUri.concat('Game/');
+    private statisticsUri = environment.baseUri.concat('Statistics/');
 
-  public getGames(): Observable<Game> {
-    return this.http
-      .get(this.gameUri)
-      .map(rsp => rsp)
-      .map(rsp => new Game(rsp));
-  }
 
-  public postGame(newGame: NewGame): Observable<Game> {
-    return this.http
-      .post(this.gameUri, newGame)
-      .map(rsp => rsp)
-      .map(rsp => new Game(rsp));
-  }
-
-  public getGame(gameId: string): Observable<Game> {
-    return this.http
-      .get(this.gameUri + gameId)
-      .map(rsp => rsp)
-      .map(rsp => new Game(rsp));
-  }
-
-  public getCurrentGame(): void {
-    this.games.forEach((game, index) => {
-      this.currentGame = game;
-      if (index > 0 && this.games[index - 1].date > game.date) {
-        this.currentGame = this.games[index - 1];
-      }
-    });
-  }
-
-  public getOrderedPlayers(): Array<Player> {
-    if (!this.currentGame.players) {
-      return;
+    constructor(private http: HttpClient, private scoreBoardService: ScoreBoardService) {
     }
-    const result = [];
-    this.scoreBoardService.lastRound.roundResults.forEach((r) => {
-      this.currentGame.players.forEach((p) => {
-        if (r.playerId === p.playerId) {
-          result.push(p);
+
+    public getGames(): Observable<Game> {
+      return this.http
+        .get(this.gameUri)
+        .map(rsp => rsp)
+        .map(rsp => new Game(rsp));
+    }
+
+    public postGame(newGame: NewGame): Observable<Game> {
+      return this.http
+        .post(this.gameUri, newGame)
+        .map(rsp => rsp)
+        .map(rsp => new Game(rsp));
+    }
+
+    public getGame(gameId: string): Observable<Game> {
+      return this.http
+        .get(this.gameUri + gameId)
+        .map(rsp => rsp)
+        .map(rsp => new Game(rsp));
+    }
+
+    public getStatistics(gameId: string): Observable<GameStatisticsList> {
+      return this.http
+        .get(this.statisticsUri + gameId)
+        .map(rsp => rsp)
+        .map(rsp => new GameStatisticsList(rsp));
+    }
+
+    public getCurrentGame(): void {
+      this.games.forEach((game, index) => {
+        this.currentGame = game;
+        if (index > 0 && this.games[index - 1].date > game.date) {
+          this.currentGame = this.games[index - 1];
         }
       });
-    });
+    }
 
-    return result;
-  }
+    public getOrderedPlayers(): Array<Player> {
+      if (!this.currentGame.players) {
+        return;
+      }
+      const result = [];
+      this.scoreBoardService.lastRound.roundResults.forEach((r) => {
+        this.currentGame.players.forEach((p) => {
+          if (r.playerId === p.playerId) {
+            result.push(p);
+          }
+        });
+      });
 
-  constructor(private http: HttpClient, private scoreBoardService: ScoreBoardService) {
+      return result;
+    }
+
   }
-}

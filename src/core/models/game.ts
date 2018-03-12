@@ -6,6 +6,7 @@ export class Game extends Model {
   public date: string;
   public name: string;
   public players: Array<Player>;
+  public isActive: boolean;
 
   public static init(entity: any): Game {
     return new this(entity);
