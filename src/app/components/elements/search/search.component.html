@@ -1,0 +1,25 @@
+<nav class="panel">
+  <p class="panel-heading">
+    Igre
+  </p>
+  <div class="panel-block">
+    <p class="control has-icons-left">
+      <input class="input is-small" type="text" placeholder="search">
+      <span class="icon is-small is-left">
+        <i class="fas fa-search"></i>
+      </span>
+    </p>
+  </div>
+  <p class="panel-tabs">
+    <a class="is-active">all</a>
+    <a>vse</a>
+    <a>ekipne</a>
+  </p>
+  <a class="panel-block" *ngFor="let game of gameService.games" (click)="selectGame(game)">
+    <span class="panel-icon">
+      <i class="fa fa-book"></i>
+    </span>
+   {{game.name}}
+  </a>
+
+</nav>

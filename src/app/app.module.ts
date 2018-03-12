@@ -27,6 +27,7 @@ import { GameService } from '../core/services/game.service';
 import { ToastService } from '../core/services/render/toast.service';
 import { StepperService } from '../core/services/render/stepper.service';
 import { RegisterComponent } from './components/register/register.component';
+import { SearchComponent } from './components/elements/search/search.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { RegisterComponent } from './components/register/register.component';
     RemoveRoundComponent,
     MenuComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

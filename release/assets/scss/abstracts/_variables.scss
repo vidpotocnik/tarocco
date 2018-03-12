@@ -1,0 +1,68 @@
+$colors: (
+  main: (
+    primary: #404faf,
+    primary-dark: darken(#404faf, 30%),
+    storm: #6A6E86,
+    storm-dark: darken(#6A6E86, 30%),
+    green: #3D9800,
+    red: #BA0008,
+    yellow: #F0CE00,
+    orange: #E09300
+  ),
+  gray: (
+    xlighter: #f7f7f7,
+    lighter: #E5E5E5,
+    light: #CCCCCC,
+    dark: #999999,
+    darker: #4C4C4C,
+    text: #393939,
+    text-light: #707070
+  ),
+  brand: (
+    bibaleze: #42B4DC,
+    moskisvet: #F49900,
+    voyo: #3977D4,
+    dominvrt: #189a62,
+    okusnoje: #54B000,
+    cekin: #BD9B52,
+    zadovoljna: #702494,
+    vizita: #e97b24,
+    facebook: #3b5998,
+    twitter: #55acee,
+    google-plus: #dc4e41
+  )
+);
+
+$white: #fff;
+$black: #000;
+$hr-color: #dbdbdb;
+
+$b-light: hsl(0, 0%, 96%);
+
+$global-font-size: 100%;
+$global-width: 1200px;
+$global-lineheight: 1.4;
+$body-background: #fcfcfc;
+$body-font-color: $black;
+$global-margin: 1rem;
+$global-padding: 1rem;
+$global-weight-normal: normal;
+$global-weight-bold: bold;
+$global-radius: 3px;
+
+$hr-border: 1px solid $hr-color;
+
+$z-depth-1: 0 2px 2px 0 rgba($black, 0.14), 0 1px 5px 0 rgba($black, 0.12), 0 3px 1px -2px rgba($black, 0.2);
+
+
+// Layout
+
+$navbar-height: rem-calc(92);
+$sidebar-width: rem-calc(280);
+$sidebar-shadow: 0 0 5px 0 rgba(0, 0, 0, .35);
+
+$blue: #404faf;
+$danger: #ff2b56;
+$primary: $blue;
+
+
