@@ -39,7 +39,7 @@ export class StatisticsComponent implements OnInit {
       );
   }
 
-  public getStatistics(gameId = this.gameService.currentGame.gameId): void {
+  public getStatistics(gameId = this.gameService.currentGame.teamId): void {
     this.gameService
       .getStatistics(gameId)
       .subscribe(

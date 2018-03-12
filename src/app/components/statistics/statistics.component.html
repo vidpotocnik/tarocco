@@ -13,55 +13,55 @@
       </tr>
       <tr>
         <th>povp. rundo</th>
-        <td *ngFor="let stat of statistics">{{stat.averagePerRound}}</td>
+        <td *ngFor="let stat of statistics">{{stat.averagePerRound | round}}</td>
       </tr>
       <tr>
         <th>povp. aktivno</th>
-        <td *ngFor="let stat of statistics">{{stat.averagePerLead}}</td>
+        <td *ngFor="let stat of statistics">{{stat.averagePerLead | round}}</td>
       </tr>
       <tr>
         <th>povp. pasivno</th>
-        <td *ngFor="let stat of statistics">{{stat.averagePerPrikolica}}</td>
+        <td *ngFor="let stat of statistics">{{stat.averagePerPrikolica | round}}</td>
       </tr>
       <tr>
         <th>pov. igro</th>
-        <td *ngFor="let stat of statistics">{{stat.averagePerPlayed}}</td>
+        <td *ngFor="let stat of statistics">{{stat.averagePerPlayed | round}}</td>
       </tr>
       <tr>
         <th>max poz. spr.</th>
-        <td *ngFor="let stat of statistics">{{stat.maxPosScoreChange}}</td>
+        <td *ngFor="let stat of statistics">{{stat.maxPosScoreChange | round}}</td>
       </tr>
       <tr>
         <th>max neg. spr</th>
-        <td *ngFor="let stat of statistics">{{stat.maxNegScoreChange}}</td>
+        <td *ngFor="let stat of statistics">{{stat.maxNegScoreChange | round}}</td>
       </tr>
       <tr>
         <th>št. akt. iger</th>
-        <td *ngFor="let stat of statistics">{{stat.countLead}}</td>
+        <td *ngFor="let stat of statistics">{{stat.countLead | round}}</td>
       </tr>
       <tr>
         <th>št. pas. iger</th>
-        <td *ngFor="let stat of statistics">{{stat.countPrikolica}}</td>
+        <td *ngFor="let stat of statistics">{{stat.countPrikolica | round}}</td>
       </tr>
       <tr>
         <th>št. igr. iger</th>
-        <td *ngFor="let stat of statistics">{{stat.countPlayed}}</td>
+        <td *ngFor="let stat of statistics">{{stat.countPlayed | round}}</td>
       </tr>
       <tr>
         <th>št. izg. igr. iger</th>
-        <td *ngFor="let stat of statistics">{{stat.countLeadLost}}</td>
+        <td *ngFor="let stat of statistics">{{stat.countLeadLost | round}}</td>
       </tr>
       <tr>
         <th>št. zm. igr. iger</th>
-        <td *ngFor="let stat of statistics">{{stat.countLeadWon}}</td>
+        <td *ngFor="let stat of statistics">{{stat.countLeadWon | round}}</td>
       </tr>
       <tr>
         <th>vsota doblj. točk</th>
-        <td *ngFor="let stat of statistics">{{stat.sumScoreWon}}</td>
+        <td *ngFor="let stat of statistics">{{stat.sumScoreWon | round}}</td>
       </tr>
       <tr>
         <th>vsota izgub. točk</th>
-        <td *ngFor="let stat of statistics">{{stat.sumScoreLost}}</td>
+        <td *ngFor="let stat of statistics">{{stat.sumScoreLost | round}}</td>
       </tr>
     </table>
   </div>

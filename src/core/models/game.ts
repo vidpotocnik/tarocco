@@ -3,6 +3,7 @@ import { Player } from './player';
 
 export class Game extends Model {
   public gameId: string;
+  public teamId: string;
   public date: string;
   public name: string;
   public players: Array<Player>;

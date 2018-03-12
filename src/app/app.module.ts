@@ -29,6 +29,11 @@ import { StepperService } from '../core/services/render/stepper.service';
 import { RegisterComponent } from './components/register/register.component';
 import { SearchComponent } from './components/elements/search/search.component';
 
+/**
+ * Pipes
+ */
+import { RoundPipe } from './pipes/round.pipe';
+
 
 @NgModule({
   declarations: [
@@ -42,7 +47,8 @@ import { SearchComponent } from './components/elements/search/search.component';
     MenuComponent,
     LoginComponent,
     RegisterComponent,
-    SearchComponent
+    SearchComponent,
+    RoundPipe
   ],
   imports: [
     BrowserModule,
