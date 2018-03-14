@@ -1,68 +1,21 @@
-<div class="container is is-fluid" *ngIf="gameService.currentGame">
-  <div class="box">
-    <h2 class="subtitle is-5 has-text-info has-text-centered is-uppercase">{{gameService.currentGame.name}}</h2>
-    <div class="column">
-      <button class="button" aria-haspopup="true">
-        <app-search (gameChanged)="getStatistics()"></app-search>
-      </button>
+<div class="container is is-fluid" *ngIf="gameService.currentGame && statTabs">
+  <h2 class="subtitle is-5 has-text-info has-text-centered is-uppercase">{{gameService.currentGame.name}}</h2>
+  <div class="column">
+    <button class="button" aria-haspopup="true">
+      <app-search (gameChanged)="getStatistics()"></app-search>
+    </button>
+  </div>
+
+  <div class="container">
+    <div class="tabs is-centered is-small is-boxed">
+      <ul>
+        <li [class.is-active]="tab.active" *ngFor="let tab of statTabs" (click)="setActiveTab(tab)"><a>{{tab.name}}</a>
+        </li>
+      </ul>
     </div>
-    <table class="table is-hoverable is-fullwidth" *ngIf="statistics">
-      <tr>
-        <th>Statistika</th>
-        <th *ngFor="let stat of statistics">{{stat.name}}</th>
-      </tr>
-      <tr>
-        <th>povp. rundo</th>
-        <td *ngFor="let stat of statistics">{{stat.averagePerRound | round}}</td>
-      </tr>
-      <tr>
-        <th>povp. aktivno</th>
-        <td *ngFor="let stat of statistics">{{stat.averagePerLead | round}}</td>
-      </tr>
-      <tr>
-        <th>povp. pasivno</th>
-        <td *ngFor="let stat of statistics">{{stat.averagePerPrikolica | round}}</td>
-      </tr>
-      <tr>
-        <th>pov. igro</th>
-        <td *ngFor="let stat of statistics">{{stat.averagePerPlayed | round}}</td>
-      </tr>
-      <tr>
-        <th>max poz. spr.</th>
-        <td *ngFor="let stat of statistics">{{stat.maxPosScoreChange | round}}</td>
-      </tr>
-      <tr>
-        <th>max neg. spr</th>
-        <td *ngFor="let stat of statistics">{{stat.maxNegScoreChange | round}}</td>
-      </tr>
-      <tr>
-        <th>št. akt. iger</th>
-        <td *ngFor="let stat of statistics">{{stat.countLead | round}}</td>
-      </tr>
-      <tr>
-        <th>št. pas. iger</th>
-        <td *ngFor="let stat of statistics">{{stat.countPrikolica | round}}</td>
-      </tr>
-      <tr>
-        <th>št. igr. iger</th>
-        <td *ngFor="let stat of statistics">{{stat.countPlayed | round}}</td>
-      </tr>
-      <tr>
-        <th>št. izg. igr. iger</th>
-        <td *ngFor="let stat of statistics">{{stat.countLeadLost | round}}</td>
-      </tr>
-      <tr>
-        <th>št. zm. igr. iger</th>
-        <td *ngFor="let stat of statistics">{{stat.countLeadWon | round}}</td>
-      </tr>
-      <tr>
-        <th>vsota doblj. točk</th>
-        <td *ngFor="let stat of statistics">{{stat.sumScoreWon | round}}</td>
-      </tr>
-      <tr>
-        <th>vsota izgub. točk</th>
-        <td *ngFor="let stat of statistics">{{stat.sumScoreLost | round}}</td>
-      </tr>
-    </table>
+    <app-graph [statistics]="statistics" *ngIf="activeTab && activeTab.id === 2"></app-graph>
+    <app-graph [statistics]="statistics" [graph]="'passive'" [type]="'pie'" *ngIf="activeTab && activeTab.id === 1"></app-graph>
+    <app-graph [statistics]="statistics" [graph]="'active'" [type]="'pie'" *ngIf="activeTab && activeTab.id === 3"></app-graph>
+    <app-stat-table [statistics]="statistics" *ngIf="activeTab && activeTab.id === 0"></app-stat-table>
   </div>
 </div>

@@ -11,6 +11,13 @@ import { HttpService } from '../../../core/services/http.service';
 export class StatisticsComponent implements OnInit {
 
   public statistics: Array<GameStatistics>;
+  public statTabs = [
+    {id: 2, name: 'AVG P.P.R', active: true},
+    {id: 1, name: 'Prikolica', active: false},
+    {id: 3, name: 'Vodilni', active: false},
+    {id: 0, name: 'Splošno', active: false}
+    ];
+  public activeTab: any;
 
   constructor(
     public gameService: GameService,
@@ -19,6 +26,13 @@ export class StatisticsComponent implements OnInit {
 
   ngOnInit() {
     this.getGames();
+  }
+
+  public setActiveTab(tab): void {
+    this.statTabs.forEach((st) => {
+      st.active = tab.id === st.id;
+    });
+    this.activeTab = this.statTabs.find(t => t.active);
   }
 
   public getGames(): void {
@@ -50,7 +64,6 @@ export class StatisticsComponent implements OnInit {
 
   private loadStatistics(rsp) {
     this.statistics = rsp.data;
-    console.log(rsp);
   }
 
   private loadGames(entities: any): void {

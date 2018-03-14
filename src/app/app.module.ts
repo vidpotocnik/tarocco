@@ -4,6 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastyModule } from 'ng2-toasty';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /**
  * Components
  */
@@ -33,7 +35,8 @@ import { SearchComponent } from './components/elements/search/search.component';
  * Pipes
  */
 import { RoundPipe } from './pipes/round.pipe';
-
+import { GraphComponent } from './components/elements/graph/graph.component';
+import { StatTableComponent } from './components/statistics/stat-table/stat-table.component';
 
 @NgModule({
   declarations: [
@@ -48,14 +51,18 @@ import { RoundPipe } from './pipes/round.pipe';
     LoginComponent,
     RegisterComponent,
     SearchComponent,
-    RoundPipe
+    RoundPipe,
+    GraphComponent,
+    StatTableComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ToastyModule
+    ToastyModule,
+    NgxChartsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     DropDownService,
