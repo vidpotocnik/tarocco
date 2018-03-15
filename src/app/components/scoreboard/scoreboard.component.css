@@ -2,3 +2,11 @@
   table-layout:fixed;
   width: 100%;
 }
+.section--disabled {
+  opacity: .2;
+  pointer-events: none;
+}
+
+.hide {
+  display: none;
+}

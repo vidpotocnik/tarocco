@@ -19,7 +19,7 @@
 
 .loader-container {
   max-height: 60vh;
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
@@ -29,7 +29,7 @@
 }
 
 .loader {
-  @include loader01($color: $primary, $border-size: 6px, $size: 32px, $duration: 1s, $align: middle);
+  @include loader01($color: #7C0A02, $border-size: 6px, $size: 32px, $duration: 1s, $align: middle);
 }
 
 .button.is-ellipsis {

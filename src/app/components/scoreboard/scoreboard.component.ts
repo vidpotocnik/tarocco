@@ -11,6 +11,10 @@ import { ScoreBoardService } from '../../../core/services/score-board.service';
 })
 export class ScoreboardComponent implements OnInit {
 
+  /**
+   * Property for masking page
+   */
+  public loading: boolean;
 
   constructor(public modalService: ModalService,
               public gameService: GameService,
@@ -41,6 +45,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   public getScoreBoard(gameId = this.gameService.currentGame.gameId): void {
+    this.loading = true;
     this.scoreBoardService
       .getScoreBoard(gameId)
       .subscribe(
@@ -82,5 +87,6 @@ export class ScoreboardComponent implements OnInit {
       });
     });
     this.getGame(this.gameService.currentGame.gameId);
+    this.loading = false;
   }
 }
