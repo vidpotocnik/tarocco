@@ -16,12 +16,17 @@
             <i class="fa fa-lg fa-user" aria-hidden="true"></i>
           </div>
           <div class="dropdown-menu" id="dropdown-menu" role="menu">
-            <div class="dropdown-content">
+            <div class="dropdown-content" *ngIf="!authenticationService.isAuthenticated()">
               <a routerLink="login" class="dropdown-item">
                 Login
               </a>
               <a routerLink="register" class="dropdown-item">
                 Registracija
+              </a>
+            </div>
+            <div class="dropdown-content" *ngIf="authenticationService.isAuthenticated()">
+              <a routerLink="login" class="dropdown-item" (click)="authenticationService.logout()">
+                Logout
               </a>
             </div>
           </div>

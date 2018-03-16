@@ -30,13 +30,18 @@ import { ToastService } from '../core/services/render/toast.service';
 import { StepperService } from '../core/services/render/stepper.service';
 import { RegisterComponent } from './components/register/register.component';
 import { SearchComponent } from './components/elements/search/search.component';
-
+import { AuthenticationService } from '../core/services/authentication.service';
 /**
  * Pipes
  */
 import { RoundPipe } from './pipes/round.pipe';
 import { GraphComponent } from './components/elements/graph/graph.component';
 import { StatTableComponent } from './components/statistics/stat-table/stat-table.component';
+/**
+ * Guards
+ */
+import { AuthGuard } from '../core/guards/auth.guard';
+import { LoginGuard } from '../core/guards/login.guard';
 
 @NgModule({
   declarations: [
@@ -71,7 +76,10 @@ import { StatTableComponent } from './components/statistics/stat-table/stat-tabl
     GameService,
     HttpService,
     ToastService,
-    StepperService
+    StepperService,
+    AuthenticationService,
+    AuthGuard,
+    LoginGuard
   ],
   bootstrap: [AppComponent]
 })

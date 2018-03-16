@@ -8,15 +8,17 @@ import { ScoreboardComponent } from './components/scoreboard/scoreboard.componen
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { LoginGuard } from '../core/guards/login.guard';
+import { AuthGuard } from '../core/guards/auth.guard';
 /**
  * Guards
  */
 
 const routes: Routes = [
-  { path: 'register', component: RegisterComponent},
-  { path: 'login', component: LoginComponent},
-  { path: 'statistics', component: StatisticsComponent},
-  { path: '**', component: ScoreboardComponent}
+  { path: 'register', canActivate: [LoginGuard], component: RegisterComponent},
+  { path: 'login', canActivate: [LoginGuard], component: LoginComponent},
+  { path: 'statistics', canActivate: [AuthGuard], component: StatisticsComponent},
+  { path: '**', canActivate: [AuthGuard], component: ScoreboardComponent}
 ];
 
 @NgModule({

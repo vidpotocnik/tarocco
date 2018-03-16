@@ -5,8 +5,19 @@
       <div class="field">
         <p class="control has-icons-left">
           <input class="input"
+                 name="username"
+                 type="text"
+                 [(ngModel)]="authentication.teamId"
+                 placeholder="Ekipa">
+          <span class="icon is-small is-left">
+                        <i class="fa fa-user"></i>
+                    </span>
+        </p>
+        <p class="control has-icons-left">
+          <input class="input"
                  name="password"
                  type="password"
+                 [(ngModel)]="authentication.passphrase"
                  placeholder="Dostopni ključ">
           <span class="icon is-small is-left">
                         <i class="fa fa-lock"></i>
@@ -16,7 +27,7 @@
 
       <div class="field">
         <div class="control is-clearfix">
-          <button class="button login-button is-primary is-pulled-right"><i class="fa fa-check"></i></button>
+          <button class="button login-button is-primary is-pulled-right" (click)="authenticate()"><i class="fa fa-check"></i></button>
         </div>
       </div>
     </div>

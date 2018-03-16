@@ -5,7 +5,8 @@ import 'rxjs/add/operator/map';
 
 import { environment } from '../../environments/environment';
 import { Round, RoundList } from '../models/round';
-import { NewRound } from "../models/new-round";
+import { NewRound } from '../models/new-round';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable()
 export class ScoreBoardService {
@@ -15,13 +16,16 @@ export class ScoreBoardService {
 
   private scoreBoardUri = environment.baseUri.concat('ScoreBoard/');
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private authenticationService: AuthenticationService
+  ) {
   }
 
   public getScoreBoard(gameId: string): Observable<RoundList> {
     const uri = this.scoreBoardUri.concat(gameId);
     return this.http
-      .get(uri)
+      .get(uri, {headers: this.authenticationService.getAuthorizationHeader()})
       .map(rsp => rsp)
       .map(rsp => new RoundList(rsp));
   }
@@ -29,13 +33,13 @@ export class ScoreBoardService {
   public deleteLastround(gameId: string): Observable<RoundList> {
     const uri = this.scoreBoardUri.concat(gameId);
     return this.http
-      .delete(uri)
+      .delete(uri, {headers: this.authenticationService.getAuthorizationHeader()})
       .map(rsp => rsp);
   }
 
   public postRound(round: NewRound): Observable<Round> {
     return this.http
-      .post(this.scoreBoardUri, round)
+      .post(this.scoreBoardUri, round, {headers: this.authenticationService.getAuthorizationHeader()})
       .map(rsp => rsp)
       .map(rsp => new Round(rsp));
   }
