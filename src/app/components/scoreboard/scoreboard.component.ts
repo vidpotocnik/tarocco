@@ -1,8 +1,15 @@
+/**
+ * Internal
+ */
 import { Component, OnInit } from '@angular/core';
+/**
+ * Services
+ */
 import { ModalService } from '../../../core/services/render/modal.service';
 import { HttpService } from '../../../core/services/http.service';
 import { GameService } from '../../../core/services/game.service';
 import { ScoreBoardService } from '../../../core/services/score-board.service';
+import { AuthenticationService } from '../../../core/services/authentication.service';
 
 @Component({
   selector: 'app-scoreboard',
@@ -17,6 +24,7 @@ export class ScoreboardComponent implements OnInit {
   public loading: boolean;
 
   constructor(public modalService: ModalService,
+              public authenticationService: AuthenticationService,
               public gameService: GameService,
               public scoreBoardService: ScoreBoardService,
               private httpService: HttpService) {

@@ -6,18 +6,21 @@
       <button class="button" aria-haspopup="true">
         <app-search (gameChanged)="getScoreBoard()"></app-search>
       </button>
-      <app-add-record (refreshScoreBoard)="getScoreBoard()"></app-add-record>
-      <button class="button" aria-haspopup="true" (click)="modalService.open('gameRecord')">
-        <span><i class="fa fa-lg fa-pencil" aria-hidden="true"></i></span>
-      </button>
-      <app-add-game (gameChanged)="getScoreBoard()"></app-add-game>
-      <button class="button" aria-haspopup="true" (click)="modalService.open('newGame')">
-        <span><i class="fa fa-lg fa-plus" aria-hidden="true"></i></span>
-      </button>
-      <app-remove-round (gameChanged)="getScoreBoard()"></app-remove-round>
-      <button class="button" aria-haspopup="true" (click)="modalService.open('removeRound')">
-        <span><i class="fa fa-lg fa-remove" aria-hidden="true"></i></span>
-      </button>
+      <!-- Following content is only available for authenticated users -->
+      <ng-container *ngIf="authenticationService.isAuthenticated()">
+        <app-add-record (refreshScoreBoard)="getScoreBoard()"></app-add-record>
+        <button class="button" aria-haspopup="true" (click)="modalService.open('gameRecord')">
+          <span><i class="fa fa-lg fa-pencil" aria-hidden="true"></i></span>
+        </button>
+        <app-add-game (gameChanged)="getScoreBoard()"></app-add-game>
+        <button class="button" aria-haspopup="true" (click)="modalService.open('newGame')">
+          <span><i class="fa fa-lg fa-plus" aria-hidden="true"></i></span>
+        </button>
+        <app-remove-round (gameChanged)="getScoreBoard()"></app-remove-round>
+        <button class="button" aria-haspopup="true" (click)="modalService.open('removeRound')">
+          <span><i class="fa fa-lg fa-remove" aria-hidden="true"></i></span>
+        </button>
+      </ng-container>
     </div>
     <div class="box">
       <article class="message is-info" *ngIf="!scoreBoardService.lastRound">
