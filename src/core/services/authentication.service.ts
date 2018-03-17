@@ -5,12 +5,13 @@ import 'rxjs/add/operator/map';
 import { Router } from '@angular/router';
 import { isUndefined } from 'util';
 
+import { environment } from '../../environments/environment';
 import { Authentication } from '../models/authentication';
 import { AccessToken } from '../models/access-token';
 
 @Injectable()
 export class AuthenticationService {
-  private loginUri = 'https://api-tarok.erikbozic.com/login';
+  private loginUri = environment.baseUri.concat('team/login');
 
   constructor(
     private http: HttpClient,
