@@ -23,7 +23,7 @@ export class StepperService {
       Step.init(
         {
           stepId: 3,
-          stepName: 'Zaključek',
+          stepName: 'Igralci',
           active: false,
           passed: false
         })

@@ -1,3 +1,6 @@
+/**
+ * Internal
+ */
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -31,6 +34,7 @@ import { StepperService } from '../core/services/render/stepper.service';
 import { RegisterComponent } from './components/register/register.component';
 import { SearchComponent } from './components/elements/search/search.component';
 import { AuthenticationService } from '../core/services/authentication.service';
+import { TeamService } from '../core/services/team.service';
 /**
  * Pipes
  */
@@ -78,6 +82,7 @@ import { LoginGuard } from '../core/guards/login.guard';
     ToastService,
     StepperService,
     AuthenticationService,
+    TeamService,
     AuthGuard,
     LoginGuard
   ],

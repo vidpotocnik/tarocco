@@ -1,7 +1,7 @@
 <div class="container">
   <div class="box">
     <h2 class="subtitle is-5 has-text-info has-text-centered is-uppercase">Registracija</h2>
-    <div class="steps" style="height: 350px;">
+    <div class="steps" style="height: 350px;" *ngIf="!registered">
       <div class="step-item" [class.is-active]="step.passed" [class.is-success]="step.passed"
            *ngFor="let step of steps">
         <div class="step-marker">{{step.stepId}}</div>
@@ -15,26 +15,27 @@
         <div class="step-content has-text-centered" [class.is-active]="currentStep.stepId === 1">
           <div class="field is-horizontal">
             <div class="field-label is-normal">
-              <label class="label">Ime</label>
+              <label class="label">Ime ekipe</label>
             </div>
             <div class="field-body">
               <div class="field">
                 <div class="control">
-                  <input class="input" name="username" id="username" type="text" placeholder="Username" autofocus
-                         data-validate="require">
+                  <input class="input" name="name" id="name" type="text" placeholder="ime" autofocus
+                         data-validate="require" [(ngModel)]="newTeam.name">
                 </div>
               </div>
             </div>
           </div>
           <div class="field is-horizontal">
             <div class="field-label is-normal">
-              <label class="label">Priimek</label>
+              <label class="label">Identifikacija</label>
             </div>
             <div class="field-body">
               <div class="field">
                 <div class="control has-icon has-icon-right">
-                  <input class="input" type="password" name="password" id="password" placeholder="Password"
-                         data-validate="require">
+                  <input class="input" type="text" name="identification" id="identification"
+                         placeholder="identifikacija"
+                         data-validate="require" [(ngModel)]="newTeam.teamId">
                 </div>
               </div>
             </div>
@@ -43,34 +44,40 @@
         <div class="step-content has-text-centered" [class.is-active]="currentStep.stepId === 2">
           <div class="field is-horizontal">
             <div class="field-label is-normal">
-              <label class="label">Uporabniško ime</label>
-            </div>
-            <div class="field-body">
-              <div class="field">
-                <div class="control">
-                  <input class="input" name="firstname" id="firstname" type="text" placeholder="uporabniško ime"
-                         autofocus
-                         data-validate="require">
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="field is-horizontal">
-            <div class="field-label is-normal">
               <label class="label">Geslo</label>
             </div>
             <div class="field-body">
               <div class="field">
-                <div class="control has-icon has-icon-right">
-                  <input class="input" type="password" name="lastname" id="lastname" placeholder="geslo"
-                         data-validate="require">
+                <div class="control">
+                  <input class="input" name="firstname" id="firstname" type="text" placeholder="geslo"
+                         autofocus
+                         data-validate="require" [(ngModel)]="newTeam.passphrase">
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div class="step-content has-text-centered" [class.is-active]="currentStep.stepId === 3">
-          <h1 class="title is-4">Ekipa je bila uspešno ustvarjena! :)</h1>
+          <div class="level">
+            <div class="level-item">
+              <input class="input" name="name" id="members" type="text" placeholder="ime" autofocus
+                     [(ngModel)]="newMember">
+              <div class="level-item">
+              <a class="button is-light is-info" (click)="addUser()"><i class="fa fa-check"></i></a>
+            </div>
+            </div>
+          </div>
+            <div class="box">
+            <div class="level-left">
+              <div class="control level-item" *ngFor="let player of newTeam.members">
+                <div class="tags has-addons">
+                  <a class="tag is-info">{{player.name}}</a>
+                  <a class="tag is-delete" (click)="removePlayer(player)"></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="button is-light is-info" (click)="register()">Zaključi registracijo</a>
         </div>
       </div>
 
@@ -82,6 +89,17 @@
           <a class="button is-light is-info" (click)="nextStep()"><i class="fa fa-arrow-right"></i></a>
         </div>
       </div>
+    </div>
+    <div class="box" *ngIf="!registered">
+      <article class="message is-success">
+        <div class="message-header">
+          <p>Registracija uspešna</p>
+          <button class="delete" aria-label="delete"></button>
+        </div>
+        <div class="message-body">
+         registracija ekipe je bila uspešna, vpišete se lahko <a routerLink="/login">Tukaj</a>.
+        </div>
+      </article>
     </div>
   </div>
 </div>
