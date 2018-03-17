@@ -1,7 +1,7 @@
 /**
  * Internal
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 /**
  * Models
@@ -41,6 +41,13 @@ export class RegisterComponent implements OnInit {
     private router: Router
   ) { }
 
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event): void {
+    if (event.keyCode === 13) {
+      this.addUser();
+    }
+  }
+
   ngOnInit() {
     this.steps = this.stepperService.getSteps();
     this.initFirstStep();
@@ -57,6 +64,9 @@ export class RegisterComponent implements OnInit {
   }
 
   public addUser() {
+    if (!this.newMember || this.newMember === '') {
+      return;
+    }
     this.newTeam.members.push(Player.init({name: this.newMember}));
     this.newMember = '';
   }
@@ -76,6 +86,9 @@ export class RegisterComponent implements OnInit {
     let changed = false;
     this.steps.forEach((s, index) => {
       if (!changed && s.active && index <= this.steps.length - 2) {
+        if (!this.validate(s)) {
+          return;
+        }
         this.steps[index + 1].active = true;
         this.steps[index + 1].passed = true;
         s.active = false;
@@ -94,6 +107,28 @@ export class RegisterComponent implements OnInit {
         s.passed = false;
       }
     });
+  }
+
+  public validate(step: Step): boolean {
+    switch (step.stepId) {
+      case 1: {
+        if (!this.newTeam.name || !this.newTeam.teamId) {
+          this.toastService.addToast('Napaka', 'Ime in identifikacija ekipe sta obvezna podatka', 'error');
+          return false;
+        }
+        return true;
+      }
+      case 2: {
+        if (!this.newTeam.passphrase) {
+          this.toastService.addToast('Napaka', 'Geslo je obvezen podatek', 'error');
+          return false;
+        }
+        return true;
+      }
+      default: {
+        return true;
+      }
+    }
   }
 
   private loadTeam(team: Team) {
