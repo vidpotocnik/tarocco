@@ -41,19 +41,6 @@ export class ScoreboardComponent implements OnInit {
 
   ngOnInit() {
     this.getGames();
-
-    this.hub = new ScoreboardHub();
-
-
-    this.hub.onUpdateScoreBoard((p) => {
-      console.log('[scoreboard.component] new round:');
-      console.log(p);
-      this.getScoreBoard(); // TODO no need to call, just add it...
-      window.scrollTo(0,document.body.scrollHeight); // or some way to scroll to the newly added round
-
-    })
-    this.hub.StartHub();
-  
   }
 
   public getGames(): void {
@@ -92,6 +79,28 @@ export class ScoreboardComponent implements OnInit {
 
   private loadGame(entity: any): void {
     this.gameService.currentGame = entity.data;
+
+    //after loading a game scoreboard also connect to hub for updates
+    var gameId= entity.data.gameId;
+    if(this.hub == null)
+      this.hub = new ScoreboardHub(gameId);
+    else{
+      // on game change, we need to reconnect with different gameId,
+      // so the server puts the connection in the right group
+      if(gameId != this.hub.gameId)
+        this.hub.changeGame(gameId);
+    }
+
+    // handler of updateScoreBoard
+    this.hub.onUpdateScoreBoard((p) => {
+      console.log('[scoreboard.component] new round:');
+      console.log(p);
+      this.getScoreBoard(); // TODO no need to call GET, just add it...
+      window.scrollTo(0,document.body.scrollHeight); // or some way to scroll to the newly added round
+
+    })
+    this.hub.StartHub();
+
   }
 
   public mask(): void {
