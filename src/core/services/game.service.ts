@@ -77,7 +77,6 @@ export class GameService {
         });
       });
     }
-    console.log(result);
     return this.currentGame.players;
   }
 

@@ -8,6 +8,7 @@ import { Result } from '../../../../core/models/result';
 import { NewRound } from '../../../../core/models/new-round';
 import { ToastService } from "../../../../core/services/render/toast.service";
 import { Player } from "../../../../core/models/player";
+import { Round } from "../../../../core/models/round";
 
 @Component({
   selector: 'app-add-record',
@@ -133,7 +134,7 @@ export class AddRecordComponent implements OnInit {
     this.scoreBoardService
       .postRound(this.newRound)
       .subscribe(
-        entity => this.loadRound(),
+        entity => this.loadRound(entity),
         error => this.httpService.handleError(error)
       );
   }
@@ -161,10 +162,11 @@ export class AddRecordComponent implements OnInit {
     this.newRound.klopResults = klopResults;
   }
 
-  private loadRound(): void {
+  private loadRound(entity: any): void {
     this.refreshScoreBoard.next();
     this.initModifiers();
     this.newRound = NewRound.init();
+    this.scoreBoardService.lastRound = entity.data;
     this.toastService.addToast('Obvestilo', 'Nova runda uspešno dodana!', 'success');
   }
 
