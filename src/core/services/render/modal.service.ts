@@ -6,6 +6,7 @@ export class ModalService {
   public gameRecord: boolean;
   public newGame: boolean;
   public removeRound: boolean;
+  public endGame: boolean;
 
   public open(entity: string) {
     switch (entity) {
@@ -19,6 +20,10 @@ export class ModalService {
       }
       case 'removeRound': {
         this.removeRound = true;
+        break;
+      }
+      case 'endGame': {
+        this.endGame = true;
         break;
       }
     }
@@ -36,6 +41,10 @@ export class ModalService {
       }
       case 'removeRound': {
         this.removeRound = false;
+        break;
+      }
+      case 'endGame': {
+        this.endGame = false;
         break;
       }
     }

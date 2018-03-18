@@ -7,6 +7,7 @@ import { environment } from '../../environments/environment';
 import { Round, RoundList } from '../models/round';
 import { NewRound } from '../models/new-round';
 import { AuthenticationService } from './authentication.service';
+import { Game } from '../models/game';
 
 @Injectable()
 export class ScoreBoardService {
@@ -42,5 +43,12 @@ export class ScoreBoardService {
       .post(this.scoreBoardUri, round, {headers: this.authenticationService.getAuthorizationHeader()})
       .map(rsp => rsp)
       .map(rsp => new Round(rsp));
+  }
+
+  public endGame(gameId: string): Observable<Game> {
+    return this.http
+      .post(this.scoreBoardUri + 'end/' + gameId, {headers: this.authenticationService.getAuthorizationHeader()})
+      .map(rsp => rsp)
+      .map(rsp => new Game(rsp));
   }
 }

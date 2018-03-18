@@ -46,6 +46,7 @@ import { StatTableComponent } from './components/statistics/stat-table/stat-tabl
  */
 import { AuthGuard } from '../core/guards/auth.guard';
 import { LoginGuard } from '../core/guards/login.guard';
+import { EndGameComponent } from './components/scoreboard/end-game/end-game.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { LoginGuard } from '../core/guards/login.guard';
     SearchComponent,
     RoundPipe,
     GraphComponent,
-    StatTableComponent
+    StatTableComponent,
+    EndGameComponent
   ],
   imports: [
     BrowserModule,
