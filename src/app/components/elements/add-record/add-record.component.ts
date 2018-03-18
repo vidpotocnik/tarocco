@@ -7,6 +7,7 @@ import { Modifier } from '../../../../core/models/modifier';
 import { Result } from '../../../../core/models/result';
 import { NewRound } from '../../../../core/models/new-round';
 import { ToastService } from "../../../../core/services/render/toast.service";
+import { Player } from "../../../../core/models/player";
 
 @Component({
   selector: 'app-add-record',
@@ -31,6 +32,30 @@ export class AddRecordComponent implements OnInit {
     this.newRound = NewRound.init();
     this.result = Result.init();
     this.initModifiers();
+  }
+
+  incrementKlop(player: Player) {
+    if (!player.klopResult) {
+      player.klopResult = 0;
+    }
+    switch (player.klopResult) {
+      case 0: {
+        player.klopResult += 1;
+        break;
+      }
+      case 1: {
+        player.klopResult += 4;
+        break;
+      }
+      case 35: {
+        player.klopResult = 0;
+        break;
+      }
+      default: {
+        player.klopResult += 5 ;
+        break;
+      }
+    }
   }
 
   public toggleModifier(modifier: Modifier): void {
@@ -63,6 +88,10 @@ export class AddRecordComponent implements OnInit {
 
   public addNewRound() {
     this.newRound.gameId = this.gameService.currentGame.gameId;
+    /**
+     * Before we post the game, we need to initKlopResults (if it was a klop) and serialize Modifiers
+     */
+    this.serializeKlopScore();
     this.addModifiers();
     this.postRound();
     this.initModifiers();
@@ -110,7 +139,6 @@ export class AddRecordComponent implements OnInit {
   }
 
 
-
   private initModifiers(): void {
     this.modifiers = [
       Modifier.init({modifierType: 'trula'}),
@@ -137,10 +165,19 @@ export class AddRecordComponent implements OnInit {
     this.refreshScoreBoard.next();
     this.initModifiers();
     this.newRound = NewRound.init();
-    this.toastService.addToast(
-      'Obvestilo',
-      'Nova runda uspešno dodana!',
-      'success'
-    );
+    this.toastService.addToast('Obvestilo', 'Nova runda uspešno dodana!', 'success');
+  }
+
+  private serializeKlopScore() {
+    /**
+     * If it wasn't klop, we do not want to do anything'
+     */
+    if (!this.newRound.isKlop) {
+      return;
+    }
+    this.newRound.klopResults = [];
+    this.gameService.getOrderedPlayers().forEach((p) => {
+      this.newRound.klopResults.push({score: p.klopResult, playerId: p.playerId});
+    });
   }
 }
