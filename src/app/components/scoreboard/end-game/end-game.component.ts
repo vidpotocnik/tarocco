@@ -1,7 +1,7 @@
 /**
  * Internal
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 /**
  * Services
  */
@@ -13,7 +13,7 @@ import { ToastService } from '../../../../core/services/render/toast.service';
 /**
  * Models
  */
-import { RoundList } from '../../../../core/models/round';
+import { Game } from '../../../../core/models/game';
 
 @Component({
   selector: 'app-end-game',
@@ -21,6 +21,9 @@ import { RoundList } from '../../../../core/models/round';
   styleUrls: ['./end-game.component.css']
 })
 export class EndGameComponent implements OnInit {
+
+  @Output() mask = new EventEmitter();
+  @Output() unmask = new EventEmitter();
 
   constructor(public modalService: ModalService,
               private gameService: GameService,
@@ -33,16 +36,19 @@ export class EndGameComponent implements OnInit {
   }
 
   public endGame() {
+    this.mask.next();
+    this.modalService.close('endGame');
     this.scoreBoardService
-      .getScoreBoard(this.gameService.currentGame.gameId)
+      .endGame(this.gameService.currentGame.gameId)
       .subscribe(
         game => this.loadFinishedGame(game),
         error => this.httpService.handleError(error)
       );
   }
 
-  private loadFinishedGame(game: RoundList): void {
+  private loadFinishedGame(game: Game): void {
+    this.unmask.next();
     this.toastService.addToast('Obvestilo', 'Igra je bila uspešno zaključena!', 'success');
-    this.modalService.close('endGame');
+    this.gameService.currentGame = game;
   }
 }

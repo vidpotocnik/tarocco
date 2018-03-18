@@ -72,6 +72,14 @@ export class ScoreboardComponent implements OnInit {
     this.gameService.currentGame = entity.data;
   }
 
+  public mask(): void {
+    this.loading = true;
+  }
+
+  public unmask(): void {
+    this.loading = false;
+  }
+
   private loadScoreBoard(entities: any): void {
     /**
      * Last round needs to be undefined before rendering starts
