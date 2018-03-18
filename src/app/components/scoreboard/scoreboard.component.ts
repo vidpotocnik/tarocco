@@ -41,11 +41,6 @@ export class ScoreboardComponent implements OnInit {
 
   ngOnInit() {
     this.getGames();
-
-    /**
-     * Serialization of scoreboardHub: Receiving New rounds in real time via WebSocket.
-     */
-    this.serializeScoreboardHub();
   }
 
   public getGames(): void {
@@ -84,6 +79,20 @@ export class ScoreboardComponent implements OnInit {
 
   private loadGame(entity: any): void {
     this.gameService.currentGame = entity.data;
+    // after loading a game scoreboard also connect to hub for updates
+    if (this.hub && this.gameService.currentGame.gameId !== this.hub.gameId) {
+      this.hub.changeGame(this.gameService.currentGame.gameId);
+    } else {
+      this.hub = new ScoreboardHub(this.gameService.currentGame.gameId);
+    }
+    // handler of updateScoreBoard
+    this.hub.onUpdateScoreBoard((p) => {
+      console.log('[scoreboard.component] new round:');
+      console.log(p);
+      this.getScoreBoard(); // TODO no need to call GET, just add it...
+      window.scrollTo(0, document.body.scrollHeight); // or some way to scroll to the newly added round
+    });
+    this.hub.StartHub();
   }
 
   public mask(): void {
@@ -123,18 +132,5 @@ export class ScoreboardComponent implements OnInit {
     });
     this.getGame(this.gameService.currentGame.gameId);
     this.loading = false;
-  }
-
-  private serializeScoreboardHub(): void {
-    this.hub = new ScoreboardHub();
-
-    this.hub.onUpdateScoreBoard((p) => {
-      console.log('[scoreboard.component] new round:');
-      console.log(p);
-      this.getScoreBoard(); // TODO no need to call, just add it...
-      window.scrollTo(0, document.body.scrollHeight); // or some way to scroll to the newly added round
-
-    });
-    this.hub.startHub();
   }
 }

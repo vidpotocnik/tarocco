@@ -1,27 +1,31 @@
-/**
- * Internal
- */
-import { HubConnection } from '@aspnet/signalr';
-/**
- * Environment
- */
+import { HubConnection } from '@aspnet/signalr'
 import { environment } from '../../../environments/environment';
 
-export class ScoreboardHub {
+export class ScoreboardHub  {
 
-  connection = new HubConnection(environment.baseUri + 'hub/scoreboard');
+  uri = environment.baseUri + 'hub/scoreboard';
+  conn: HubConnection
+  gameId:string;
 
-  constructor() {
-    this.connection.onclose(e => {
-      console.log('onclose:' + e);
-    });
+constructor(gameId) {
+  this.conn = new HubConnection(this.uri + '?gameId=' + gameId); 
+  this.gameId = gameId;
+}
+
+  public async StartHub() {
+    if(this.conn)
+      await this.conn.start().catch(e => console.log(e));    
+    
+    this.conn.onclose(e =>  {console.log('onclose:' + e)});
   }
 
-  public async startHub() {
-    await this.connection.start().catch(e => console.log(e));
+  public onUpdateScoreBoard(handler){
+    this.conn.on('updateScoreBoard', handler)
   }
 
-  public onUpdateScoreBoard(handler): void {
-    this.connection.on('updateScoreBoard', handler);
+  public changeGame(gameId){
+    this.conn.stop();
+    this.conn = new HubConnection(this.uri + '?gameId=' + gameId); 
+    this.gameId = gameId;
   }
 }
