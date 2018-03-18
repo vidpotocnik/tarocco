@@ -77,6 +77,10 @@ export class GameService {
         });
       });
     }
+    if (result.length > 0) {
+      this.currentGame.players = result;
+    }
+
     return this.currentGame.players;
   }
 
