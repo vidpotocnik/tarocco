@@ -11,6 +11,7 @@ import { GameService } from '../../../core/services/game.service';
 import { ScoreBoardService } from '../../../core/services/score-board.service';
 import { AuthenticationService } from '../../../core/services/authentication.service';
 import { TeamService } from '../../../core/services/team.service';
+import { ScoreboardHub } from './scoreboardhub.components'
 /**
  * Models
  */
@@ -23,6 +24,7 @@ import { Team } from '../../../core/models/team';
 })
 export class ScoreboardComponent implements OnInit {
 
+  private hub: ScoreboardHub;
   /**
    * Property for masking page
    */
@@ -39,6 +41,19 @@ export class ScoreboardComponent implements OnInit {
 
   ngOnInit() {
     this.getGames();
+
+    this.hub = new ScoreboardHub();
+
+
+    this.hub.onUpdateScoreBoard((p) => {
+      console.log('[scoreboard.component] new round:');
+      console.log(p);
+      this.getScoreBoard(); // TODO no need to call, just add it...
+      window.scrollTo(0,document.body.scrollHeight); // or some way to scroll to the newly added round
+
+    })
+    this.hub.StartHub();
+  
   }
 
   public getGames(): void {
