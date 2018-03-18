@@ -1,9 +1,20 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+/**
+ * Internal
+ */
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+/**
+ * Services
+ */
 import { ModalService } from '../../../../core/services/render/modal.service';
-import { NewGame } from '../../../../core/models/new-game';
 import { GameService } from '../../../../core/services/game.service';
 import { HttpService } from '../../../../core/services/http.service';
 import { ToastService } from '../../../../core/services/render/toast.service';
+/**
+ * Models
+ */
+import { Team } from '../../../../core/models/team';
+import { NewGame } from '../../../../core/models/new-game';
+import { Player } from '../../../../core/models/player';
 
 @Component({
   selector: 'app-add-game',
@@ -13,20 +24,39 @@ import { ToastService } from '../../../../core/services/render/toast.service';
 export class AddGameComponent implements OnInit {
 
   public newGame: NewGame;
+
+  @Input() team: Team;
+  @Output() mask = new EventEmitter();
+  @Output() unmask = new EventEmitter();
   @Output() gameChanged = new EventEmitter();
 
-  constructor(
-    public modalService: ModalService,
-    public gameService: GameService,
-    private httpService: HttpService,
-    private toastService: ToastService
-  ) { }
+  constructor(public modalService: ModalService,
+              public gameService: GameService,
+              private httpService: HttpService,
+              private toastService: ToastService) {
+  }
 
   ngOnInit() {
-    this.newGame = NewGame.init({name: '', players: [{name: ''}, {name: ''}, {name: ''}, {name: ''}]});
+    this.newGame = NewGame.init({});
+  }
+
+  toggleActive(member: Player): void {
+    member.active = !member.active;
+  }
+
+  populateMembers(): void {
+    this.newGame.players = [];
+    this.team.members.forEach((m) => {
+      if (m.active) {
+        this.newGame.players.push(m);
+      }
+    });
   }
 
   public makeNewGame(): void {
+    this.mask.next();
+    this.modalService.close('newGame');
+    this.populateMembers();
     this.gameService
       .postGame(this.newGame)
       .subscribe(
@@ -42,11 +72,7 @@ export class AddGameComponent implements OnInit {
     this.gameService.currentGame = entity.data;
     this.gameService.games.push(this.gameService.currentGame);
     this.gameChanged.next();
-    this.modalService.close('newGame');
-    this.toastService.addToast(
-      'Obvestilo',
-      'Nova igra uspešno dodana!',
-      'success'
-    );
+    this.unmask.next();
+    this.toastService.addToast('Obvestilo', 'Nova igra uspešno dodana!', 'success');
   }
 }

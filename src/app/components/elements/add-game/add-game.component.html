@@ -12,10 +12,14 @@
           <input class="input" type="text" [(ngModel)]="newGame.name">
         </div>
       </div>
-      <div class="box">
+      <div class="box" *ngIf="team">
         <div class="has-text-weight-bold">Igralci</div>
-        <div class="control" *ngFor="let player of newGame.players">
-          <input class="input" type="text" [(ngModel)]="player.name">
+        <div class="level-left">
+        <div class="control" *ngFor="let member of team.members">
+          <a class="level-item" (click)="toggleActive(member)">
+            &nbsp;<span class="tag" [class.is-info]="!member.active" [class.is-success]="member.active">{{member.name}}</span>&nbsp;
+          </a>
+        </div>
         </div>
       </div>
     </section>

@@ -4,6 +4,7 @@ export class Player extends Model {
   public playerId: string;
   public name: string;
   public GameId: string;
+  public active: boolean;
 
   public static init(entity: any): Player {
     return new this(entity);

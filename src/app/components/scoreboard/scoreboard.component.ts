@@ -10,6 +10,11 @@ import { HttpService } from '../../../core/services/http.service';
 import { GameService } from '../../../core/services/game.service';
 import { ScoreBoardService } from '../../../core/services/score-board.service';
 import { AuthenticationService } from '../../../core/services/authentication.service';
+import { TeamService } from '../../../core/services/team.service';
+/**
+ * Models
+ */
+import { Team } from '../../../core/models/team';
 
 @Component({
   selector: 'app-scoreboard',
@@ -22,11 +27,13 @@ export class ScoreboardComponent implements OnInit {
    * Property for masking page
    */
   public loading: boolean;
+  public team: Team;
 
   constructor(public modalService: ModalService,
               public authenticationService: AuthenticationService,
               public gameService: GameService,
               public scoreBoardService: ScoreBoardService,
+              private teamService: TeamService,
               private httpService: HttpService) {
   }
 
@@ -78,6 +85,11 @@ export class ScoreboardComponent implements OnInit {
 
   public unmask(): void {
     this.loading = false;
+  }
+
+  public newGame() {
+    this.team = this.teamService.retreiveTeam();
+    this.modalService.open('newGame');
   }
 
   private loadScoreBoard(entities: any): void {

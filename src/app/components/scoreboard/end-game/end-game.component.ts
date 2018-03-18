@@ -24,6 +24,7 @@ export class EndGameComponent implements OnInit {
 
   @Output() mask = new EventEmitter();
   @Output() unmask = new EventEmitter();
+  @Output() gameChanged = new EventEmitter();
 
   constructor(public modalService: ModalService,
               private gameService: GameService,
@@ -49,6 +50,6 @@ export class EndGameComponent implements OnInit {
   private loadFinishedGame(game: Game): void {
     this.unmask.next();
     this.toastService.addToast('Obvestilo', 'Igra je bila uspešno zaključena!', 'success');
-    this.gameService.currentGame = game;
+    this.gameChanged.next();
   }
 }

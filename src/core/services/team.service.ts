@@ -41,4 +41,8 @@ export class TeamService {
       .map(rsp => rsp)
       .map(rsp => new Team(rsp));
   }
+
+  public retreiveTeam(): Team {
+    return new Team(JSON.parse(localStorage.getItem('access-token')).team);
+  }
 }

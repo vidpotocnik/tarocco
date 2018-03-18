@@ -47,7 +47,7 @@ export class ScoreBoardService {
 
   public endGame(gameId: string): Observable<Game> {
     return this.http
-      .post(this.scoreBoardUri + 'end/' + gameId, {headers: this.authenticationService.getAuthorizationHeader()})
+      .post(this.scoreBoardUri + 'end/' + gameId, {}, {headers: this.authenticationService.getAuthorizationHeader()})
       .map(rsp => rsp)
       .map(rsp => new Game(rsp));
   }

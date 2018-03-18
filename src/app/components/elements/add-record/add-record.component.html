@@ -117,6 +117,21 @@
                 </div>
               </div>
             </div>
+
+            <!-- PAGATFANG -->
+            <div class="field">
+              <label class="label">PagatFang igralec</label>
+              <div class="control">
+                <div class="select">
+                  <select [(ngModel)]="newRound.pagatFangPlayerId">
+                    <option [ngValue]="null">---</option>
+                    <option [ngValue]="player.playerId" *ngFor="let player of gameService.currentGame.players">
+                      {{player.name}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
             <div class="box">
               <div class="field is-grouped is-grouped-multiline" *ngFor="let modifier of modifiers">
                 <div class="control">
