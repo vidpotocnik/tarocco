@@ -35,7 +35,7 @@ export class ScoreboardComponent implements OnInit {
               public authenticationService: AuthenticationService,
               public gameService: GameService,
               public scoreBoardService: ScoreBoardService,
-              private teamService: TeamService,
+              public teamService: TeamService,
               private httpService: HttpService) {
   }
 

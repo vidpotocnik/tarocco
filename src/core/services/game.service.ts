@@ -10,6 +10,7 @@ import { Player } from '../models/player';
 import { ScoreBoardService } from './score-board.service';
 import { GameStatisticsList } from '../models/game-statistics';
 import { AuthenticationService } from './authentication.service';
+import { TeamService } from './team.service';
 
 @Injectable()
 export class GameService {
@@ -20,6 +21,7 @@ export class GameService {
 
 
   constructor(private http: HttpClient,
+              private teamService: TeamService,
               private authenticationService: AuthenticationService,
               private scoreBoardService: ScoreBoardService) {
   }
@@ -66,15 +68,20 @@ export class GameService {
       return;
     }
     const result = [];
-    this.scoreBoardService.lastRound.roundResults.forEach((r) => {
-      this.currentGame.players.forEach((p) => {
-        if (r.playerId === p.playerId) {
-          result.push(p);
-        }
+    if (this.scoreBoardService.lastRound) {
+      this.scoreBoardService.lastRound.roundResults.forEach((r) => {
+        this.currentGame.players.forEach((p) => {
+          if (r.playerId === p.playerId) {
+            result.push(p);
+          }
+        });
       });
-    });
+    }
+    if (result.length > 0) {
+      this.currentGame.players = result;
+    }
 
-    return result;
+    return this.currentGame.players;
   }
 
 }
