@@ -157,7 +157,7 @@
                   &nbsp;
                   <a class="level-item" (click)="incrementKlop(player)">
                     <div class="tags has-addons">
-                      <span class="tag" [class.is-info]="player.klopResult >= 35" [class.is-success]="player.klopResult < 1">{{player.name}}</span>
+                      <span class="tag" [class.is-info]="player.klopResult > 35" [class.is-success]="player.klopResult < 1">{{player.name}}</span>
                       <span class="tag is-dark">{{player.klopResult}}</span>
                     </div>
                   </a>

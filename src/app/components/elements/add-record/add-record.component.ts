@@ -49,6 +49,10 @@ export class AddRecordComponent implements OnInit {
         break;
       }
       case 35: {
+        player.klopResult += 1;
+        break;
+      }
+      case 36: {
         player.klopResult = 0;
         break;
       }
