@@ -8,6 +8,7 @@ export class RoundResult extends Model {
   public playerRadelcCount: number;
   public playerRadelcUsed: number;
   public playerScore: number;
+  public roundScoreChange: number;
   public player: Player;
   public radelci: Array<boolean>;
 

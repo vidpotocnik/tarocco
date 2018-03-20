@@ -22,6 +22,8 @@ export class Round extends Model {
     }
 
   public getGameType(): string {
+    if(this.isKlop)
+      return 'Klop';      
     switch (this.gameType) {
       case 10: {
         return 'III';

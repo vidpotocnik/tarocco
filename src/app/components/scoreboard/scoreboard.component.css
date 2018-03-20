@@ -10,3 +10,15 @@
 .hide {
   display: none;
 }
+
+.is-lead{
+  font-weight: bold;
+}
+
+.went-up{
+  color: green;
+}
+
+.went-down{
+  color: red;
+}
