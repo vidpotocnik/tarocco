@@ -11,7 +11,7 @@ import { GameService } from '../../../core/services/game.service';
 import { ScoreBoardService } from '../../../core/services/score-board.service';
 import { AuthenticationService } from '../../../core/services/authentication.service';
 import { TeamService } from '../../../core/services/team.service';
-import { ScoreboardHub } from './scoreboardhub.components'
+import { ScoreboardHub } from './scoreboardhub.components';
 /**
  * Models
  */
