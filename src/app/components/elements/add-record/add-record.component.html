@@ -20,7 +20,7 @@
             </div>
           </div>
         </div>
-        <ng-container [ngSwitch]="newRound.isKlop">
+        <ng-container [ngSwitch]="newRound.isKlop || obligatoryKlop">
           <ng-container *ngSwitchCase="false">
             <!-- RESULT -->
             <div class="field">

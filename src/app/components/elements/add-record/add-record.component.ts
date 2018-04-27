@@ -20,6 +20,8 @@ export class AddRecordComponent implements OnInit {
   public newRound: NewRound;
   public result: Result;
   public modifiers: Array<Modifier>;
+  public obligatoryKlop: boolean;
+
   @Output() refreshScoreBoard = new EventEmitter();
 
   constructor(public modalService: ModalService,
