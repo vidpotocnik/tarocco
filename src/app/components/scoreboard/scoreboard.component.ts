@@ -16,6 +16,7 @@ import { ScoreboardHub } from './scoreboardhub.components';
  * Models
  */
 import { Team } from '../../../core/models/team';
+import { Round } from '../../../core/models/round';
 
 @Component({
   selector: 'app-scoreboard',
@@ -86,10 +87,10 @@ export class ScoreboardComponent implements OnInit {
       this.hub = new ScoreboardHub(this.gameService.currentGame.gameId);
     }
     // handler of updateScoreBoard
-    this.hub.onUpdateScoreBoard((p) => {
+    this.hub.onUpdateScoreBoard((round) => {
       console.log('[scoreboard.component] new round:');
-      console.log(p);
-      this.getScoreBoard(); // TODO no need to call GET, just add it...
+      console.log(round);
+      this.scoreBoardService.addRound(Round.init(round));
       window.scrollTo(0, document.body.scrollHeight); // or some way to scroll to the newly added round
     });
     this.hub.StartHub();

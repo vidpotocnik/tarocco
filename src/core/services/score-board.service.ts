@@ -51,4 +51,9 @@ export class ScoreBoardService {
       .map(rsp => rsp)
       .map(rsp => new Game(rsp));
   }
+
+  addRound(round: Round) : void {
+    this.roundList.push(round);
+  }
+
 }
