@@ -80,20 +80,23 @@ export class ScoreboardComponent implements OnInit {
 
   private loadGame(entity: any): void {
     this.gameService.currentGame = entity.data;
+
     // after loading a game scoreboard also connect to hub for updates
     if (this.hub && this.gameService.currentGame.gameId !== this.hub.gameId) {
       this.hub.changeGame(this.gameService.currentGame.gameId);
-    } else {
+    } else if (!this.hub){
       this.hub = new ScoreboardHub(this.gameService.currentGame.gameId);
+      this.hub.startHub();
     }
-    // handler of updateScoreBoard
-    this.hub.onUpdateScoreBoard((round) => {
-      console.log('[scoreboard.component] new round:');
-      console.log(round);
+    
+    this.hub.onAddRound((round) => {
       this.scoreBoardService.addRound(Round.init(round));
-      window.scrollTo(0, document.body.scrollHeight); // or some way to scroll to the newly added round
+      window.scrollTo(0, document.body.scrollHeight);
     });
-    this.hub.StartHub();
+    this.hub.onDeleteRound((round) => {
+      this.scoreBoardService.removeLastRound();
+      window.scrollTo(0, document.body.scrollHeight);
+    });
   }
 
   public mask(): void {

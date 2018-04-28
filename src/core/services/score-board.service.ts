@@ -52,8 +52,12 @@ export class ScoreBoardService {
       .map(rsp => new Game(rsp));
   }
 
-  addRound(round: Round) : void {
+  public addRound(round: Round) : void {
     this.roundList.push(round);
+  }
+
+  public removeLastRound(): void {
+    this.roundList.pop(); // TODO remove by id
   }
 
 }
