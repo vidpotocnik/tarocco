@@ -19,23 +19,24 @@ export class ScoreboardHub {
     this.gameId = gameId;
   }
 
-  public async StartHub() {
+  public async startHub() {
     if (this.conn) {
       await this.conn.start().catch(e => console.log(e));
     }
-
-    this.conn.onclose(e => {
-      console.log('onclose:' + e);
-    });
   }
 
-  public onUpdateScoreBoard(handler) {
+  public onAddRound(handler) {
     this.conn.on('updateScoreBoard', handler);
+  }
+
+  public onDeleteRound(handler) {
+    this.conn.on('deleteRound', handler);
   }
 
   public changeGame(gameId) {
     this.conn.stop();
     this.conn = new HubConnection(this.uri + '?gameId=' + gameId);
     this.gameId = gameId;
+    this.startHub();
   }
 }
