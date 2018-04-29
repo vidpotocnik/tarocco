@@ -34,6 +34,7 @@ export class AddRecordComponent implements OnInit {
   ngOnInit() {
     this.newRound = NewRound.init();
     this.result = Result.init();
+    this.obligatoryKlop = false; // TODO When any result % 500 == 0 or result == 0 (where it wasn't before)
     this.initModifiers();
   }
 

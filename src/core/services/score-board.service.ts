@@ -56,8 +56,10 @@ export class ScoreBoardService {
     this.roundList.push(round);
   }
 
-  public removeLastRound(): void {
-    this.roundList.pop(); // TODO remove by id
+  public removeLastRound(round: Round): void {
+    let removedRound = this.roundList.pop();
+    if(removedRound.roundId != round.roundId)
+      console.error('Last round was not same on the client as on the server!')
   }
 
 }

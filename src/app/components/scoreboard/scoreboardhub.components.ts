@@ -30,7 +30,7 @@ export class ScoreboardHub {
   }
 
   public onDeleteRound(handler) {
-    this.conn.on('deleteRound', handler);
+    this.conn.on('deleteLastRound', handler);
   }
 
   public changeGame(gameId) {

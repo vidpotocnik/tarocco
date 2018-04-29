@@ -89,17 +89,19 @@ export class ScoreboardComponent implements OnInit {
     // after loading a game scoreboard also connect to hub for updates
     if (this.hub && this.gameService.currentGame.gameId !== this.hub.gameId) {
       this.hub.changeGame(this.gameService.currentGame.gameId);
-    } else if (!this.hub){
+    } else if (!this.hub) {
       this.hub = new ScoreboardHub(this.gameService.currentGame.gameId);
       this.hub.startHub();
     }
-    
+
     this.hub.onAddRound((round) => {
       this.scoreBoardService.addRound(Round.init(round));
+      this.updateScoreBoard();
       window.scrollTo(0, document.body.scrollHeight);
     });
     this.hub.onDeleteRound((round) => {
-      this.scoreBoardService.removeLastRound();
+      this.scoreBoardService.removeLastRound(Round.init(round));
+      this.updateScoreBoard();
       window.scrollTo(0, document.body.scrollHeight);
     });
   }
@@ -117,12 +119,7 @@ export class ScoreboardComponent implements OnInit {
     this.modalService.open('newGame');
   }
 
-  private loadScoreBoard(entities: any): void {
-    /**
-     * Last round needs to be undefined before rendering starts
-     */
-    this.scoreBoardService.lastRound = null;
-    this.scoreBoardService.roundList = entities.data;
+  private updateScoreBoard() {
     this.scoreBoardService.roundList.forEach((c, i) => {
       c.isLast = i === this.scoreBoardService.roundList.length - 1;
       if (c.isLast) {
@@ -139,6 +136,14 @@ export class ScoreboardComponent implements OnInit {
         }
       });
     });
+  }
+  private loadScoreBoard(entities: any): void {
+    /**
+     * Last round needs to be undefined before rendering starts
+     */
+    this.scoreBoardService.lastRound = null;
+    this.scoreBoardService.roundList = entities.data;
+    this.updateScoreBoard();
     this.getGame(this.gameService.currentGame.gameId);
     this.loading = false;
   }
