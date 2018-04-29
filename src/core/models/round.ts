@@ -47,6 +47,9 @@ export class Round extends Model {
         return 'B.';
       }
       case 80: {
+        return 'S. B. T.';
+      }
+      case 90: {
         return 'O. B.';
       }
     }

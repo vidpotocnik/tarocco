@@ -73,12 +73,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   private loadGames(entities: any): void {
-    this.gameService.games = [];
-    entities.data.forEach((g, index) => {
-      if (index > entities.data.length - 5) {
-        this.gameService.games.push(g);
-      }
-    });
+    this.gameService.games = entities.data;
     this.gameService.getCurrentGame();
     this.getScoreBoard();
   }

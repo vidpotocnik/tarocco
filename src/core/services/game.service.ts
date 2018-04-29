@@ -55,12 +55,7 @@ export class GameService {
   }
 
   public getCurrentGame(): void {
-    this.games.forEach((game, index) => {
-      this.currentGame = game;
-      if (index > 0 && this.games[index - 1].date > game.date) {
-        this.currentGame = this.games[index - 1];
-      }
-    });
+    this.currentGame = this.games[0]; // some other logic?
   }
 
   public getOrderedPlayers(): Array<Player> {
