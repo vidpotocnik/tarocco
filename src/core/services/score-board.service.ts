@@ -35,7 +35,7 @@ export class ScoreBoardService {
     const uri = this.scoreBoardUri.concat(gameId);
     return this.http
       .delete(uri, {headers: this.authenticationService.getAuthorizationHeader()})
-      .map(rsp => rsp);
+      .map(rsp => new RoundList(rsp));
   }
 
   public postRound(round: NewRound): Observable<Round> {

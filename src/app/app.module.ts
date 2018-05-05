@@ -47,6 +47,8 @@ import { StatTableComponent } from './components/statistics/stat-table/stat-tabl
 import { AuthGuard } from '../core/guards/auth.guard';
 import { LoginGuard } from '../core/guards/login.guard';
 import { EndGameComponent } from './components/scoreboard/end-game/end-game.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,8 @@ import { EndGameComponent } from './components/scoreboard/end-game/end-game.comp
     FormsModule,
     ToastyModule,
     NgxChartsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     DropDownService,
