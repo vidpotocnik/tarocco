@@ -27,7 +27,6 @@
   display:block;
   overflow:auto;
   height:calc(100vh - 320px);
-  width:100%;
 }
 .fixed_header thead tr{
   display:block;

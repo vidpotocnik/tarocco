@@ -101,10 +101,12 @@ export class ScoreboardComponent implements OnInit {
     this.hub.onAddRound((round) => {
       this.scoreBoardService.addRound(Round.init(round));
       this.updateScoreBoard();
-      console.log('scroll');
-      const table = document.getElementById('scoreBoard');
-      table.scrollTo(0, table.scrollHeight);
-
+      setTimeout(() => { // Ideally we could know when ngFor finished rendering and then scroll. But we don't. So this.
+        console.log('scroll');
+        const table = document.getElementById('scoreBoard');
+        table.scrollTo(0, table.scrollHeight);
+        document.body.scrollTo(0, document.body.scrollHeight);
+      }, 100);
     });
 
     this.hub.onDeleteRound((round) => {
