@@ -44,6 +44,15 @@ export class ScoreboardComponent implements OnInit {
     this.getGames();
   }
 
+  public getNumberOfPlayers(): number {
+
+    if (!this.gameService.currentGame.players) {
+      return 4;
+    }
+
+    return this.gameService.currentGame.players.length;
+  }
+
   public getGames(): void {
     this.gameService
       .getGames()
@@ -92,8 +101,12 @@ export class ScoreboardComponent implements OnInit {
     this.hub.onAddRound((round) => {
       this.scoreBoardService.addRound(Round.init(round));
       this.updateScoreBoard();
-      window.scrollTo(0, document.body.scrollHeight);
+      console.log('scroll');
+      const table = document.getElementById('scoreBoard');
+      table.scrollTo(0, table.scrollHeight);
+
     });
+
     this.hub.onDeleteRound((round) => {
       this.scoreBoardService.removeLastRound(Round.init(round));
       this.updateScoreBoard();
@@ -115,21 +128,17 @@ export class ScoreboardComponent implements OnInit {
   }
 
   private updateScoreBoard() {
-    this.scoreBoardService.roundList.forEach((c, i) => {
-      c.isLast = i === this.scoreBoardService.roundList.length - 1;
-      if (c.isLast) {
-        this.scoreBoardService.lastRound = c;
-      }
-      c.roundResults.forEach((r) => {
-        r.radelci = [];
-        for (let k = 1; k <= r.playerRadelcCount; k++) {
-          if (k <= r.playerRadelcUsed) {
-            r.radelci.push(true);
-          } else {
-            r.radelci.push(false);
-          }
+    const lastRound = this.scoreBoardService.roundList[this.scoreBoardService.roundList.length - 1];
+    this.scoreBoardService.lastRound = lastRound;
+    lastRound.roundResults.forEach((r) => {
+      r.radelci = [];
+      for (let k = 1; k <= r.playerRadelcCount; k++) {
+        if (k <= r.playerRadelcUsed) {
+          r.radelci.push(true);
+        } else {
+          r.radelci.push(false);
         }
-      });
+      }
     });
   }
   private loadScoreBoard(entities: any): void {

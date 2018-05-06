@@ -52,14 +52,15 @@ export class ScoreBoardService {
       .map(rsp => new Game(rsp));
   }
 
-  public addRound(round: Round) : void {
+  public addRound(round: Round): void {
     this.roundList.push(round);
   }
 
   public removeLastRound(round: Round): void {
-    let removedRound = this.roundList.pop();
-    if(removedRound.roundId != round.roundId)
-      console.error('Last round was not same on the client as on the server!')
+    const removedRound = this.roundList.pop();
+    if (removedRound.roundId !== round.roundId) {
+      console.error('Last round was not same on the client as on the server!');
+    }
   }
 
 }

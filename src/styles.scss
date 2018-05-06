@@ -157,6 +157,10 @@ $desktop:	1024px;
 $widescreen:  1024px;
 $fullhd:	1024px;
 
+body {
+    height: 100vh;
+}
+
 @import '~bulma';
 
 @import '/assets/scss/abstracts/abstracts';

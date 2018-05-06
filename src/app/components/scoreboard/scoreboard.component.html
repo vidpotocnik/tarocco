@@ -1,5 +1,5 @@
-<div class="container-fluid" *ngIf="scoreBoardService.roundList" [class.section--disabled]="loading">
-  <div class="box" style="margin: 5px 5px;">
+<div class="container-fluid" style="height: 100%;"  *ngIf="scoreBoardService.roundList" [class.section--disabled]="loading">
+  <div class="box" style="margin: 5px 5px; height: 95%;">
 
     <h2 class="subtitle is-5 has-text-info has-text-centered is-uppercase">{{gameService.currentGame.name}}</h2>
     <div class="column">
@@ -34,29 +34,29 @@
           Trenutna igra še nima nobenega zapisa.
         </div>
       </article>
-      <table class="table is-hoverable is-fullwidth" *ngIf="scoreBoardService.lastRound">
+      <table class="table is-hoverable is-fullwidth fixed_header" *ngIf="scoreBoardService.lastRound">
         <thead>
         <tr>
-          <th>#</th>
-          <th>Tip</th>
-          <th *ngFor="let player of gameService.getOrderedPlayers()">{{player.name}}</th>
+          <th [style.width.vw]="100 / getNumberOfPlayers()" >#</th>
+          <th [style.width.vw]="100 / getNumberOfPlayers()" >Tip</th>
+          <th [style.width.vw]="100 / getNumberOfPlayers()" *ngFor="let player of gameService.getOrderedPlayers()">{{player.name}}</th>
         </tr>
         <tr>
-          <th>R</th>
-          <th></th>
-          <th *ngFor="let lastRoundResult of scoreBoardService.lastRound.roundResults" class="has-text-info">
-          <span *ngFor="let radelc of lastRoundResult.radelci">
+          <th [style.width.vw]="100 / getNumberOfPlayers()" >R</th>
+          <th [style.width.vw]="100 / getNumberOfPlayers()" ></th>
+          <th [style.width.vw]="100 / getNumberOfPlayers()" *ngFor="let lastRoundResult of scoreBoardService.lastRound.roundResults" class="has-text-info">
+          <span  *ngFor="let radelc of lastRoundResult.radelci">
             <i class="fa fa-xs fa-circle-thin" aria-hidden="true" *ngIf="!radelc"></i>
           </span>
           </th>
         </tr>
         </thead>
-        <tbody>
+        <tbody  id="scoreBoard" >
         <tr *ngFor="let round of scoreBoardService.roundList" [class.has-text-info]="round.isLast"
             [class.has-text-weight-bold]="round.isLast">
-          <td>{{round.roundNumber}}</td>
-          <td>{{round.getGameType()}}</td>
-          <td *ngFor="let result of round.roundResults" [class.is-lead]="round.leadPlayerId == result.playerId" 
+          <td [style.width.vw]="100 / getNumberOfPlayers()" >{{round.roundNumber}}</td>
+          <td [style.width.vw]="100 / getNumberOfPlayers()" >{{round.getGameType()}}</td>
+          <td [style.width.vw]="100 / getNumberOfPlayers()" *ngFor="let result of round.roundResults" [class.is-lead]="round.leadPlayerId == result.playerId" 
           [class.went-down]="result.roundScoreChange<0" [class.went-up]="result.roundScoreChange>0" >{{result.playerScore}}</td>
         </tr>
         </tbody>
@@ -68,3 +68,20 @@
 </div>
 
 <ng2-toasty></ng2-toasty>
+
+<script>
+  // Change the selector if needed
+var $table = $('table'),
+    $bodyCells = $table.find('tbody tr:first').children(),
+    colWidth;
+
+// Get the tbody columns width array
+colWidth = $bodyCells.map(function() {
+    return $(this).width();
+}).get();
+
+// Set the width of thead columns
+$table.find('thead tr').children().each(function(i, v) {
+    $(v).width(colWidth[i]);
+});    
+</script>
