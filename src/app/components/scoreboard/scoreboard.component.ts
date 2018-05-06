@@ -12,6 +12,7 @@ import { ScoreBoardService } from '../../../core/services/score-board.service';
 import { AuthenticationService } from '../../../core/services/authentication.service';
 import { TeamService } from '../../../core/services/team.service';
 import { ScoreboardHub } from './scoreboardhub.components';
+import { ToastService } from '../../../core/services/render/toast.service';
 /**
  * Models
  */
@@ -35,6 +36,7 @@ export class ScoreboardComponent implements OnInit {
   constructor(public modalService: ModalService,
               public authenticationService: AuthenticationService,
               public gameService: GameService,
+              private toastService: ToastService,
               public scoreBoardService: ScoreBoardService,
               public teamService: TeamService,
               private httpService: HttpService) {
@@ -95,25 +97,39 @@ export class ScoreboardComponent implements OnInit {
       this.hub.changeGame(this.gameService.currentGame.gameId);
     } else if (!this.hub) {
       this.hub = new ScoreboardHub(this.gameService.currentGame.gameId);
+
+      this.hub.onAddRound((round) => {
+        this.scoreBoardService.addRound(Round.init(round));
+        this.updateScoreBoard();
+
+        this.toastService.addToast('Obvestilo', 'Nova runda uspešno dodana!', 'success');
+        setTimeout(() => { // Ideally we could know when ngFor finished rendering and then scroll. But we don't. So this.
+         this.scrollToBottom();
+        }, 100);
+      });
+
+      this.hub.onDeleteRound((round) => {
+        this.scoreBoardService.removeLastRound(Round.init(round));
+
+        this.toastService.addToast(
+          'Obvestilo',
+          'Zadnja runda je bila odstranjena.',
+          'success'
+        );
+        this.updateScoreBoard();
+        setTimeout(() => { // Ideally we could know when ngFor finished rendering and then scroll. But we don't. So this.
+        this.scrollToBottom();
+       }, 100);
+      });
+
       this.hub.startHub();
     }
+  }
 
-    this.hub.onAddRound((round) => {
-      this.scoreBoardService.addRound(Round.init(round));
-      this.updateScoreBoard();
-      setTimeout(() => { // Ideally we could know when ngFor finished rendering and then scroll. But we don't. So this.
-        console.log('scroll');
-        const table = document.getElementById('scoreBoard');
-        table.scrollTo(0, table.scrollHeight);
-        document.body.scrollTo(0, document.body.scrollHeight);
-      }, 100);
-    });
-
-    this.hub.onDeleteRound((round) => {
-      this.scoreBoardService.removeLastRound(Round.init(round));
-      this.updateScoreBoard();
-      window.scrollTo(0, document.body.scrollHeight);
-    });
+  private scrollToBottom(): void {
+    const table = document.getElementById('scoreBoard');
+    table.scrollTo(0, table.scrollHeight);
+    document.body.scrollTo(0, document.body.scrollHeight);
   }
 
   public mask(): void {
@@ -130,6 +146,9 @@ export class ScoreboardComponent implements OnInit {
   }
 
   private updateScoreBoard() {
+    if (this.scoreBoardService.roundList.length === 0) {
+      return;
+    }
     const lastRound = this.scoreBoardService.roundList[this.scoreBoardService.roundList.length - 1];
     this.scoreBoardService.lastRound = lastRound;
     lastRound.roundResults.forEach((r) => {
