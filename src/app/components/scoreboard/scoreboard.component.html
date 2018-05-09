@@ -1,7 +1,7 @@
 <div class="container-fluid" style="height: 100%;"  *ngIf="scoreBoardService.roundList" [class.section--disabled]="loading">
   <div class="box" style="margin: 5px 5px; height: 95%; padding: 10px;">
 
-    <h2 class="subtitle is-5 has-text-info has-text-centered is-uppercase">{{gameService.currentGame.name}}</h2>
+    <h2 class="is-5 has-text-info has-text-centered is-uppercase">{{gameService.currentGame.name}}</h2>
     <div class="column">
       <button class="button" aria-haspopup="true">
         <app-search (gameChanged)="getScoreBoard()"></app-search>
@@ -42,7 +42,7 @@
           <th [style.width.vw]="100 / getNumberOfPlayers()" *ngFor="let player of gameService.getOrderedPlayers()">{{player.name}}</th>
         </tr>
         <tr>
-          <th [style.width.vw]="100 / getNumberOfPlayers()" >R</th>
+          <th [style.width.vw]="100 / getNumberOfPlayers()" >R</th> <!-- TODO padding not ok. figure it out-->
           <th [style.width.vw]="100 / getNumberOfPlayers()" ></th>
           <th [style.width.vw]="100 / getNumberOfPlayers()" *ngFor="let lastRoundResult of scoreBoardService.lastRound.roundResults" class="has-text-info">
           <span  *ngFor="let radelc of lastRoundResult.radelci">
