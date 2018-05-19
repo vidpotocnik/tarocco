@@ -57,7 +57,7 @@
         </thead>
         <tbody  id="scoreBoard" >
         <tr *ngFor="let round of scoreBoardService.roundList" [class.has-text-info]="round.isLast"
-            [class.has-text-weight-bold]="round.isLast" (click)="setDetailedRound(round)" [class.is-info]="round.roundId === detailedRound?.roundId">
+            [class.has-text-weight-bold]="round.isLast" (click)="setDetailedRound(round)" [class.is-selected]="round.roundId === detailedRound?.roundId">
           <td [style.width.vw]="100 / getNumberOfPlayers()" >{{round.roundNumber}}</td>
           <td [style.width.vw]="100 / getNumberOfPlayers()" >{{round.getGameType()}}</td>
           <td [style.width.vw]="100 / getNumberOfPlayers()" *ngFor="let result of round.roundResults" [class.is-lead]="round.leadPlayerId == result.playerId"

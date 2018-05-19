@@ -1,7 +1,7 @@
 /**
  * Internal
  */
-import { HubConnection } from '@aspnet/signalr';
+import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
 /**
  * Environment
  */
@@ -15,7 +15,9 @@ export class ScoreboardHub {
   private uri = environment.baseUri + 'hub/scoreboard';
 
   constructor(gameId) {
-    //this.conn = new HubConnection(this.uri + '?gameId=' + gameId);
+    this.conn = new HubConnectionBuilder()
+    .withUrl(this.uri + '?gameId=' + gameId)
+    .build();
     this.gameId = gameId;
   }
 
@@ -35,7 +37,9 @@ export class ScoreboardHub {
 
   public changeGame(gameId) {
     this.conn.stop();
-    //this.conn = new HubConnection(this.uri + '?gameId=' + gameId);
+    this.conn = new HubConnectionBuilder()
+    .withUrl(this.uri + '?gameId=' + gameId)
+    .build();
     this.gameId = gameId;
     this.startHub();
   }

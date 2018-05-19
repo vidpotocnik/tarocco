@@ -58,7 +58,6 @@ export class ScoreboardComponent implements OnInit {
 
   public setDetailedRound(round: Round): void {
     this.detailedRound = round;
-    console.log(this.detailedRound);
   }
 
   public getGames(): void {
