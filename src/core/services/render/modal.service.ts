@@ -7,6 +7,7 @@ export class ModalService {
   public newGame: boolean;
   public removeRound: boolean;
   public endGame: boolean;
+  public detailedView: boolean;
 
   public open(entity: string) {
     switch (entity) {
@@ -24,6 +25,10 @@ export class ModalService {
       }
       case 'endGame': {
         this.endGame = true;
+        break;
+      }
+      case 'detailedView': {
+        this.detailedView = true;
         break;
       }
     }
@@ -47,6 +52,11 @@ export class ModalService {
         this.endGame = false;
         break;
       }
+      case 'detailedView': {
+        this.detailedView = false;
+        break;
+      }
     }
   }
 }
+

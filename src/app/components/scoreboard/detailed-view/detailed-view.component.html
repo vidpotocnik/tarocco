@@ -1,0 +1,14 @@
+<div class="modal i is-radiusless" [class.is-active]="modalService.detailedView">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Pregled runde</p>
+      <button class="delete" aria-label="close" (click)="modalService.close('detailedView')"></button>
+    </header>
+    <section class="modal-card-body" *ngIf="detailedRound">
+      {{detailedRound | json}}
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-radiusless" (click)="modalService.close('detailedView')"><i class="fa fa-remove" aria-hidden="true"></i></button>
+    </footer>
+  </div

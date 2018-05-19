@@ -24,6 +24,10 @@
         <button class="button" aria-haspopup="true" (click)="modalService.open('endGame')">
           <span><i class="fa fa-lg fa-share-square-o" aria-hidden="true"></i></span>
         </button>
+        <app-detailed-view [detailedRound]="detailedRound"></app-detailed-view>
+        <button class="button" aria-haspopup="true" (click)="modalService.open('detailedView')">
+          <span><i class="fa fa-lg fa-info" aria-hidden="true"></i></span>
+        </button>
       </ng-container>
     </div>
       <article class="message is-info" *ngIf="!scoreBoardService.lastRound">
@@ -53,10 +57,10 @@
         </thead>
         <tbody  id="scoreBoard" >
         <tr *ngFor="let round of scoreBoardService.roundList" [class.has-text-info]="round.isLast"
-            [class.has-text-weight-bold]="round.isLast">
+            [class.has-text-weight-bold]="round.isLast" (click)="setDetailedRound(round)" [class.is-info]="round.roundId === detailedRound?.roundId">
           <td [style.width.vw]="100 / getNumberOfPlayers()" >{{round.roundNumber}}</td>
           <td [style.width.vw]="100 / getNumberOfPlayers()" >{{round.getGameType()}}</td>
-          <td [style.width.vw]="100 / getNumberOfPlayers()" *ngFor="let result of round.roundResults" [class.is-lead]="round.leadPlayerId == result.playerId" 
+          <td [style.width.vw]="100 / getNumberOfPlayers()" *ngFor="let result of round.roundResults" [class.is-lead]="round.leadPlayerId == result.playerId"
           [class.went-down]="result.roundScoreChange<0" [class.went-up]="result.roundScoreChange>0" >{{result.playerScore}}</td>
         </tr>
         </tbody>
@@ -83,5 +87,5 @@ colWidth = $bodyCells.map(function() {
 // Set the width of thead columns
 $table.find('thead tr').children().each(function(i, v) {
     $(v).width(colWidth[i]);
-});    
+});
 </script>

@@ -15,7 +15,7 @@ export class ScoreboardHub {
   private uri = environment.baseUri + 'hub/scoreboard';
 
   constructor(gameId) {
-    this.conn = new HubConnection(this.uri + '?gameId=' + gameId);
+    //this.conn = new HubConnection(this.uri + '?gameId=' + gameId);
     this.gameId = gameId;
   }
 
@@ -35,7 +35,7 @@ export class ScoreboardHub {
 
   public changeGame(gameId) {
     this.conn.stop();
-    this.conn = new HubConnection(this.uri + '?gameId=' + gameId);
+    //this.conn = new HubConnection(this.uri + '?gameId=' + gameId);
     this.gameId = gameId;
     this.startHub();
   }

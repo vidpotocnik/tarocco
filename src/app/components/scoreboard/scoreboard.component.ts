@@ -32,6 +32,7 @@ export class ScoreboardComponent implements OnInit {
    */
   public loading: boolean;
   public team: Team;
+  public detailedRound: Round;
 
   constructor(public modalService: ModalService,
               public authenticationService: AuthenticationService,
@@ -53,6 +54,11 @@ export class ScoreboardComponent implements OnInit {
     }
 
     return this.gameService.currentGame.players.length;
+  }
+
+  public setDetailedRound(round: Round): void {
+    this.detailedRound = round;
+    console.log(this.detailedRound);
   }
 
   public getGames(): void {

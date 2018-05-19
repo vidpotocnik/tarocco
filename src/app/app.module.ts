@@ -49,6 +49,7 @@ import { LoginGuard } from '../core/guards/login.guard';
 import { EndGameComponent } from './components/scoreboard/end-game/end-game.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { DetailedViewComponent } from './components/scoreboard/detailed-view/detailed-view.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { environment } from '../environments/environment';
     RoundPipe,
     GraphComponent,
     StatTableComponent,
-    EndGameComponent
+    EndGameComponent,
+    DetailedViewComponent
   ],
   imports: [
     BrowserModule,
