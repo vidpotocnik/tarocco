@@ -20,15 +20,8 @@ export class SearchComponent implements OnInit {
   }
 
   public selectGame(game: Game) {
-    this.gameService.currentGame = game;
+    this.gameService.setCurrentGame(game);
     this.dropDownService.toggle('games');
-    this.setActive(game);
     this.gameChanged.next();
-  }
-
-  private setActive(game: Game) {
-    this.gameService.games.forEach((g) => {
-      g.isActive = g.gameId === game.gameId;
-    });
   }
 }

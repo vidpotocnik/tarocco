@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -13,15 +13,22 @@ import { TeamService } from './team.service';
 
 @Injectable()
 export class GameService {
-  public games: Array<Game>;
-  public currentGame: Game;
-  private gameUri = environment.baseUri.concat('Game/');
-  private statisticsUri = environment.baseUri.concat('Statistics/');
 
+  public games: Array<Game>;
+
+  private _currentGame: Game;
+  public get currentGame(): Game
+  {
+    return this._currentGame;
+  }
+
+  private gameUri = environment.baseUri.concat('game/');
+  private statisticsUri = environment.baseUri.concat('statistics');
 
   constructor(private http: HttpClient,
               private teamService: TeamService,
               private authenticationService: AuthenticationService) {
+    console.log('GameService::ctor');
   }
 
   public getGames(): Observable<Game> {
@@ -42,13 +49,32 @@ export class GameService {
       .map(rsp => new Game(rsp));
   }
 
-  public getStatistics(gameId: string): Observable<GameStatisticsList> {
+  public getStatistics(teamId: string, gameId?: string): Observable<GameStatisticsList> {
+    console.log('teamId', teamId);
+    console.log('gameId', gameId);
+    let q = new HttpParams();
+    q = q.set('teamId', teamId);
+    if (gameId)
+      q = q.set('gameId', gameId);
+
     return this.http
-      .get(this.statisticsUri + gameId, {headers: this.authenticationService.getAuthorizationHeader()})
+      .get(this.statisticsUri,
+         {
+           headers: this.authenticationService.getAuthorizationHeader(),
+           params: q
+         })
       .map(rsp => new GameStatisticsList(rsp));
   }
 
-  public getCurrentGame(): void {
-    this.currentGame = this.games[0]; // some other logic?
+  public setCurrentGame(game: Game): void {
+    console.log(`Setting current game to gameId: ${game.gameId}`);
+    this._currentGame = game;
+  }
+
+  public getCurrentGame(): Game {
+    if (this._currentGame == null)
+      this._currentGame = this.games[0]; // some other logic?
+
+    return this._currentGame;
   }
 }

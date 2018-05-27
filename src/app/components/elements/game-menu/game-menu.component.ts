@@ -21,7 +21,7 @@ export class GameMenuComponent implements OnInit {
   }
 
   public selectGame(game: Game) {
-    this.gameService.currentGame = game;
+    this.gameService.setCurrentGame(game);
     this.dropDownService.toggle('gameMenu');
     this.gameChanged.next();
   }

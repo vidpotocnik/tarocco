@@ -95,7 +95,7 @@ export class ScoreboardComponent implements OnInit {
   }
 
   private loadGame(entity: any): void {
-    this.gameService.currentGame = entity.data;
+    this.gameService.setCurrentGame(entity.data);
 
     // after loading a game scoreboard also connect to hub for updates
     if (this.hub && this.gameService.currentGame.gameId !== this.hub.gameId) {

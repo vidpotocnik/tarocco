@@ -10,6 +10,7 @@ import { HttpService } from '../../../core/services/http.service';
 })
 export class StatisticsComponent implements OnInit {
 
+  public teamMode = true;
   public statistics: Array<GameStatistics>;
   public statTabs = [
     {id: 2, name: 'AVG P.P.R', active: true},
@@ -24,8 +25,17 @@ export class StatisticsComponent implements OnInit {
     private httpService: HttpService) {
   }
 
+  public setTeamMode(teamMode: boolean): void {
+    if (this.teamMode === teamMode)
+      return;
+
+    this.teamMode = teamMode;
+    this.getStatistics();
+  }
+
   ngOnInit() {
     this.getGames();
+    this.setActiveTab(this.statTabs[0]);
   }
 
   public setActiveTab(tab): void {
@@ -53,9 +63,9 @@ export class StatisticsComponent implements OnInit {
       );
   }
 
-  public getStatistics(gameId = this.gameService.currentGame.teamId): void {
+  public getStatistics(game = this.gameService.currentGame): void {
     this.gameService
-      .getStatistics(gameId)
+      .getStatistics(game.teamId, this.teamMode ? null : game.gameId)
       .subscribe(
         entities => this.loadStatistics(entities),
         error => this.httpService.handleError(error)
@@ -69,10 +79,11 @@ export class StatisticsComponent implements OnInit {
   private loadGames(entities: any): void {
     this.gameService.games = entities.data;
     this.gameService.getCurrentGame();
+    this.getStatistics();
   }
 
   private loadGame(entity: any): void {
-    this.gameService.currentGame = entity.data;
+    this.gameService.setCurrentGame(entity.data);
     this.getStatistics();
   }
 }

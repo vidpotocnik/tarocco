@@ -69,8 +69,8 @@ export class AddGameComponent implements OnInit {
     /**
      * Whenever a new game is created it becomes active, and it's appended to the other games.
      */
-    this.gameService.currentGame = entity.data;
-    this.gameService.games.push(this.gameService.currentGame);
+    this.gameService.setCurrentGame(entity.data);
+    this.gameService.games.unshift(this.gameService.currentGame); // TODO service layer
     this.gameChanged.next();
     this.unmask.next();
     this.toastService.addToast('Obvestilo', 'Nova igra uspešno dodana!', 'success');
