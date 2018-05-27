@@ -182,7 +182,7 @@ export class AddRecordComponent implements OnInit {
       return;
     }
     this.newRound.klopResults = [];
-    this.gameService.getOrderedPlayers().forEach((p) => {
+    this.scoreBoardService.getOrderedPlayers().forEach((p) => {
       this.newRound.klopResults.push({score: p.klopResult, playerId: p.playerId});
     });
   }

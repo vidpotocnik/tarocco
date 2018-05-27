@@ -43,7 +43,7 @@
         <tr>
           <th [style.width.vw]="100 / getNumberOfPlayers()" >#</th>
           <th [style.width.vw]="100 / getNumberOfPlayers()" >Tip</th>
-          <th [style.width.vw]="100 / getNumberOfPlayers()" *ngFor="let player of gameService.getOrderedPlayers()">{{player.name}}</th>
+          <th [style.width.vw]="100 / getNumberOfPlayers()" *ngFor="let player of scoreBoardService.getOrderedPlayers()">{{player.name}}</th>
         </tr>
         <tr>
           <th [style.width.vw]="100 / getNumberOfPlayers()" >R</th> <!-- TODO padding not ok. figure it out-->
@@ -67,7 +67,7 @@
       </table>
     </div>
 </div>
-<div class="loader-container--full" [class.hide]="!loading">
+<div class="loader-container--full center-screen" [class.hide]="!loading">
   <div class="loader"></div>
 </div>
 
