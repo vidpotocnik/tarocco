@@ -10,6 +10,7 @@ import { Player } from '../models/player';
 import { GameStatisticsList } from '../models/game-statistics';
 import { AuthenticationService } from './authentication.service';
 import { TeamService } from './team.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class GameService {
@@ -27,7 +28,8 @@ export class GameService {
 
   constructor(private http: HttpClient,
               private teamService: TeamService,
-              private authenticationService: AuthenticationService) {
+              private authenticationService: AuthenticationService,
+              private router: Router) {
     console.log('GameService::ctor');
   }
 
@@ -69,6 +71,7 @@ export class GameService {
   public setCurrentGame(game: Game): void {
     console.log(`Setting current game to gameId: ${game.gameId}`);
     this._currentGame = game;
+    this.router.navigate(['/scoreboard', { gameId: game.gameId }]);
   }
 
   public getCurrentGame(): Game {

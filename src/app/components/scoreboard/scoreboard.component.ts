@@ -2,6 +2,7 @@
  * Internal
  */
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 /**
  * Services
  */
@@ -18,6 +19,7 @@ import { ToastService } from '../../../core/services/render/toast.service';
  */
 import { Team } from '../../../core/models/team';
 import { Round } from '../../../core/models/round';
+import { Game } from '../../../core/models/game';
 
 @Component({
   selector: 'app-scoreboard',
@@ -40,7 +42,15 @@ export class ScoreboardComponent implements OnInit {
               private toastService: ToastService,
               public scoreBoardService: ScoreBoardService,
               public teamService: TeamService,
-              private httpService: HttpService) {
+              private httpService: HttpService,
+              private route: ActivatedRoute) {
+    this.route.params.subscribe(params => {
+        console.log(params);
+        if (params.gameId !== undefined) {
+          const game = new Game(params);
+          this.gameService.setCurrentGame(game);
+        }
+    });
   }
 
   ngOnInit() {
