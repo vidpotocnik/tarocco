@@ -153,7 +153,7 @@
           <ng-container *ngSwitchCase="true">
             <div class="box">
               <div class="level-left">
-                <div class="control" *ngFor="let player of gameService.getOrderedPlayers()">
+                <div class="control" *ngFor="let player of gameService.currentGame.players">
                   &nbsp;
                   <a class="level-item" (click)="incrementKlop(player)">
                     <div class="tags has-addons">

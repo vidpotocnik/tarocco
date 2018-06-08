@@ -45,9 +45,12 @@ export class ScoreboardComponent implements OnInit {
               private httpService: HttpService,
               private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
-        console.log(params);
-        if (params.gameId !== undefined) {
+        // TODO fix this properly at one point.
+        if (params.gameId !== undefined || params === null) {
           const game = new Game(params);
+          this.gameService.setCurrentGame(game);
+        } else {
+          const game = this.gameService.getCurrentGame();
           this.gameService.setCurrentGame(game);
         }
     });
@@ -55,6 +58,7 @@ export class ScoreboardComponent implements OnInit {
 
   ngOnInit() {
     this.getGames();
+    this.gameService.getCurrentGame();
   }
 
   public getNumberOfPlayers(): number {
