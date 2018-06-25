@@ -1,5 +1,5 @@
-<div class="container-fluid" style="height: 100%;"  *ngIf="scoreBoardService.roundList" [class.section--disabled]="loading">
-  <div class="box" style="margin: 5px 5px; height: 95%; padding: 10px;">
+<div class="container-fluid scoreboard-scale-viewport" *ngIf="scoreBoardService.roundList" [class.section--disabled]="loading">
+  <div class="box" style="margin: 5px 5px; padding: 10px;">
 
     <h2 class="is-5 has-text-info has-text-centered is-uppercase tarocco-game-title">{{gameService.currentGame.name}}</h2>
     <div class="column">
@@ -38,6 +38,8 @@
           Trenutna igra še nima nobenega zapisa.
         </div>
       </article>
+
+      
       <table class="table is-hoverable is-fullwidth fixed_header" *ngIf="scoreBoardService.lastRound">
         <thead>
         <tr>
@@ -46,7 +48,7 @@
           <th [style.width.vw]="100 / getNumberOfPlayers()" *ngFor="let player of scoreBoardService.getOrderedPlayers()" class="tarocco-table-playername">{{player.name}}</th>
         </tr>
         <tr>
-          <th [style.width.vw]="100 / getNumberOfPlayers()" >R</th> <!-- TODO padding not ok. figure it out-->
+          <th [style.width.vw]="100 / getNumberOfPlayers()" >R</th> <!-- TODO padding not ok. figure it out--> 
           <th [style.width.vw]="100 / getNumberOfPlayers()" ></th>
           <th [style.width.vw]="100 / getNumberOfPlayers()" *ngFor="let lastRoundResult of scoreBoardService.lastRound.roundResults" class="has-text-info">
           <span class="tarocco-radelci" *ngFor="let radelc of lastRoundResult.radelci">
@@ -64,7 +66,12 @@
           [class.went-down]="result.roundScoreChange<0" [class.went-up]="result.roundScoreChange>0" >{{result.playerScore}}</td>
         </tr>
         </tbody>
-      </table>
+      </table> 
+
+      
+      
+
+
     </div>
 </div>
 <div class="loader-container--full center-screen" [class.hide]="!loading">

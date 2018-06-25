@@ -7,3 +7,25 @@
 .input {
     width: 100px;
 }
+
+.tarocco-lr-text {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 36px;
+}
+
+button.button.is-primary {
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: grey;
+    -webkit-transition: background-color 0.5s; /* Safari */
+    transition: background-color 0.5s;
+    width: 140px;
+    height: 50px;
+}
+
+button.button.is-primary:hover {
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+}
