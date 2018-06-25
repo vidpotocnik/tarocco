@@ -29,3 +29,8 @@ button.button.is-primary:hover {
     border: 1px solid black;
     color: black;
 }
+
+
+.t-stat-margin {
+    margin-top: 50px;
+}
