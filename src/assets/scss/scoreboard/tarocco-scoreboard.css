@@ -10,10 +10,10 @@
     font-size: 18px;
 }
 
-thead {
-    border: 1px solid black;
-}
-
-.tarocco-radelci {
-    display: inline-block;
+nav.navbar {
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
 }
