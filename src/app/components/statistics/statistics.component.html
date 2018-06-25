@@ -1,5 +1,5 @@
-<div class="container is is-fluid" *ngIf="gameService.currentGame && statTabs">
-  <h2 class="subtitle is-5 has-text-info has-text-centered is-uppercase tarocco-game-title">{{gameService.currentGame.name}}</h2>
+<div class="container is is-fluid statistics-container" *ngIf="gameService.currentGame && statTabs">
+  <h2 class="subtitle is-5 has-text-info has-text-centered is-uppercase tarocco-game-title t-stat-margin">{{gameService.currentGame.name}}</h2>
   <p class="panel-tabs">
     <a [class.is-active]="teamMode" (click)="setTeamMode(true)" class="tarocco-stat-tab">ekipa</a>
     <a [class.is-active]="!teamMode" (click)="setTeamMode(false)" class="tarocco-stat-tab">igra</a>

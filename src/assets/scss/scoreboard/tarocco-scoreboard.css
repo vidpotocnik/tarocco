@@ -17,3 +17,7 @@ nav.navbar {
     width: 100%;
     z-index: 1;
 }
+
+.scoreboard-scale-viewport {
+    overflow: hidden;
+}
