@@ -1,7 +1,7 @@
 <div class="container-fluid" style="height: 100%;"  *ngIf="scoreBoardService.roundList" [class.section--disabled]="loading">
   <div class="box" style="margin: 5px 5px; height: 95%; padding: 10px;">
 
-    <h2 class="is-5 has-text-info has-text-centered is-uppercase">{{gameService.currentGame.name}}</h2>
+    <h2 class="is-5 has-text-info has-text-centered is-uppercase tarocco-game-title">{{gameService.currentGame.name}}</h2>
     <div class="column">
       <button class="button" aria-haspopup="true">
         <app-search (gameChanged)="getScoreBoard()"></app-search>
@@ -43,13 +43,13 @@
         <tr>
           <th [style.width.vw]="100 / getNumberOfPlayers()" >#</th>
           <th [style.width.vw]="100 / getNumberOfPlayers()" >Tip</th>
-          <th [style.width.vw]="100 / getNumberOfPlayers()" *ngFor="let player of scoreBoardService.getOrderedPlayers()">{{player.name}}</th>
+          <th [style.width.vw]="100 / getNumberOfPlayers()" *ngFor="let player of scoreBoardService.getOrderedPlayers()" class="tarocco-table-playername">{{player.name}}</th>
         </tr>
         <tr>
           <th [style.width.vw]="100 / getNumberOfPlayers()" >R</th> <!-- TODO padding not ok. figure it out-->
           <th [style.width.vw]="100 / getNumberOfPlayers()" ></th>
           <th [style.width.vw]="100 / getNumberOfPlayers()" *ngFor="let lastRoundResult of scoreBoardService.lastRound.roundResults" class="has-text-info">
-          <span  *ngFor="let radelc of lastRoundResult.radelci">
+          <span class="tarocco-radelci" *ngFor="let radelc of lastRoundResult.radelci">
             <i class="fa fa-xs fa-circle-thin" aria-hidden="true" *ngIf="!radelc"></i>
           </span>
           </th>
@@ -89,3 +89,5 @@ $table.find('thead tr').children().each(function(i, v) {
     $(v).width(colWidth[i]);
 });
 </script>
+
+

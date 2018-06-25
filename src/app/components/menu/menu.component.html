@@ -1,19 +1,20 @@
-<div class="navbar-fixed">
-  <nav class="navbar is-primary">
-    <div class="navbar-brand">
+<!-- FULL-VIEW -->
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand"><h1 class="tarocco-title">Tarok</h1>
       <a class="navbar-item" routerLink="/">
-        <i class="fa fa-lg fa-heart" aria-hidden="true"></i>
+        <i class="fa fa-lg fa-heart" aria-hidden="true"><span class="navbar-item-title">Igra</span></i>
       </a>
       <a class="navbar-item" routerLink="">
-        <i class="fa fa-lg fa-sticky-note" aria-hidden="true"></i>
+        <i class="fa fa-lg fa-sticky-note" aria-hidden="true"><span class="navbar-item-title">Nova igra</span></i>
       </a>
       <a class="navbar-item" routerLink="statistics">
-        <i class="fa fa-lg fa-bar-chart" aria-hidden="true"></i>
+        <i class="fa fa-lg fa-bar-chart" aria-hidden="true"><span class="navbar-item-title">Statistika</span></i>
       </a>
       <a class="navbar-item" (click)="dropDownService.toggle('user')">
         <div class="dropdown is-left" [class.is-active]="dropDownService.user">
           <div class="dropdown-trigger">
-            <i class="fa fa-lg fa-user" aria-hidden="true"></i>
+            <i class="fa fa-lg fa-user" aria-hidden="true"><span class="navbar-item-title">Uporabnik</span></i>
           </div>
           <div class="dropdown-menu" id="dropdown-menu" role="menu">
             <div class="dropdown-content" *ngIf="!authenticationService.isAuthenticated()">
@@ -32,16 +33,9 @@
           </div>
         </div>
       </a>
-    </div>
-    <div class="navbar-menu">
-      <div class="navbar-start">
-
-      </div>
-      <div class="navbar-end">
-
-      </div>
+  
     </div>
   </nav>
-  <nav class="breadcrumb navbar-breadcrumb" aria-label="breadcrumbs">
-  </nav>
-</div>
+
+
+  <!-- RESPONSIVE MENU -->

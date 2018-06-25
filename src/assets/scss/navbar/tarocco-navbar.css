@@ -1,0 +1,35 @@
+.nav .navbar {
+    background-color: red;
+}
+
+.tarocco-title {
+    font-size: 36px;
+    font-family: 'Spirax', cursive;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.navbar .navbar-item {
+    background-color: white;
+    -webkit-transition: background-color 0.5s; /* Safari */
+    transition: background-color 0.5s;
+}
+
+.navbar .navbar-item:hover { 
+    background-color: grey;
+    color: white;
+}
+
+.navbar-item-title {
+    padding: 5px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+
+@media all and (max-width: 750px) {
+
+    .navbar-item-title {
+        display: none;
+    }
+
+}
