@@ -3,7 +3,7 @@
 }
 
 .tarocco-title {
-    font-size: 36px;
+    font-size: 56px;
     font-family: 'Spirax', cursive;
     padding-right: 15px;
     padding-left: 15px;
@@ -33,3 +33,17 @@
     }
 
 }
+
+.dropdown-content {
+    background-color: white;
+    padding: 15px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    display:block;
+}
+
+.dropdown-content a {
+    padding: 15px;
+}
+
+

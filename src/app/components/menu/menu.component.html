@@ -1,7 +1,7 @@
 <!-- FULL-VIEW -->
 
 <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand"><h1 class="tarocco-title">Tarok</h1>
+    <div class="navbar-brand"><a routerLink="/"><h1 class="tarocco-title">Tarok</h1></a>
       <a class="navbar-item" routerLink="/">
         <i class="fa fa-lg fa-heart" aria-hidden="true"><span class="navbar-item-title">Igra</span></i>
       </a>
@@ -14,7 +14,7 @@
       <a class="navbar-item" (click)="dropDownService.toggle('user')">
         <div class="dropdown is-left" [class.is-active]="dropDownService.user">
           <div class="dropdown-trigger">
-            <i class="fa fa-lg fa-user" aria-hidden="true"><span class="navbar-item-title">Uporabnik</span></i>
+            <i class="fa fa-lg fa-user" aria-hidden="true"><span class="navbar-item-title item-uporabnik">Uporabnik</span></i>
           </div>
           <div class="dropdown-menu" id="dropdown-menu" role="menu">
             <div class="dropdown-content" *ngIf="!authenticationService.isAuthenticated()">
