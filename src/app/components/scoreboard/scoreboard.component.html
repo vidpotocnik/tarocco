@@ -1,4 +1,5 @@
-<div class="container-fluid scoreboard-scale-viewport" *ngIf="scoreBoardService.roundList" [class.section--disabled]="loading">
+
+<div class="container-fluid" *ngIf="scoreBoardService.roundList" [class.section--disabled]="loading">
   <div class="box">
 
     <h2 class="is-5 has-text-info has-text-centered is-uppercase tarocco-game-title">{{gameService.currentGame.name}}</h2>
