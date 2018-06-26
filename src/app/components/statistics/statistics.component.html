@@ -1,8 +1,8 @@
-<div class="container is is-fluid" *ngIf="gameService.currentGame && statTabs">
-  <h2 class="subtitle is-5 has-text-info has-text-centered is-uppercase">{{gameService.currentGame.name}}</h2>
+<div class="container is is-fluid statistics-container" *ngIf="gameService.currentGame && statTabs">
+  <h2 class="subtitle is-5 has-text-info has-text-centered is-uppercase tarocco-game-title t-stat-margin">{{gameService.currentGame.name}}</h2>
   <p class="panel-tabs">
-    <a [class.is-active]="teamMode" (click)="setTeamMode(true)">ekipa</a>
-    <a [class.is-active]="!teamMode" (click)="setTeamMode(false)">igra</a>
+    <a [class.is-active]="teamMode" (click)="setTeamMode(true)" class="tarocco-stat-tab">ekipa</a>
+    <a [class.is-active]="!teamMode" (click)="setTeamMode(false)" class="tarocco-stat-tab">igra</a>
   </p>
   <div class="column">
     <button class="button" aria-haspopup="true">
@@ -11,15 +11,15 @@
   </div>
 
   <div class="container">
-    <div class="tabs is-centered is-small is-boxed">
+    <div class="tabs is-centered is-small">
       <ul>
-        <li [class.is-active]="tab.active" *ngFor="let tab of statTabs" (click)="setActiveTab(tab)"><a>{{tab.name}}</a>
+        <li [class.is-active]="tab.active" *ngFor="let tab of statTabs" (click)="setActiveTab(tab)"><a class="tarocco-stat-tab">{{tab.name}}</a>
         </li>
       </ul>
     </div>
-    <app-graph [statistics]="statistics" *ngIf="activeTab && activeTab.id === 2"></app-graph>
-    <app-graph [statistics]="statistics" [graph]="'passive'" [type]="'pie'" *ngIf="activeTab && activeTab.id === 1"></app-graph>
-    <app-graph [statistics]="statistics" [graph]="'active'" [type]="'pie'" *ngIf="activeTab && activeTab.id === 3"></app-graph>
-    <app-stat-table [statistics]="statistics" *ngIf="activeTab && activeTab.id === 0"></app-stat-table>
+    <app-graph class="tarocco-stat-tab" [statistics]="statistics" *ngIf="activeTab && activeTab.id === 2"></app-graph>
+    <app-graph class="tarocco-stat-tab-graph" [statistics]="statistics" [graph]="'passive'" [type]="'pie'" *ngIf="activeTab && activeTab.id === 1"></app-graph>
+    <app-graph class="tarocco-stat-tab-graph" [statistics]="statistics" [graph]="'active'" [type]="'pie'" *ngIf="activeTab && activeTab.id === 3"></app-graph>
+    <app-stat-table class="tarocco-stat-tab" [statistics]="statistics" *ngIf="activeTab && activeTab.id === 0"></app-stat-table>
   </div>
 </div>

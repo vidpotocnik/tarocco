@@ -161,8 +161,14 @@ body {
     height: 100vh;
 }
 
-@import '~bulma';
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Spirax');
 
+@import '~bulma';
+@import '/assets/scss/statistics/tarocco-stat.css';
+@import '/assets/scss/navbar/tarocco-navbar.css';
+@import '/assets/scss/login/tarocco-login.css';
+@import '/assets/scss/scoreboard/tarocco-scoreboard.css';
 @import '/assets/scss/abstracts/abstracts';
 @import '/assets/scss/base/base';
 @import '/assets/scss/layout/layout';

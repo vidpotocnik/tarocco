@@ -1,0 +1,23 @@
+.tarocco-stat-tab {
+    font-weight: bold;
+    font-size: 18px;
+    font-family: 'Ubuntu', sans-serif;
+    background-color: white;
+    -webkit-transition: background-color 0.5s; /* Safari */
+    transition: background-color 0.5s;
+}
+
+.tarocco-stat-tab:hover {
+    background-color: grey;
+    color: white;
+}
+
+.tarocco-stat-tab-graph {
+    font-weight: bold;
+    font-size: 18px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.t-stat-margin {
+    margin-top: 50px;
+}

@@ -1,6 +1,7 @@
-<div class="container">
-  <div class="box">
-    <h2 class="subtitle is-5 has-text-info has-text-centered is-uppercase">Registracija</h2>
+<div class="container login-container">
+  <div class="box tarocco-login-box t-stat-margin">
+      <h2 class="subtitle is-4 has-text-info has-text-centered is-uppercase tarocco-lr-text">Registracija</h2>
+      <h3 class="subtitle is-6 has-text-info has-text-centered">registracija novega uporabnika</h3>
     <div class="steps" style="height: 350px;" *ngIf="!registered">
       <div class="step-item" [class.is-active]="step.passed" [class.is-success]="step.passed"
            *ngFor="let step of steps">
