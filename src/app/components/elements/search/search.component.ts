@@ -1,7 +1,16 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+/**
+ * Internal
+ */
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+/**
+ * Services
+ */
 import { GameService } from '../../../../core/services/game.service';
-import { Game } from '../../../../core/models/game';
 import { DropDownService } from '../../../../core/services/render/dropdown.service';
+/**
+ * Models
+ */
+import { Game } from '../../../../core/models/game';
 
 @Component({
   selector: 'app-search',
@@ -11,6 +20,7 @@ import { DropDownService } from '../../../../core/services/render/dropdown.servi
 export class SearchComponent implements OnInit {
 
   @Output() gameChanged = new EventEmitter();
+  @Input() active: boolean;
 
   constructor(public gameService: GameService,
               public dropDownService: DropDownService) {
@@ -21,7 +31,7 @@ export class SearchComponent implements OnInit {
 
   public selectGame(game: Game) {
     this.gameService.setCurrentGame(game);
-    this.dropDownService.toggle('games');
+    this.dropDownService.gameMenu = false;
     this.gameChanged.next();
   }
 }

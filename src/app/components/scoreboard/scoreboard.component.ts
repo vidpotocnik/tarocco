@@ -1,8 +1,8 @@
 /**
  * Internal
  */
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 /**
  * Services
  */
@@ -14,6 +14,7 @@ import { AuthenticationService } from '../../../core/services/authentication.ser
 import { TeamService } from '../../../core/services/team.service';
 import { ScoreboardHub } from './scoreboardhub.components';
 import { ToastService } from '../../../core/services/render/toast.service';
+import { DropDownService } from '../../../core/services/render/dropdown.service';
 /**
  * Models
  */
@@ -35,9 +36,14 @@ export class ScoreboardComponent implements OnInit {
   public loading: boolean;
   public team: Team;
   public detailedRound: Round;
+  /**
+   * Property for handling dropdown closing.
+   */
+  public preventToggling = true;
 
   constructor(public modalService: ModalService,
               public authenticationService: AuthenticationService,
+              public dropDownService: DropDownService,
               public gameService: GameService,
               private toastService: ToastService,
               public scoreBoardService: ScoreBoardService,
@@ -54,6 +60,15 @@ export class ScoreboardComponent implements OnInit {
           this.gameService.setCurrentGame(game);
         }
     });
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleClickEvent() {
+    if (this.preventToggling) {
+      this.preventToggling = false;
+      return;
+    }
+    this.dropDownService.gameMenu = false;
   }
 
   ngOnInit() {
@@ -101,6 +116,12 @@ export class ScoreboardComponent implements OnInit {
         error => this.httpService.handleError(error)
       );
   }
+
+  public toggleGameMenu() {
+    this.dropDownService.toggle('games');
+    this.preventToggling = this.dropDownService.gameMenu;
+  }
+
 
   private loadGames(entities: any): void {
     this.gameService.games = entities.data;

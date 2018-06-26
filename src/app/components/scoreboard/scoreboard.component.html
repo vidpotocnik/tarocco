@@ -3,8 +3,8 @@
 
     <h2 class="is-5 has-text-info has-text-centered is-uppercase">{{gameService.currentGame.name}}</h2>
     <div class="column">
-      <button class="button" aria-haspopup="true">
-        <app-search (gameChanged)="getScoreBoard()"></app-search>
+      <button class="button" aria-haspopup="true" (click)="toggleGameMenu()">
+        <app-search (gameChanged)="getScoreBoard()" [active]="dropDownService.gameMenu"></app-search>
       </button>
       <!-- Following content is only available for authenticated users -->
       <ng-container *ngIf="authenticationService.isAuthenticated()">

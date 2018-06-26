@@ -10,7 +10,7 @@
       <a class="navbar-item" routerLink="statistics">
         <i class="fa fa-lg fa-bar-chart" aria-hidden="true"></i>
       </a>
-      <a class="navbar-item" (click)="dropDownService.toggle('user')">
+      <a class="navbar-item" (click)="toggleUserDropdown()">
         <div class="dropdown is-left" [class.is-active]="dropDownService.user">
           <div class="dropdown-trigger">
             <i class="fa fa-lg fa-user" aria-hidden="true"></i>

@@ -1,5 +1,5 @@
 <div class="dropdown" [class.is-active]="dropDownService.games" *ngIf="gameService.games">
-  <div class="dropdown-trigger" (click)="dropDownService.toggle('games')">
+  <div class="dropdown-trigger">
     <span>
       <i class="fa fa fa-bars" aria-hidden="true"></i>
     </span>
@@ -10,14 +10,6 @@
         <p class="panel-heading">
           Igre
         </p>
-        <div class="panel-block">
-          <p class="control has-icons-left">
-            <input class="input is-small" type="text" placeholder="search">
-            <span class="icon is-small is-left">
-              <i class="fa fa-search"></i>
-            </span>
-          </p>
-        </div>
         <p class="panel-tabs">
           <a class="is-active">vse</a>
           <a>ekipne</a>
