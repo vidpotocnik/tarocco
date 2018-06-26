@@ -35,6 +35,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { SearchComponent } from './components/elements/search/search.component';
 import { AuthenticationService } from '../core/services/authentication.service';
 import { TeamService } from '../core/services/team.service';
+import { BaseService } from '../core/services/base.service';
 /**
  * Pipes
  */
@@ -91,7 +92,8 @@ import { DetailedViewComponent } from './components/scoreboard/detailed-view/det
     AuthenticationService,
     TeamService,
     AuthGuard,
-    LoginGuard
+    LoginGuard,
+    BaseService
   ],
   bootstrap: [AppComponent]
 })

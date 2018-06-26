@@ -7,6 +7,10 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
  */
 import { GameStatistics } from '../../../../core/models/game-statistics';
 import { Result } from '../../../../core/models/result';
+/**
+ * Services
+ */
+import { BaseService } from '../../../../core/services/base.service';
 
 @Component({
   selector: 'app-graph',
@@ -19,11 +23,25 @@ export class GraphComponent implements OnInit, OnChanges {
   @Input() type = 'line';
   @Input() graph = 'AVGP';
 
+  width: number;
+  height: number;
+
+  isMobileDisplay: boolean;
+
   result: Array<Result>;
 
-  constructor() { }
+  constructor(
+    private baseService: BaseService
+  ) { }
 
   ngOnInit() {
+    if (this.baseService.isMobileDisplay()) {
+      this.width = 360;
+      this.height = 300;
+    } else {
+      this.width = 650;
+      this.height = 600;
+    }
   }
 
   ngOnChanges() {

@@ -9,8 +9,8 @@ import { NewGame } from '../models/new-game';
 import { Player } from '../models/player';
 import { GameStatisticsList } from '../models/game-statistics';
 import { AuthenticationService } from './authentication.service';
-import { TeamService } from './team.service';
 import { Router } from '@angular/router';
+import { BaseService } from './base.service';
 
 @Injectable()
 export class GameService {
@@ -27,10 +27,8 @@ export class GameService {
   private statisticsUri = environment.baseUri.concat('statistics');
 
   constructor(private http: HttpClient,
-              private teamService: TeamService,
               private authenticationService: AuthenticationService,
               private router: Router) {
-    console.log('GameService::ctor');
   }
 
   public getGames(): Observable<Game> {

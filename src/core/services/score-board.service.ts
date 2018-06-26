@@ -10,6 +10,7 @@ import { Player } from '../models/player';
 import { AuthenticationService } from './authentication.service';
 import { Game } from '../models/game';
 import { GameService } from './game.service';
+import { BaseService } from './base.service';
 
 @Injectable()
 export class ScoreBoardService {
