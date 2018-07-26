@@ -41,33 +41,51 @@
       </article>
 
       
-      <table class="table is-stripped is-hoverable is-fullwidth fixed_header" *ngIf="scoreBoardService.lastRound">
-        <thead>
-        <tr>
-          <th [style.width.vw]="100 / getNumberOfPlayers()">#</th>
-          <th [style.width.vw]="100 / getNumberOfPlayers()">Tip</th>
-          <th [style.width.vw]="100 / getNumberOfPlayers()" *ngFor="let player of scoreBoardService.getOrderedPlayers()" class="tarocco-table-playername">{{player.name}}</th>
-        </tr>
-        <tr>
-          <th [style.width.vw]="100 / getNumberOfPlayers()">R</th> <!-- TODO padding not ok. figure it out--> 
-          <th [style.width.vw]="100 / getNumberOfPlayers()"></th>
-          <th [style.width.vw]="100 / getNumberOfPlayers()" *ngFor="let lastRoundResult of scoreBoardService.lastRound.roundResults" class="has-text-info">
-          <span class="tarocco-radelci" *ngFor="let radelc of lastRoundResult.radelci">
-            <i class="fa fa-xs fa-circle-thin" aria-hidden="true" *ngIf="!radelc"></i>
-          </span>
-          </th>
-        </tr>
-        </thead>
-        <tbody  id="scoreBoard" >
-        <tr *ngFor="let round of scoreBoardService.roundList" [class.has-text-info]="round.isLast"
-            [class.has-text-weight-bold]="round.isLast" (click)="setDetailedRound(round)" [class.is-selected]="round.roundId === detailedRound?.roundId">
-          <td [style.width.vw]="100 / getNumberOfPlayers()" >{{round.roundNumber}}</td>
-          <td [style.width.vw]="100 / getNumberOfPlayers()" >{{round.getGameType()}}</td>
-          <td [style.width.vw]="100 / getNumberOfPlayers()" *ngFor="let result of round.roundResults" [class.is-lead]="round.leadPlayerId == result.playerId"
-          [class.went-down]="result.roundScoreChange<0" [class.went-up]="result.roundScoreChange>0" >{{result.playerScore}}</td>
-        </tr>
-        </tbody>
-      </table> 
+     <!-- GAME SCOREBOARD -->
+
+     <div class="game-scoreboard">
+
+        <span class="player-title">
+
+          <span class="content-tip">Tip</span>
+
+          <span class="player-name">Vid</span>
+          <span class="player-name">Erik</span>
+          <span class="player-name">Jan</span>
+          <span class="player-name">Luka</span>
+          <span class="player-name">Mičo</span>
+
+        </span>
+      
+        <span class="player-radelci">
+
+          <span class="content-radelci">R ></span>
+
+          <span class="player-radelc">O</span>
+          <span class="player-radelc">O</span>
+          <span class="player-radelc">O</span>
+          <span class="player-radelc">O</span>
+          <span class="player-radelc">O</span>
+
+        </span>
+
+        <span class="player-games">
+
+          <span class="game-type">III.</span>
+
+
+          <span class="player-score">100</span>
+          <span class="player-score">100</span>
+          <span class="player-score">100</span>
+          <span class="player-score">100</span>
+          <span class="player-score">100</span>
+
+        </span>
+
+     </div>
+
+
+     <!-- / GAME SCOREBOARD -->
 
     </div>
 </div>
