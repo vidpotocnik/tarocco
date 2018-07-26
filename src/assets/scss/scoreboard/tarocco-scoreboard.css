@@ -20,6 +20,7 @@
     background-color: #ffffff;
     color: #000000;
     align-content: center;
+
 }
 
 .player-name {
@@ -106,3 +107,30 @@
 
 
 }
+
+.content-num {
+
+    display: inline-flex;
+    justify-content: center;
+    background-color: #7C0A02;
+    color: #ffffff;
+    padding: 10px;
+    width: 30%;
+    border-bottom: 1px solid white;
+
+}
+
+
+
+.num {
+
+    display: inline-flex;
+    justify-content: center;
+    background-color: #ffffff;
+    padding: 10px;
+    width: 30%;
+    border-bottom: 1px solid white;
+    border-right: 1px solid black;
+
+}
+

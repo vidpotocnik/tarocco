@@ -47,6 +47,8 @@
 
         <span class="player-title">
 
+          <span class="content-num">#</span>
+          
           <span class="content-tip">Tip</span>
 
           <span *ngFor="let player of scoreBoardService.getOrderedPlayers()" class="player-name">{{player.name}}</span>
@@ -55,6 +57,7 @@
         </span>
       
         <span class="player-radelci">
+            <span class="num"></span>
 
           <span class="content-radelci">R ></span>
 
@@ -64,12 +67,15 @@
 
         <span *ngFor="let round of scoreBoardService.roundList"  class="player-games">
 
+            <span class="num">{{round.roundNumber}}</span>
+
           <span class="game-type">{{round.getGameType()}}</span>
 
 
           <span *ngFor="let result of round.roundResults"  class="player-score">{{result.playerScore}}</span>
 
         </span>
+
 
      </div>
 

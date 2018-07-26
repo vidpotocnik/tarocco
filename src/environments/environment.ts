@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  baseUri: 'https://tarok.erikbozic.com/api/'
+  baseUri: 'https://tarok-test.erikbozic.com/api/'
 };
