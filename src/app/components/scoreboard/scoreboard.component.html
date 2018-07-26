@@ -49,11 +49,8 @@
 
           <span class="content-tip">Tip</span>
 
-          <span class="player-name">Vid</span>
-          <span class="player-name">Erik</span>
-          <span class="player-name">Jan</span>
-          <span class="player-name">Luka</span>
-          <span class="player-name">Mičo</span>
+          <span *ngFor="let player of scoreBoardService.getOrderedPlayers()" class="player-name">{{player.name}}</span>
+
 
         </span>
       
@@ -61,24 +58,16 @@
 
           <span class="content-radelci">R ></span>
 
-          <span class="player-radelc">O</span>
-          <span class="player-radelc">O</span>
-          <span class="player-radelc">O</span>
-          <span class="player-radelc">O</span>
-          <span class="player-radelc">O</span>
+          <span  *ngFor="let lastRoundResult of scoreBoardService.lastRound.roundResults" class="player-radelc">{{lastRoundResult.radelci.length}}</span>
 
         </span>
 
-        <span class="player-games">
+        <span *ngFor="let round of scoreBoardService.roundList"  class="player-games">
 
-          <span class="game-type">III.</span>
+          <span class="game-type">{{round.getGameType()}}</span>
 
 
-          <span class="player-score">100</span>
-          <span class="player-score">100</span>
-          <span class="player-score">100</span>
-          <span class="player-score">100</span>
-          <span class="player-score">100</span>
+          <span *ngFor="let result of round.roundResults"  class="player-score">{{result.playerScore}}</span>
 
         </span>
 
