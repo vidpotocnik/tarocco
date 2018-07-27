@@ -42,13 +42,13 @@
 
       
      <!-- GAME SCOREBOARD -->
+    
 
      <div class="game-scoreboard">
 
         <span class="player-title">
 
-          <span class="content-num">#</span>
-          
+            <span class="num-game">#</span>
           <span class="content-tip">Tip</span>
 
           <span *ngFor="let player of scoreBoardService.getOrderedPlayers()" class="player-name">{{player.name}}</span>
@@ -57,8 +57,8 @@
         </span>
       
         <span class="player-radelci">
-            <span class="num"></span>
 
+            <span class="num-game">()</span>
           <span class="content-radelci">R ></span>
 
           <span  *ngFor="let lastRoundResult of scoreBoardService.lastRound.roundResults" class="player-radelc">{{lastRoundResult.radelci.length}}</span>
@@ -67,8 +67,7 @@
 
         <span *ngFor="let round of scoreBoardService.roundList"  class="player-games">
 
-            <span class="num">{{round.roundNumber}}</span>
-
+            <span class="num-game">{{round.roundNumber}}</span>
           <span class="game-type">{{round.getGameType()}}</span>
 
 
@@ -84,27 +83,11 @@
 
     </div>
 </div>
+
 <div class="loader-container--full center-screen" [class.hide]="!loading">
   <div class="loader"></div>
 </div>
 
 <ng2-toasty></ng2-toasty>
-
-<script>
-  // Change the selector if needed
-var $table = $('table'),
-    $bodyCells = $table.find('tbody tr:first').children(),
-    colWidth;
-
-// Get the tbody columns width array
-colWidth = $bodyCells.map(function() {
-    return $(this).width();
-}).get();
-
-// Set the width of thead columns
-$table.find('thead tr').children().each(function(i, v) {
-    $(v).width(colWidth[i]);
-});
-</script>
 
 

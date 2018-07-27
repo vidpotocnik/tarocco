@@ -5,23 +5,102 @@
     height: 70vh;
     background-color: #ffffff;
     justify-content: center;
-    font-size: 16px;
+    font-size: 18px;
+    vertical-align: top;
+    font-size: 3vw;
+
 }
 
-@media only screen and (max-width: 386px) {
+/**
+
+@media only screen and (max-width: 415px) {
     .game-scoreboard {
-        font-size: 11px;
+        font-size: 14px;
     }
 }
 
+
+@media only screen and (max-width: 344px) {
+    .game-scoreboard {
+        font-size: 12px;
+    }
+}
+
+
+@media only screen and (max-width: 308px) {
+    .game-scoreboard {
+        font-size: 10px;
+    }
+}
+
+
+**/
+
 .player-title {
+    position: sticky;
     display: inline-flex;
     width: 100%;
     background-color: #ffffff;
     color: #000000;
     align-content: center;
-
+    text-overflow: clip;
+    font-size: 20px;
+    font-size: 3vw;
 }
+
+/**
+
+@media only screen and (max-width: 890px) {
+    .player-title {
+        font-size: 18px;
+    }
+}
+
+
+@media only screen and (max-width: 730px) {
+    .player-title {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .player-title {
+        font-size: 14px;
+    }
+}
+
+
+@media only screen and (max-width: 595px) {
+    .player-title {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .player-title {
+        font-size: 9px;
+        font-weight: bold;
+    }
+}
+
+
+
+@media only screen and (max-width: 400px) {
+    .player-title {
+        font-size: 8px;
+        font-weight: bold;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .player-title {
+        font-size: 8px;
+        font-weight: bold;
+
+    }
+}
+
+**/
 
 .player-name {
     display: inline-flex;
@@ -31,8 +110,9 @@
     padding: 10px;
     width: 100%;
     border-bottom: 1px solid white;
-
 }
+
+
 
 .player-radelci {
     display: inline-flex;
@@ -96,7 +176,7 @@
 }
 
 .game-type {
-    
+
     display: inline-flex;
     justify-content: center;
     background-color: #ffffff;
@@ -134,3 +214,17 @@
 
 }
 
+.hidden {
+    visibility: hidden;
+}
+
+.num-game {
+
+    display: inline-flex;
+    justify-content: center;
+    background-color: #7C0A02;
+    color: #ffffff;
+    padding: 10px;
+    width: 100%;
+
+}
