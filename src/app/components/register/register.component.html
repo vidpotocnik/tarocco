@@ -1,0 +1,107 @@
+<div class="container login-container">
+  <div class="box tarocco-login-box t-stat-margin">
+      <h2 class="subtitle is-4 has-text-info has-text-centered is-uppercase tarocco-lr-text">Registracija</h2>
+      <h3 class="subtitle is-6 has-text-info has-text-centered">registracija novega uporabnika</h3>
+    <div class="steps" style="height: 350px;" *ngIf="!registered">
+      <div class="step-item" [class.is-active]="step.passed" [class.is-success]="step.passed"
+           *ngFor="let step of steps">
+        <div class="step-marker">{{step.stepId}}</div>
+        <div class="step-details">
+          <p class="step-title">{{step.stepName}}</p>
+        </div>
+
+
+      </div>
+      <div class="steps-content">
+        <div class="step-content has-text-centered" [class.is-active]="currentStep.stepId === 1">
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Ime ekipe</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <input class="input" name="name" id="name" type="text" placeholder="ime" autofocus
+                         data-validate="require" [(ngModel)]="newTeam.name">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Identifikacija</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control has-icon has-icon-right">
+                  <input class="input" type="text" name="identification" id="identification"
+                         placeholder="identifikacija"
+                         data-validate="require" [(ngModel)]="newTeam.teamId">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step-content has-text-centered" [class.is-active]="currentStep.stepId === 2">
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Geslo</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <input class="input" name="firstname" id="firstname" type="text" placeholder="geslo"
+                         autofocus
+                         data-validate="require" [(ngModel)]="newTeam.passphrase">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step-content has-text-centered" [class.is-active]="currentStep.stepId === 3">
+          <div class="level">
+            <div class="level-item">
+              <input class="input" name="name" id="members" type="text" placeholder="ime" autofocus
+                     [(ngModel)]="newMember">
+              <div class="level-item">
+              <a class="button is-light is-info" (click)="addUser()"><i class="fa fa-check"></i></a>
+            </div>
+            </div>
+          </div>
+            <div class="box">
+            <div class="level-left">
+              <div class="control level-item" *ngFor="let player of newTeam.members">
+                <div class="tags has-addons">
+                  <a class="tag is-info">{{player.name}}</a>
+                  <a class="tag is-delete" (click)="removePlayer(player)"></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a class="button is-light is-info" (click)="register()">Zaključi registracijo</a>
+        </div>
+      </div>
+
+      <div class="steps-actions">
+        <div class="steps-action">
+          <a class="button is-light is-info" (click)="lastStep()"><i class="fa fa-arrow-left"></i></a>
+        </div>
+        <div class="steps-action">
+          <a class="button is-light is-info" (click)="nextStep()"><i class="fa fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="box" *ngIf="registered">
+      <article class="message is-success">
+        <div class="message-header">
+          <p>Registracija uspešna</p>
+          <button class="delete" aria-label="delete"></button>
+        </div>
+        <div class="message-body">
+         registracija ekipe je bila uspešna, vpišete se lahko <a routerLink="/login">Tukaj</a>.
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+<ng2-toasty></ng2-toasty>

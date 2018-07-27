@@ -1,0 +1,93 @@
+
+<div class="container-fluid" *ngIf="scoreBoardService.roundList" [class.section--disabled]="loading">
+  <div class="box">
+
+    <h2 class="is-5 has-text-info has-text-centered is-uppercase tarocco-game-title">{{gameService.currentGame.name}}</h2>
+    <div class="column">
+      <button class="button" aria-haspopup="true" (click)="toggleGameMenu()">
+        <app-search (gameChanged)="getScoreBoard()" [active]="dropDownService.gameMenu"></app-search>
+      </button>
+      <!-- Following content is only available for authenticated users -->
+      <ng-container *ngIf="authenticationService.isAuthenticated()">
+        <app-add-record (refreshScoreBoard)="getScoreBoard()"></app-add-record>
+        <button class="button" aria-haspopup="true" (click)="modalService.open('gameRecord')">
+          <span><i class="fa fa-lg fa-pencil" aria-hidden="true"></i></span>
+        </button>
+        <app-add-game (mask)="mask()" (unmask)="unmask() "[team]="team" (gameChanged)="getScoreBoard()"></app-add-game>
+        <button class="button" aria-haspopup="true" (click)="newGame()">
+          <span><i class="fa fa-lg fa-plus" aria-hidden="true"></i></span>
+        </button>
+        <app-remove-round (gameChanged)="getScoreBoard()"></app-remove-round>
+        <button class="button" aria-haspopup="true" (click)="modalService.open('removeRound')">
+          <span><i class="fa fa-lg fa-remove" aria-hidden="true"></i></span>
+        </button>
+        <app-end-game (mask)="mask()" (unmask)="unmask()" (gameChanged)="getScoreBoard()"></app-end-game>
+        <button class="button" aria-haspopup="true" (click)="modalService.open('endGame')">
+          <span><i class="fa fa-lg fa-share-square-o" aria-hidden="true"></i></span>
+        </button>
+        <app-detailed-view [detailedRound]="detailedRound"></app-detailed-view>
+        <button class="button" aria-haspopup="true" (click)="modalService.open('detailedView')">
+          <span><i class="fa fa-lg fa-info" aria-hidden="true"></i></span>
+        </button>
+      </ng-container>
+    </div>
+      <article class="message is-info" *ngIf="!scoreBoardService.lastRound">
+        <div class="message-header">
+          <p>Info</p>
+        </div>
+        <div class="message-body">
+          Trenutna igra še nima nobenega zapisa.
+        </div>
+      </article>
+
+      
+     <!-- GAME SCOREBOARD -->
+    
+
+     <div class="game-scoreboard">
+
+        <span class="player-title">
+
+            <span class="num-game-top">#</span>
+          <span class="content-tip">Tip</span>
+
+          <span *ngFor="let player of scoreBoardService.getOrderedPlayers()" class="player-name">{{player.name}}</span>
+
+
+        </span>
+      
+        <span class="player-radelci">
+
+            <span class="num-game">()</span>
+          <span class="content-radelci">R ></span>
+
+          <span  *ngFor="let lastRoundResult of scoreBoardService.lastRound.roundResults" class="player-radelc">{{lastRoundResult.radelci.length}}</span>
+
+        </span>
+
+        <span *ngFor="let round of scoreBoardService.roundList"  class="player-games">
+
+            <span class="num-game">{{round.roundNumber}}</span>
+          <span class="game-type">{{round.getGameType()}}</span>
+
+
+          <span *ngFor="let result of round.roundResults"  class="player-score">{{result.playerScore}}</span>
+
+        </span>
+
+
+     </div>
+
+
+     <!-- / GAME SCOREBOARD -->
+
+    </div>
+</div>
+
+<div class="loader-container--full center-screen" [class.hide]="!loading">
+  <div class="loader"></div>
+</div>
+
+<ng2-toasty></ng2-toasty>
+
+

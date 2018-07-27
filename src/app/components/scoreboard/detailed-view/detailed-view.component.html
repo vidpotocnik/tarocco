@@ -1,0 +1,60 @@
+<div class="modal i is-radiusless" [class.is-active]="modalService.detailedView">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Pregled runde</p>
+      <button class="delete" aria-label="close" (click)="modalService.close('detailedView')"></button>
+    </header>
+    <section class="modal-card-body" *ngIf="detailedRound">
+      <table class="table is-small is-fullwidth is-striped">
+        <tbody>
+        <tr>
+        <th>Zaporedna runda:</th>
+        <td>{{detailedRound.roundNumber}}</td>
+        </tr>
+        <tr>
+          <th>Tip igre:</th>
+          <td>{{getGameType(detailedRound.gameType)}}</td>
+        </tr>
+        <tr>
+          <th>Izid:</th>
+          <td [class.has-text-success]="detailedRound.won" [class.has-text-danger]="!detailedRound.won">{{getResult(detailedRound.won)}}</td>
+        </tr>
+        <tr>
+          <th>Razlika:</th>
+          <td [class.has-text-success]="detailedRound.won" [class.has-text-danger]="!detailedRound.won">{{detailedRound.difference}}</td>
+        </tr>
+        <tr>
+          <th>Igralec:</th>
+          <td>{{getPlayerById(detailedRound.leadPlayerId)}}</td>
+        </tr>
+        <tr *ngIf="detailedRound.supportingPlayerId">
+          <th>Partner:</th>
+          <td>{{getPlayerById(detailedRound.supportingPlayerId)}}</td>
+        </tr>
+        <tr *ngIf="detailedRound.modifiers && detailedRound.modifiers.length">
+          <th>Napovedi:</th>
+          <td>
+              <div class="tags has-addons" *ngFor="let item of detailedRound.modifiers">
+                <a class="tag is-success">{{item.modifierType}}</a>
+                <a class="tag">{{getAnounced(item.announced)}}</a>
+                <a class="tag">Ekipa {{item.team}}</a>
+              </div>
+          </td>
+        </tr>
+        <tr *ngIf="detailedRound.mondFangPlayerId">
+          <th>MondFang:</th>
+          <td>{{getPlayerById(detailedRound.mondFangPlayerId)}}</td>
+        </tr>
+        <tr *ngIf="detailedRound.pagatFangPlayerId">
+          <th>PagatFang:</th>
+          <td>{{getPlayerById(detailedRound.pagatFangPlayerId)}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-radiusless" (click)="modalService.close('detailedView')"><i class="fa fa-remove" aria-hidden="true"></i></button>
+    </footer>
+  </div>
+</div>

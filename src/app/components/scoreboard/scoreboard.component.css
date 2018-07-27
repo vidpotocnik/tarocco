@@ -1,0 +1,39 @@
+.table {
+  table-layout:fixed;
+  width: 100%;
+}
+.section--disabled {
+  opacity: .2;
+  pointer-events: none;
+}
+
+.hide {
+  display: none;
+}
+
+.is-lead{
+  font-weight: bold;
+}
+
+.went-up{
+  color: green;
+}
+
+.went-down{
+  color: red;
+}
+
+.fixed_header tbody{
+  display:block;
+  overflow:auto;
+  height:calc(100vh - 280px);
+}
+.fixed_header thead tr{
+  display:block;
+}
+
+.center-screen {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+}

@@ -1,0 +1,79 @@
+
+.weather__button {
+  margin-bottom: $global-margin;
+}
+
+.weather__title {
+ background: rgba($black, .8);
+ padding: $global-padding;
+ color: $white;
+ text-transform: uppercase;
+ font-weight: bold;
+}
+
+.weather__report {
+  padding: 20px;
+}
+
+.weather__full {
+  padding: 0;
+  box-shadow: unset;
+  background: transparent;
+}
+
+.weather__box {
+  margin-bottom: 0;
+  border-radius: unset;
+  border: 0;
+  // background: transparent;
+  box-shadow: unset;
+  border: 1px solid #dcdcdc;
+  border-top: 0;
+}
+
+.weather__box-small {
+  width: 33.3333333333%;
+  float: left;
+  min-height: 185px;
+  border-radius: 0;
+  box-shadow: unset;
+  border: 1px solid gainsboro;
+  border-top: 0;
+  margin-bottom: $global-margin !important;
+}
+
+.weather__box-small:nth-child(3) {
+  border-left: 0;
+  border-right: 0;
+}
+
+.weather__location:first-child {
+  margin-top: $global-margin;
+}
+
+.weather__location {
+    width: 100% !important;
+    display: table;
+    background: rgba($blue, .5);
+    color: $white;
+    padding: $global-padding;
+    font-weight: bold;
+}
+
+.weather__box {
+  transition: ease-in-out .2s;
+}
+
+.weather__box:hover {
+   background: rgba($blue, .05);
+   transition: transfer;
+}
+
+
+
+.is-scrollable {
+  overflow-y: scroll;
+  width: 49.1%;
+  position: absolute;
+  height: 850px;
+}

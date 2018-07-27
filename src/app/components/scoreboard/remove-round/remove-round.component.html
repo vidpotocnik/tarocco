@@ -1,0 +1,18 @@
+<div class="modal" [class.is-active]="modalService.removeRound">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Izbris runde</p>
+      <button class="delete" aria-label="close" (click)="modalService.close('removeRound')"></button>
+    </header>
+    <section class="modal-card-body">
+      Ali zares želiš izbrisati zadnjo rundo?
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-info" (click)="deleteLastRound()"><i class="fa fa-check"
+                                           aria-hidden="true"></i></button>
+      <button class="button" (click)="modalService.close('removeRound')"><i class="fa fa-remove"
+                                                                            aria-hidden="true"></i></button>
+    </footer>
+  </div>
+</div>

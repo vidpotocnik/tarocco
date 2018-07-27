@@ -1,0 +1,26 @@
+html,
+body {
+  background: $body-background;
+}
+
+body {
+  font-size: 100%;
+  font-family: Roboto, Arial, Helvetica, sans-serif;
+}
+
+.table td,
+.table th {
+  vertical-align: middle;
+}
+
+.modal {
+  z-index: 2000;
+}
+
+.layout {
+  padding-top: 116px;
+}
+
+.hero-body {
+  padding: 1.5rem 0 .5rem;
+}

@@ -1,0 +1,37 @@
+<div class="container login-container">
+  <form>
+    <div class="box tarocco-login-box t-stat-margin">
+        <h2 class="subtitle is-4 has-text-info has-text-centered is-uppercase tarocco-lr-text">Prijava</h2>
+        <h3 class="subtitle is-6 has-text-info has-text-centered">prijava v sistem</h3>
+      <div class="field">
+        <p class="control has-icons-left">
+          <input class="input"
+                 name="username"
+                 type="text"
+                 [(ngModel)]="authentication.teamId"
+                 placeholder="Ekipa">
+          <span class="icon is-small is-left">
+                        <i class="fa fa-user"></i>
+                    </span>
+        </p>
+        <br />
+        <p class="control has-icons-left">
+          <input class="input"
+                 name="password"
+                 type="password"
+                 [(ngModel)]="authentication.passphrase"
+                 placeholder="Dostopni ključ">
+          <span class="icon is-small is-left">
+                        <i class="fa fa-lock"></i>
+                    </span>
+        </p>
+      </div>
+
+      <div class="field">
+        <div class="control is-clearfix">
+          <button class="button login-button is-primary is-pulled-right tarocco-login-button" (click)="authenticate()"><i class="fa fa-check"></i></button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

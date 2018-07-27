@@ -1,0 +1,102 @@
+.box {
+  margin-bottom: 1rem;
+}
+
+.box--dragable {
+  padding: $global-padding / 2;
+  margin-bottom: $global-margin !important;
+  border: 2px dashed transparent;
+  padding-right: 4rem;
+  position: relative;
+
+  &:hover {
+    background: $light;
+  }
+}
+
+.box__dragicon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box--disabled {
+  opacity: .3;
+}
+.grid-disabled {
+
+}
+.box--select {
+  height: 18vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+  position: relative;
+  border: 1px solid transparent;
+}
+
+.box--select.is-selected {
+  border-color: #404faf;
+  box-shadow: 0 0 0 0.125em rgba(64, 79, 175, 0.25);
+}
+
+.box__tick {
+  position: absolute;
+  top: .5rem;
+  right: .5rem;
+  color: $white;
+  background: $blue;
+  border-radius: 999em;
+}
+
+
+/* Draggable*/
+
+.drag-border {
+  border: $danger dashed 2px;
+}
+
+.drag-handle {
+  cursor: move; /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.drag-handle:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+
+/* Droppable */
+
+.drag-hint-border {
+  border: color(gray, light) dashed 2px;
+}
+
+.drag-over-border {
+  border: $success dashed 2px;
+  background: lighten($success, 45%);
+}
+
+.drag-transit {
+  // border: #3500FF dashed 2px;
+  // background: red;
+
+  border: 2px solid color(main, primary);
+
+
+
+  background: lighten(color(main, primary), 45%);
+
+  &:hover {
+    background: lighten(color(main, primary), 45%);
+  }
+}
