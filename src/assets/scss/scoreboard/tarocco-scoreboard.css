@@ -7,11 +7,11 @@
     justify-content: center;
     font-size: 18px;
     vertical-align: top;
-    font-size: 3vw;
 
 }
 
-/**
+
+
 
 @media only screen and (max-width: 415px) {
     .game-scoreboard {
@@ -34,7 +34,7 @@
 }
 
 
-**/
+
 
 .player-title {
     position: sticky;
@@ -45,10 +45,11 @@
     align-content: center;
     text-overflow: clip;
     font-size: 20px;
-    font-size: 3vw;
+    box-shadow: 1px 1px 10px;
+    font-family: 'Ubuntu', sans-serif;
 }
 
-/**
+
 
 @media only screen and (max-width: 890px) {
     .player-title {
@@ -70,37 +71,6 @@
 }
 
 
-@media only screen and (max-width: 595px) {
-    .player-title {
-        font-size: 12px;
-    }
-}
-
-@media only screen and (max-width: 500px) {
-    .player-title {
-        font-size: 9px;
-        font-weight: bold;
-    }
-}
-
-
-
-@media only screen and (max-width: 400px) {
-    .player-title {
-        font-size: 8px;
-        font-weight: bold;
-    }
-}
-
-@media only screen and (max-width: 400px) {
-    .player-title {
-        font-size: 8px;
-        font-weight: bold;
-
-    }
-}
-
-**/
 
 .player-name {
     display: inline-flex;
@@ -109,7 +79,6 @@
     color: #ffffff;
     padding: 10px;
     width: 100%;
-    border-bottom: 1px solid white;
 }
 
 
@@ -129,7 +98,6 @@
     color: #ffffff;
     padding: 10px;
     width: 100%;
-    border-bottom: 1px solid white;
 
 }
 
@@ -209,7 +177,6 @@
     background-color: #ffffff;
     padding: 10px;
     width: 100%;
-    border-bottom: 1px solid white;
     border-right: 1px solid black;
 
 }
@@ -236,6 +203,5 @@
     color: #ffffff;
     padding: 10px;
     width: 100%;
-    border-bottom: 1px solid white;
 
 }

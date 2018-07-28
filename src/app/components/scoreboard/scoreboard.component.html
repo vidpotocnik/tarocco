@@ -43,18 +43,18 @@
       
      <!-- GAME SCOREBOARD -->
     
+     <span class="player-title">
+
+      <span class="num-game-top">#</span>
+    <span class="content-tip">Tip</span>
+
+    <span *ngFor="let player of scoreBoardService.getOrderedPlayers()" class="player-name">{{player.name}}</span>
+
+
+  </span>
 
      <div class="game-scoreboard">
 
-        <span class="player-title">
-
-            <span class="num-game-top">#</span>
-          <span class="content-tip">Tip</span>
-
-          <span *ngFor="let player of scoreBoardService.getOrderedPlayers()" class="player-name">{{player.name}}</span>
-
-
-        </span>
       
         <span class="player-radelci">
 
